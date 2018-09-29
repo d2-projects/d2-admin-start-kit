@@ -25,6 +25,7 @@ import { frameInRoutes } from '@/router/routes'
 Vue.use(d2Admin)
 
 // 可选插件组件
+// https://github.com/d2-projects/d2-crud
 Vue.use(D2Crud)
 
 new Vue({
