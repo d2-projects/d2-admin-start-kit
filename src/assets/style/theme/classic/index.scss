@@ -3,10 +3,10 @@
 
 .theme-#{$theme-name} {
     .d2-layout-header-aside-group {
-      $liner-color1: #36C;
-      $liner-color2: #00B;
-      $linear-gradient: linear-gradient(-45deg, $liner-color1 40%, $liner-color2 0, $liner-color2 50%, $liner-color1 0, $liner-color1 90%, $liner-color2 0);
-      background-size: 16px 16px;
+      $liner-color1: #3A96DD;
+      $liner-color2: #0067B8;
+      $linear-gradient: linear-gradient(-45deg, $liner-color1 25%, $liner-color2 0, $liner-color2 50%, $liner-color1 0, $liner-color1 75%, $liner-color2 0);
+      background-size: 4px 4px;
       background-color: $liner-color2;
       background-image: -webkit-$linear-gradient;
       background-image: -moz-$linear-gradient;
