@@ -40,7 +40,6 @@ const setting = {
       {
         title: '经典',
         name: 'classic',
-        backgroundImage: 'image/theme/classic/bg.jpg',
         preview: 'image/theme/classic/preview@2x.png'
       },
       {

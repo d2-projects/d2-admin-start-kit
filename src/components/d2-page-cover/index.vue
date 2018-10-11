@@ -6,7 +6,7 @@
     <p class="d2-page-cover__title">{{title}}</p>
     <p class="d2-page-cover__sub-title d2-mt-0">{{subTitle}}</p>
     <slot name="footer"/>
-    <a target="blank" href="https://github.com/d2-projects/d2-admin">
+    <a target="blank" href="https://github.com/han-feng/d2-admin-start-kit">
       <img
         style="position: absolute; top: 0; right: 0; border: 0; width: 150px;"
         src="./image/darkblue@2x.png"
