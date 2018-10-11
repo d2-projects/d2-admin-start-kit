@@ -28,7 +28,7 @@ const setting = {
   // 版本
   releases: {
     version: version,
-    api: 'https://api.github.com/repos/FairyEver/d2-admin/releases/latest'
+    api: 'https://api.github.com/repos/han-feng/cvicse-admin-start-kit/releases/latest'
   },
   // 菜单搜索
   search: {
@@ -38,31 +38,21 @@ const setting = {
   theme: {
     list: [
       {
-        title: 'd2admin 经典',
-        name: 'd2',
-        preview: 'image/theme/d2/preview@2x.png'
+        title: '经典',
+        name: 'classic',
+        backgroundImage: 'image/theme/classic/bg.jpg',
+        preview: 'image/theme/classic/preview@2x.png'
       },
       {
-        title: '紫罗兰',
-        name: 'violet',
-        preview: 'image/theme/violet/preview@2x.png'
+        title: '简约',
+        name: 'simple',
+        preview: 'image/theme/simple/preview@2x.png'
       },
       {
-        title: '简约线条',
-        name: 'line',
-        backgroundImage: 'image/theme/line/bg.jpg',
-        preview: 'image/theme/line/preview@2x.png'
-      },
-      {
-        title: '流星',
-        name: 'star',
-        backgroundImage: 'image/theme/star/bg.jpg',
-        preview: 'image/theme/star/preview@2x.png'
-      },
-      {
-        title: 'Tomorrow Night Blue (vsCode)',
-        name: 'tomorrow-night-blue',
-        preview: 'image/theme/tomorrow-night-blue/preview@2x.png'
+        title: '宇宙',
+        name: 'universe',
+        backgroundImage: 'image/theme/universe/bg.jpg',
+        preview: 'image/theme/universe/preview@2x.png'
       }
     ]
   },

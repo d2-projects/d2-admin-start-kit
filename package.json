@@ -1,5 +1,5 @@
 {
-  "name": "d2-admin",
+  "name": "cvicse-admin",
   "version": "1.5.0",
   "scripts": {
     "serve": "vue-cli-service serve --open",
