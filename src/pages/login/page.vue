@@ -56,7 +56,7 @@
 <script>
 /* eslint-disable */
 require('particles.js')
-import config from './config/default'
+import config from './config/nasa'
 import { mapActions } from 'vuex'
 export default {
   data () {
