@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/han-feng/cvicse-admin-start-kit.svg?branch=master)](https://travis-ci.org/han-feng/cvicse-admin-start-kit)
 
-基于 [D2Admin](https://github.com/d2-projects/d2-admin-start-kit) 简化版进行定制的企业内部应用前端模板。
+基于 [D2Admin](https://github.com/d2-projects/d2-admin) 简化版定制的企业内部应用前端模板。
 
 [预览](https://han-feng.github.io/cvicse-admin-start-kit)
 
