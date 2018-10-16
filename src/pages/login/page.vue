@@ -2,10 +2,10 @@
   <div class="login-page">
     <div class="layer bg" id="login"></div>
     <div class="layer flex-center">
-      <!-- logo部分
+      <!-- logo部分 -->
       <div class="logo-group">
-        <img src="./image/logo.png" alt="logo">
-      </div> -->
+        <h2>请登录</h2>
+      </div>
       <!-- 表单部分 -->
       <div class="form-group">
         <el-card>
