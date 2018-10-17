@@ -59,11 +59,13 @@ module.exports = {
       .add('babel-polyfill')
       .end()
     // 压缩CSS
-    config
-      .plugin('html')
-      .tap(args => {
-        args[0].minify.minifyCSS = true
-        return args
-      })
+    if (process.env.NODE_ENV === 'production') {
+      config
+        .plugin('html')
+        .tap(args => {
+          args[0].minify.minifyCSS = true
+          return args
+        })
+    }
   }
 }
