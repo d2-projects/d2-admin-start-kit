@@ -47,6 +47,7 @@ export default {
           util.cookies.remove('redirect')
         })
         .catch(err => {
+          vm.requiredInputCode = err.data.requiredInputCode
           console.log('err: ', err)
         })
     },
