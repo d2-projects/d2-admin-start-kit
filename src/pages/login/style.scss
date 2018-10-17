@@ -1,6 +1,6 @@
 @import '~@/assets/style/public.scss';
 .login-page {
-  background-color: #ABC;
+  background: radial-gradient(at top center, #fff 0%, #abc 50%) #abc;
   height: 100%;
   position: relative;
   // 层
@@ -28,6 +28,7 @@
     margin-top: -75px - 70px;
     position: relative;
     top: 75px;
+    color: $color-primary;
     img {
       height: 140px;
     }
