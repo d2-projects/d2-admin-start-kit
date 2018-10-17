@@ -3,7 +3,7 @@
   "version": "1.5.3",
   "scripts": {
     "serve": "vue-cli-service serve --open",
-    "start": "serve -s dist",
+    "start": "http-server dist -s -o",
     "build": "vue-cli-service build",
     "build:travis": "vue-cli-service build --mode travis",
     "lint": "vue-cli-service lint --fix",
@@ -42,10 +42,10 @@
     "@vue/test-utils": "^1.0.0-beta.20",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.0.1",
+    "http-server": "^0.11.1",
     "lint-staged": "^7.2.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
-    "serve": "^10.0.2",
     "svg-sprite-loader": "^3.8.0",
     "text-loader": "0.0.1",
     "vue-template-compiler": "^2.5.17"
