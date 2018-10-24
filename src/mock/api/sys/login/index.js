@@ -1,3 +1,4 @@
+import Qs from 'qs'
 import Mock from 'mockjs'
 
 const userDB = [
@@ -24,7 +25,7 @@ const userDB = [
 let errorCount = 0
 
 Mock.mock('/api/login', 'post', ({ url, type, body }) => {
-  const bodyObj = JSON.parse(body)
+  const bodyObj = Qs.parse(body)
   const user = userDB.find(e => e.username === bodyObj.username && e.password === bodyObj.password)
   if (user) {
     errorCount = 0
