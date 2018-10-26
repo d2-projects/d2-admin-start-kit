@@ -39,8 +39,10 @@
     // 重新设置卡片阴影
     .el-card {
       box-shadow: 0 0 8px 0 rgba(232,237,250,.6), 0 2px 4px 0 rgba(232,237,250,.5);
+      background-color: transparent;
       .el-card__body {
         padding-top: 70px;
+        background-color: rgba(#fff,.5);
       }
     }
     // 登录按钮

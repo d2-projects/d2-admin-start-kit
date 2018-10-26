@@ -20,7 +20,7 @@
                 <i slot="prepend" class="fa fa-keyboard-o"></i>
               </el-input>
             </el-form-item>
-            <el-form-item prop="code">
+            <el-form-item prop="code" v-if="requiredInputCode">
               <el-input type="text" v-model="formLogin.code" placeholder="- - - -">
                 <template slot="prepend">验证码</template>
                 <template slot="append">
@@ -63,6 +63,8 @@ export default {
     return {
       // 快速选择用户
       dialogVisible: false,
+      // 是否需要输入验证码
+      requiredInputCode: false,
       users: [
         {
           name: '管理员',

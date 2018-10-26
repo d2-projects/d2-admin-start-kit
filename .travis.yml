@@ -1,5 +1,13 @@
 language: node_js
+
 node_js: stable
+
+addons:
+  sonarcloud:
+    organization: "han-feng-github"
+    token:
+      secure: $SONAR_CLOUD_TOKEN
+
 cache:
   directories:
     - "node_modules"
@@ -19,3 +27,6 @@ deploy:
   keep-history: true
   on:
     branch: master
+
+after_success:
+  - sonar-scanner

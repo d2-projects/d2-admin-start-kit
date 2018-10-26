@@ -1,3 +1,4 @@
+import Qs from 'qs'
 import Mock from 'mockjs'
 
 const userDB = [
@@ -21,10 +22,13 @@ const userDB = [
   }
 ]
 
+let errorCount = 0
+
 Mock.mock('/api/login', 'post', ({ url, type, body }) => {
-  const bodyObj = JSON.parse(body)
+  const bodyObj = Qs.parse(body)
   const user = userDB.find(e => e.username === bodyObj.username && e.password === bodyObj.password)
   if (user) {
+    errorCount = 0
     return {
       code: 0,
       msg: '登录成功',
@@ -34,10 +38,13 @@ Mock.mock('/api/login', 'post', ({ url, type, body }) => {
       }
     }
   } else {
+    errorCount++
     return {
       code: 401,
       msg: '用户名或密码错误',
-      data: {}
+      data: {
+        requiredInputCode: errorCount >= 3
+      }
     }
   }
 })

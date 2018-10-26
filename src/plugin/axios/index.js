@@ -4,8 +4,9 @@ import { Message } from 'element-ui'
 import util from '@/libs/util'
 
 // 创建一个错误
-function errorCreat (msg) {
+function errorCreat (msg, data = {}) {
   const err = new Error(msg)
+  err.data = data
   errorLog(err)
   throw err
 }
@@ -34,20 +35,17 @@ function errorLog (err) {
 // 创建一个 axios 实例
 const service = axios.create({
   baseURL: process.env.VUE_APP_API,
-  timeout: 5000, // 请求超时时间
-  withCredentials: true
+  timeout: 5000 // 请求超时时间
 })
 
 // 请求拦截器
 service.interceptors.request.use(
   config => {
     // 在请求发送之前做一些处理
-    if (!(/^https:\/\/|http:\/\//.test(config.url))) {
-      const token = util.cookies.get('token')
-      if (token && token !== 'undefined') {
-        // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
-        config.headers['X-Token'] = token
-      }
+    const token = util.cookies.get('token')
+    if (token && token !== 'undefined') {
+      // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
+      config.headers['X-Token'] = token
     }
     return config
   },
@@ -77,11 +75,11 @@ service.interceptors.response.use(
           return dataAxios.data
         case 'xxx':
           // [ 示例 ] 其它和后台约定的 code
-          errorCreat(`[ code: xxx ] ${dataAxios.msg}: ${response.config.url}`)
+          errorCreat(`[ code: xxx ] ${dataAxios.msg}: ${response.config.url}`, dataAxios.data)
           break
         default:
           // 不是正确的 code
-          errorCreat(`${dataAxios.msg}: ${response.config.url}`)
+          errorCreat(`${dataAxios.msg}: ${response.config.url}`, dataAxios.data)
           break
       }
     }

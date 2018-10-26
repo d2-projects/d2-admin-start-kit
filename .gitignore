@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 /dist
+/target
 
 # Log files
 npm-debug.log*
@@ -10,6 +11,9 @@ yarn-error.log*
 # Editor directories and files
 .idea
 .vscode
+.settings
+.classpath
+.project
 *.suo
 *.ntvs*
 *.njsproj
