@@ -5,6 +5,8 @@ node_js: stable
 addons:
   sonarcloud:
     organization: "han-feng-github"
+    prokectKey: "han-feng_cvicse-admin-start-kit"
+    sources: "."
     token:
       secure: $SONAR_CLOUD_TOKEN
 
