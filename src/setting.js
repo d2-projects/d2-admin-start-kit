@@ -48,6 +48,12 @@ const setting = {
         preview: 'image/theme/simple/preview@2x.png'
       },
       {
+        title: '夜晚',
+        name: 'night',
+        backgroundImage: 'image/theme/night/bg.jpg',
+        preview: 'image/theme/night/preview@2x.png'
+      },
+      {
         title: '宇宙',
         name: 'universe',
         backgroundImage: 'image/theme/universe/bg.jpg',
