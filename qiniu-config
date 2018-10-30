@@ -1,6 +1,6 @@
 {
-  "src_dir"            :   "/home/travis/build/d2-projects/d2-admin/dist",
-  "bucket"             :   "d2-admin",
+  "src_dir"            :   "/home/travis/build/d2-projects/d2-admin-start-kit/dist",
+  "bucket"             :   "d2-admin-start-kit",
   "ignore_dir"         :   false,
   "overwrite"          :   true,
   "check_exists"       :   true,
