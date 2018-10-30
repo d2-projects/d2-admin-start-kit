@@ -1,11 +1,4 @@
-import playground from './modules/playground'
-import frame from './modules/frame'
-import d2Crud from './modules/d2-crud'
-import plugins from './modules/plugins'
-import charts from './modules/charts'
-import components from './modules/components'
-import element from './modules/element'
-import business from './modules/business'
+import demo from './modules/demo'
 
 import layoutHeaderAside from '@/layout/header-aside'
 
@@ -28,14 +21,7 @@ const frameIn = [
       }
     ]
   },
-  playground,
-  frame,
-  d2Crud,
-  plugins,
-  charts,
-  components,
-  element,
-  business
+  demo
 ]
 
 /**
@@ -46,13 +32,8 @@ const frameOut = [
   {
     path: '/redirect/:path*',
     component: {
-      beforeCreate () {
-        const path = this.$route.params.path
-        this.$router.replace(JSON.parse(path))
-      },
-      render: function (h) {
-        return h()
-      }
+      beforeCreate () { this.$router.replace(JSON.parse(this.$route.params.path)) },
+      render: h => h()
     }
   },
   // 登录
