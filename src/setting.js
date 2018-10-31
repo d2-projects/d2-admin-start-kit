@@ -1,6 +1,6 @@
 import { version } from '../package'
 
-const setting = {
+export default {
   // 快捷键
   // 支持快捷键 例如 ctrl+shift+s
   hotkey: {
@@ -27,8 +27,7 @@ const setting = {
   },
   // 版本
   releases: {
-    version: version,
-    api: 'https://api.github.com/repos/han-feng/cvicse-admin-start-kit/releases/latest'
+    version
   },
   // 菜单搜索
   search: {
@@ -72,5 +71,3 @@ const setting = {
     }
   }
 }
-
-export default setting
