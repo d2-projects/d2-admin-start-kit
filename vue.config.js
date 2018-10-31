@@ -1,12 +1,9 @@
-const path = require('path')
-
 // 拼接路径
-function resolve (dir) {
-  return path.join(__dirname, dir)
-}
+const resolve = dir => require('path').join(__dirname, dir)
 
 module.exports = {
   baseUrl: './',
+  outputDir: 'target/dist',
   lintOnSave: true,
 
   // 是否为生产环境构建生成sourceMap

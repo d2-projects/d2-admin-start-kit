@@ -78,7 +78,7 @@
 							<outputDirectory>${project.build.outputDirectory}/META-INF/resources</outputDirectory>
 							<resources>
 								<resource>
-									<directory>dist</directory>
+									<directory>target/dist</directory>
 								</resource>
 							</resources>
 						</configuration>

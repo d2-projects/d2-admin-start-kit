@@ -1,6 +1,6 @@
 import { version } from '../package'
 
-const setting = {
+export default {
   // 快捷键
   // 支持快捷键 例如 ctrl+shift+s
   hotkey: {
@@ -27,8 +27,7 @@ const setting = {
   },
   // 版本
   releases: {
-    version: version,
-    api: 'https://api.github.com/repos/han-feng/cvicse-admin-start-kit/releases/latest'
+    version
   },
   // 菜单搜索
   search: {
@@ -48,6 +47,12 @@ const setting = {
         preview: 'image/theme/simple/preview@2x.png'
       },
       {
+        title: '夜晚',
+        name: 'night',
+        backgroundImage: 'image/theme/night/bg.jpg',
+        preview: 'image/theme/night/preview@2x.png'
+      },
+      {
         title: '宇宙',
         name: 'universe',
         backgroundImage: 'image/theme/universe/bg.jpg',
@@ -62,9 +67,7 @@ const setting = {
   // 在读取持久化数据失败时默认用户信息
   user: {
     info: {
-      name: 'Ghost'
+      name: 'Guest'
     }
   }
 }
-
-export default setting

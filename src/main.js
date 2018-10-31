@@ -13,7 +13,7 @@ import i18n from './i18n'
 import d2Admin from '@/plugin/d2admin'
 
 // [ 可选插件组件 ]D2-Crud
-import D2Crud from '@d2-projects/d2-crud'
+// import D2Crud from '@d2-projects/d2-crud'
 
 // 菜单和路由设置
 import router from './router'
@@ -26,7 +26,7 @@ Vue.use(d2Admin)
 
 // 可选插件组件
 // https://github.com/d2-projects/d2-crud
-Vue.use(D2Crud)
+// Vue.use(D2Crud)
 
 new Vue({
   router,
