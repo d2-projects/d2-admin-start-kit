@@ -3,6 +3,7 @@ const resolve = dir => require('path').join(__dirname, dir)
 
 module.exports = {
   baseUrl: './',
+  outputDir: 'target/dist',
   lintOnSave: true,
 
   // 是否为生产环境构建生成sourceMap
