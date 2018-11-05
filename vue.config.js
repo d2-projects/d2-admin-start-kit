@@ -67,6 +67,13 @@ module.exports = {
       .add('babel-polyfill')
       .end()
 
+    if (process.env.VUE_APP_BUILD_MODE !== 'maven') {
+      // 加入模拟数据
+      entry
+        .add('@/mock')
+        .end()
+    }
+
     if (process.env.NODE_ENV === 'production') {
       // 压缩CSS
       config

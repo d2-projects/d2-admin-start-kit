@@ -9,6 +9,7 @@
     "start": "http-server target/dist -s -o",
     "dev": "npm run serve",
     "build": "vue-cli-service build",
+    "build:maven": "vue-cli-service build --mode maven",
     "build:travis": "vue-cli-service build --mode travis",
     "lint": "vue-cli-service lint --fix",
     "test:unit": "vue-cli-service test:unit"

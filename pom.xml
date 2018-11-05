@@ -59,7 +59,7 @@
 						</goals>
 						<phase>generate-resources</phase>
 						<configuration>
-							<arguments>run build</arguments>
+							<arguments>run build:maven</arguments>
 						</configuration>
 					</execution>
 				</executions>
