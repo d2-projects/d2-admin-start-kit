@@ -1,9 +1,7 @@
 {
   "name": "cvicse-admin",
   "version": "1.5.6",
-  "description": "CVICSE Admin",
-  "license": "ISC",
-  "repository": {},
+  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "start": "http-server target/dist -s -o",
