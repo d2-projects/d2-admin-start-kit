@@ -37,6 +37,12 @@ export default {
   theme: {
     list: [
       {
+        title: '夜晚',
+        name: 'night',
+        backgroundImage: 'image/theme/night/bg.jpg',
+        preview: 'image/theme/night/preview@2x.png'
+      },
+      {
         title: '经典',
         name: 'classic',
         preview: 'image/theme/classic/preview@2x.png'
@@ -45,12 +51,6 @@ export default {
         title: '简约',
         name: 'simple',
         preview: 'image/theme/simple/preview@2x.png'
-      },
-      {
-        title: '夜晚',
-        name: 'night',
-        backgroundImage: 'image/theme/night/bg.jpg',
-        preview: 'image/theme/night/preview@2x.png'
       },
       {
         title: '宇宙',
