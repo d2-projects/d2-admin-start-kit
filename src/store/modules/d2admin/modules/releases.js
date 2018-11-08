@@ -4,6 +4,7 @@ import setting from '@/setting.js'
 export default {
   namespaced: true,
   state: {
+    name: setting.releases.name,
     version: setting.releases.version
   },
   mutations: {
@@ -12,8 +13,11 @@ export default {
      * @param {Object} state vuex state
      */
     versionShow (state) {
-      util.log.capsule('CVICSE Admin', `v${state.version}`)
+      util.log.capsule(state.name, `v${state.version}`)
       console.log('Github https://github.com/han-feng/cvicse-admin-start-kit')
+      if (process.env.NODE_ENV === 'development') {
+        console.log(process.env)
+      }
     }
   }
 }
