@@ -1,4 +1,4 @@
-import { version } from '../package'
+import { name, version } from '../package'
 
 export default {
   // 快捷键
@@ -27,6 +27,7 @@ export default {
   },
   // 版本
   releases: {
+    name,
     version
   },
   // 菜单搜索
