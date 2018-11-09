@@ -4,6 +4,7 @@ const resolve = dir => require('path').join(__dirname, dir)
 module.exports = {
   baseUrl: './',
   outputDir: 'target/dist',
+  assetsDir: 'static',
   lintOnSave: true,
 
   // 是否为生产环境构建生成sourceMap
@@ -67,7 +68,7 @@ module.exports = {
       .add('babel-polyfill')
       .end()
 
-    if (process.env.VUE_APP_BUILD_MODE !== 'maven') {
+    if (process.env.VUE_APP_BUILD_MODE !== 'nomock') {
       // 加入模拟数据
       entry
         .add('@/mock')

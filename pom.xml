@@ -20,6 +20,7 @@
 	</properties>
 
 	<build>
+		<defaultGoal>install</defaultGoal>
 		<plugins>
 			<plugin>
 				<groupId>com.github.eirslett</groupId>
@@ -59,7 +60,7 @@
 						</goals>
 						<phase>generate-resources</phase>
 						<configuration>
-							<arguments>run build:maven</arguments>
+							<arguments>run build</arguments>
 						</configuration>
 					</execution>
 				</executions>
