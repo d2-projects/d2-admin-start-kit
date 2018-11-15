@@ -2,7 +2,7 @@
 const resolve = dir => require('path').join(__dirname, dir)
 
 module.exports = {
-  baseUrl: './',
+  baseUrl: '', // 使用相对路径可以满足大多数情况需求，如遇特殊情况满足不了请调整该值，请参考Vue Cli文档中关于“相对 baseUrl 的限制”：https://cli.vuejs.org/zh/config/#baseurl
   outputDir: 'target/dist',
   assetsDir: 'static',
   lintOnSave: true,
@@ -67,9 +67,8 @@ module.exports = {
     entry
       .add('babel-polyfill')
       .end()
-
+    // 判断环境加入模拟数据
     if (process.env.VUE_APP_BUILD_MODE !== 'nomock') {
-      // 加入模拟数据
       entry
         .add('@/mock')
         .end()

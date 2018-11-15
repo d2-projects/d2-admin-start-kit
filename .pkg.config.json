@@ -1,0 +1,6 @@
+{
+  "pkg": {
+    "scripts": ["service.js"],
+    "assets": ["target/dist/**/*"]
+  }
+}
