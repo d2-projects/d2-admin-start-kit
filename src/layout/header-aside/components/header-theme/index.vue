@@ -9,7 +9,7 @@
         type="text"
         @click="dialogVisible = true">
         <d2-icon
-          name="diamond"
+          name="magic"
           style="font-size: 16px"/>
       </el-button>
     </el-tooltip>
