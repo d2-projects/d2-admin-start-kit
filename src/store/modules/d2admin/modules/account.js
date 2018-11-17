@@ -33,7 +33,8 @@ export default {
             util.cookies.set('token', res.token)
             // 设置 vuex 用户信息
             await dispatch('d2admin/user/set', {
-              name: res.name
+              name: res.name,
+              permissions: res.permissions
             }, { root: true })
             // 用户登录后从持久化数据加载一系列的设置
             await dispatch('load')
@@ -41,6 +42,7 @@ export default {
             resolve()
           })
           .catch(err => {
+            vm.requiredInputCode = err.data.requiredInputCode
             console.log('err: ', err)
             reject(err)
           })
@@ -92,7 +94,7 @@ export default {
     load ({ commit, dispatch }) {
       return new Promise(async resolve => {
         // DB -> store 加载用户名
-        await dispatch('d2admin/user/load', null, { root: true })
+        // await dispatch('d2admin/user/load', null, { root: true }) // 重复动作，注释掉避免数据干扰
         // DB -> store 加载主题
         await dispatch('d2admin/theme/load', null, { root: true })
         // DB -> store 加载页面过渡效果设置
