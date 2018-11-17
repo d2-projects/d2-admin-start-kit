@@ -7,9 +7,6 @@
       flex-box="0"
       flex="dir:top main:center cross:center"
       @click.self="handlePanelClick">
-      <!--d2-icon-svg
-        class="panel-search__logo"
-        name="d2-admin-text"/-->
       <el-autocomplete
         class="panel-search__input"
         ref="input"
@@ -183,7 +180,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/style/public.scss';
 .panel-search {
   margin: 20px;
   .panel-search__input-group {
@@ -199,7 +195,6 @@ export default {
     .panel-search__tip {
       @extend %unable-select;
       margin-top: 20px;
-      // margin-bottom: 40px;
       font-size: 12px;
       color: $color-text-sub;
       .panel-search__key {

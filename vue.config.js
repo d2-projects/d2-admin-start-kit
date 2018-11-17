@@ -2,8 +2,9 @@
 const resolve = dir => require('path').join(__dirname, dir)
 
 module.exports = {
-  baseUrl: './',
+  baseUrl: '', // 使用相对路径可以满足大多数情况需求，如遇特殊情况满足不了请调整该值，请参考Vue Cli文档中关于“相对 baseUrl 的限制”：https://cli.vuejs.org/zh/config/#baseurl
   outputDir: 'target/dist',
+  assetsDir: 'static',
   lintOnSave: true,
 
   // 是否为生产环境构建生成sourceMap
@@ -12,7 +13,14 @@ module.exports = {
   devServer: {
     publicPath: '/'
   },
-
+  css: {
+    loaderOptions: {
+      // 设置 scss 公用变量文件
+      sass: {
+        data: `@import '~@/assets/style/public.scss';`
+      }
+    }
+  },
   // 默认设置: https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-service/lib/config/base.js
   chainWebpack: config => {
     // 解决 cli3 热更新失效 https://github.com/vuejs/vue-cli/issues/1559
@@ -66,9 +74,8 @@ module.exports = {
     entry
       .add('babel-polyfill')
       .end()
-
-    if (process.env.VUE_APP_BUILD_MODE !== 'maven') {
-      // 加入模拟数据
+    // 判断环境加入模拟数据
+    if (process.env.VUE_APP_BUILD_MODE !== 'nomock') {
       entry
         .add('@/mock')
         .end()

@@ -18,6 +18,7 @@ export default {
     opened: [
       {
         name: 'index',
+        fullPath: '/index',
         meta: {
           title: '首页',
           requiresAuth: false
@@ -40,24 +41,24 @@ export default {
       {
         title: '夜晚',
         name: 'night',
-        backgroundImage: 'image/theme/night/bg.jpg',
-        preview: 'image/theme/night/preview@2x.png'
+        backgroundImage: 'static/theme/night/bg.jpg',
+        preview: 'static/theme/night/preview@2x.png'
       },
       {
         title: '经典',
         name: 'classic',
-        preview: 'image/theme/classic/preview@2x.png'
+        preview: 'static/theme/classic/preview@2x.png'
       },
       {
         title: '简约',
         name: 'simple',
-        preview: 'image/theme/simple/preview@2x.png'
+        preview: 'static/theme/simple/preview@2x.png'
       },
       {
         title: '宇宙',
         name: 'universe',
-        backgroundImage: 'image/theme/universe/bg.jpg',
-        preview: 'image/theme/universe/preview@2x.png'
+        backgroundImage: 'static/theme/universe/bg.jpg',
+        preview: 'static/theme/universe/preview@2x.png'
       }
     ]
   },

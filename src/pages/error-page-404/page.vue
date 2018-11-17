@@ -8,7 +8,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import '~@/assets/style/public.scss';
 .page {
   background: radial-gradient(at top center, #fff 0%, #abc 50%) #abc;
   background-blend-mode: multiply,multiply;
