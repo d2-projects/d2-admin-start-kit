@@ -13,7 +13,14 @@ module.exports = {
   devServer: {
     publicPath: '/'
   },
-
+  css: {
+    loaderOptions: {
+      // 设置 scss 公用变量文件
+      sass: {
+        data: `@import '~@/assets/style/public.scss';`
+      }
+    }
+  },
   // 默认设置: https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-service/lib/config/base.js
   chainWebpack: config => {
     // 解决 cli3 热更新失效 https://github.com/vuejs/vue-cli/issues/1559
