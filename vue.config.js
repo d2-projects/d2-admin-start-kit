@@ -1,3 +1,5 @@
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+
 // 拼接路径
 const resolve = dir => require('path').join(__dirname, dir)
 
@@ -6,10 +8,7 @@ module.exports = {
   outputDir: 'target/dist',
   assetsDir: 'static',
   lintOnSave: true,
-
-  // 是否为生产环境构建生成sourceMap
-  productionSourceMap: false,
-
+  productionSourceMap: false, // 是否为生产环境构建生成 sourceMap
   devServer: {
     publicPath: '/'
   },
@@ -26,6 +25,38 @@ module.exports = {
     // 解决 cli3 热更新失效 https://github.com/vuejs/vue-cli/issues/1559
     config.resolve
       .symlinks(true)
+
+    config
+      // 开发环境
+      .when(process.env.NODE_ENV === 'development',
+        // sourcemap不包含列信息
+        config => config.devtool('cheap-source-map')
+      )
+      // 非开发环境
+      .when(process.env.NODE_ENV !== 'development', config => {
+        config
+          .plugin('html')
+          .tap(args => {
+            // 压缩 html 中的 CSS
+            args[0].minify.minifyCSS = true
+            return args
+          })
+        config.optimization
+          .minimizer([
+            new UglifyJsPlugin({
+              uglifyOptions: {
+                // 移除 console
+                // 其它优化选项 https://segmentfault.com/a/1190000010874406
+                compress: {
+                  warnings: false,
+                  drop_console: true,
+                  drop_debugger: true,
+                  pure_funcs: ['console.log']
+                }
+              }
+            })
+          ])
+      })
 
     // markdown
     config.module
@@ -74,21 +105,12 @@ module.exports = {
     entry
       .add('babel-polyfill')
       .end()
+
     // 判断环境加入模拟数据
     if (process.env.VUE_APP_BUILD_MODE !== 'nomock') {
       entry
         .add('@/mock')
         .end()
-    }
-
-    if (process.env.NODE_ENV === 'production') {
-      // 压缩CSS
-      config
-        .plugin('html')
-        .tap(args => {
-          args[0].minify.minifyCSS = true
-          return args
-        })
     }
   }
 

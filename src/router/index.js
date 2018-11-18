@@ -8,6 +8,7 @@ import 'nprogress/nprogress.css'
 import store from '@/store/index'
 
 import util from '@/libs/util.js'
+import { checkPermission } from '@/libs/auth.js'
 
 // 路由数据
 import routes from './routes'
@@ -34,7 +35,23 @@ router.beforeEach((to, from, next) => {
     // 请根据自身业务需要修改
     const token = util.cookies.get('token')
     if (token && token !== 'undefined') {
-      next()
+      // 已登录，则进行许可检查
+      if (
+        !to.matched.some(r => r.meta.requiresAuth === 'check') ||
+        checkPermission(to.fullPath)
+      ) {
+        next()
+      } else {
+        // 无权访问时通过 403 页面显示提示信息
+        // 产生该异常原因有：1、权限配置不合理，显示了无权访问的按钮等；2、地址栏输入无权访问的路径。
+        // 以上情况均需要提醒管理员
+        next({
+          name: '403',
+          params: {
+            uri: to.fullPath
+          }
+        })
+      }
     } else {
       // 没有登录的时候跳转到登录界面
       // 携带上登陆成功之后需要跳转的页面完整路径
