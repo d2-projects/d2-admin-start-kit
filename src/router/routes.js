@@ -43,6 +43,14 @@ const frameIn = [
           },
           render: h => h()
         }
+      },
+      // 403 无授权访问提示页
+      {
+        path: '403/:uri',
+        name: '403',
+        props: true,
+        meta: { ...meta, requiresAuth: false, title: '403' },
+        component: () => import('@/pages/error-page-403')
       }
     ]
   },
@@ -77,8 +85,4 @@ const errorPage = [
 export const frameInRoutes = frameIn
 
 // 重新组织后导出
-export default [
-  ...frameIn,
-  ...frameOut,
-  ...errorPage
-]
+export default [...frameIn, ...frameOut, ...errorPage]

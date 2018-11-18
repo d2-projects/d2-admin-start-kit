@@ -6,19 +6,37 @@ const userDB = [
     username: 'admin',
     password: 'admin',
     uuid: 'admin-uuid',
-    name: '管理员'
+    name: '管理员',
+    permissions: [
+      '/demo/page1',
+      '/demo/page2',
+      '/demo/page3',
+      '/demo/test1',
+      '/demo/test2',
+      '/demo/test3'
+    ]
   },
   {
     username: 'editor',
     password: 'editor',
     uuid: 'editor-uuid',
-    name: '编辑'
+    name: '编辑',
+    permissions: [
+      '/demo/page1',
+      '/demo/page2',
+      '/demo/test1',
+      '/demo/test2'
+    ]
   },
   {
     username: 'user1',
     password: 'user1',
     uuid: 'user1-uuid',
-    name: '用户1'
+    name: '用户1',
+    permissions: [
+      '/demo/page1',
+      '/demo/test1'
+    ]
   }
 ]
 

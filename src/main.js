@@ -19,12 +19,18 @@ import menuHeader from '@/menu/header'
 import menuAside from '@/menu/aside'
 import { frameInRoutes } from '@/router/routes'
 
+// 授权 mixin
+import auth from '@/libs/auth.js'
+
 // 核心插件
 Vue.use(d2Admin)
 
 // 可选插件组件
 // https://github.com/d2-projects/d2-crud
 // Vue.use(D2Crud)
+
+// 授权 mixin
+Vue.mixin(auth)
 
 new Vue({
   router,
