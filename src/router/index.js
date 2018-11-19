@@ -43,6 +43,7 @@ router.beforeEach((to, from, next) => {
       next({
         name: 'login'
       })
+      NProgress.done() // next(...)重定向不会触发router.afterEach钩子，需要手动hack一下
     }
   } else {
     // 不需要身份校验 直接通过
