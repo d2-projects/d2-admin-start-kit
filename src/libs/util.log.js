@@ -12,7 +12,7 @@ function typeColor (type = 'default') {
     case 'success': color = '#43B883'; break
     case 'warning': color = '#e6a23c'; break
     case 'danger': color = '#f56c6c'; break
-    default:; break
+    default: break
   }
   return color
 }

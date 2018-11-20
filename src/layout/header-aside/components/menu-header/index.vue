@@ -50,9 +50,9 @@ export default {
     }
   },
   watch: {
-    '$route.matched': {
-      handler (val) {
-        this.active = val[val.length - 1].path
+    '$route': {
+      handler ({ fullPath }) {
+        this.active = fullPath
       },
       immediate: true
     }
