@@ -1,5 +1,6 @@
 import store from '@/store'
 import util from '@/libs/util'
+import setting from '@/setting.js'
 
 export default {
   install (Vue, options) {
@@ -14,7 +15,7 @@ export default {
         })
         // 只在开发模式下打印 log
         if (process.env.NODE_ENV === 'development') {
-          util.log.capsule('D2Admin', 'ErrorHandler', 'danger')
+          util.log.capsule(`${setting.releases.name}`, 'ErrorHandler', 'danger')
           util.log.danger('>>>>>> 错误信息 >>>>>>')
           console.log(info)
           util.log.danger('>>>>>> Vue 实例 >>>>>>')
