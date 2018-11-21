@@ -42,7 +42,7 @@ router.beforeEach((to, from, next) => {
       ) {
         next()
       } else {
-        // 无权访问时通过 403 页面显示提示信息
+        // 无权访问时显示提示信息
         // 产生该异常原因有：1、权限配置不合理，显示了无权访问的按钮等；2、地址栏输入无权访问的路径。
         // 以上情况均需要提醒管理员
         next(new Error(`未授权访问“${to.fullPath}”，如有疑问请与管理员联系`))
@@ -56,6 +56,8 @@ router.beforeEach((to, from, next) => {
           redirect: to.fullPath
         }
       })
+      // https://github.com/d2-projects/d2-admin/issues/138
+      NProgress.done()
     }
   } else {
     // 不需要身份校验 直接通过
@@ -77,7 +79,7 @@ router.afterEach(to => {
 
 router.onError(err => {
   router.app.$message.error(err.message)
-  Vue.config.errorHandler(err, router.app, err.message)
+  Vue.config.errorHandler(err, router, err.message)
 })
 
 export default router
