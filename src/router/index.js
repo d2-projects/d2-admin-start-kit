@@ -46,6 +46,7 @@ router.beforeEach((to, from, next) => {
         // 产生该异常原因有：1、权限配置不合理，显示了无权访问的按钮等；2、地址栏输入无权访问的路径。
         // 以上情况均需要提醒管理员
         next(new Error(`未授权访问“${to.fullPath}”，如有疑问请与管理员联系`))
+        NProgress.done()
       }
     } else {
       // 没有登录的时候跳转到登录界面
