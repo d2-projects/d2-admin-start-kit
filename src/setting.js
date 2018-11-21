@@ -45,20 +45,9 @@ export default {
         preview: 'static/theme/night/preview@2x.png'
       },
       {
-        title: '经典',
-        name: 'classic',
-        preview: 'static/theme/classic/preview@2x.png'
-      },
-      {
         title: '简约',
         name: 'simple',
         preview: 'static/theme/simple/preview@2x.png'
-      },
-      {
-        title: '宇宙',
-        name: 'universe',
-        backgroundImage: 'static/theme/universe/bg.jpg',
-        preview: 'static/theme/universe/preview@2x.png'
       }
     ]
   },
