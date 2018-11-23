@@ -8,29 +8,29 @@
 
     <el-table-column type="expand">
       <div slot-scope="props" class="d2-error-log-list__expand-group">
-        <expand-item
+        <!-- <expand-item
           :type="props.row.type"
           title="类型"
-          :value="props.row.type === 'log' ? '日志' : '异常'"/>
-        <expand-item
+          :value="props.row.type === 'log' ? '日志' : '异常'"/> -->
+        <!-- <expand-item
           :type="props.row.type"
           title="内容"
-          :value="props.row.info"/>
+          :value="props.row.info"/> -->
         <expand-item
           v-if="props.row.type === 'error'"
           type="error"
           title="报错组件"
           :value="get(props.row.vm, '$vnode.tag', '')"/>
-        <expand-item
+        <!-- <expand-item
           v-if="props.row.type === 'error'"
           type="error"
           title="错误名称"
-          :value="get(props.row.err, 'name', '')"/>
-        <expand-item
+          :value="get(props.row.err, 'name', '')"/> -->
+        <!-- <expand-item
           v-if="props.row.type === 'error'"
           type="error"
           title="错误信息"
-          :value="get(props.row.err, 'message', '')"/>
+          :value="get(props.row.err, 'message', '')"/> -->
         <expand-item
           v-if="props.row.type === 'error'"
           type="error"
@@ -105,7 +105,7 @@
     </el-table-column>
 
     <el-table-column
-      label="错误类型"
+      label="错误名称"
       width="140px"
       :show-overflow-tooltip="true">
       <template

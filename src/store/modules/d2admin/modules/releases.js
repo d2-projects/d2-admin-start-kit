@@ -14,7 +14,6 @@ export default {
      */
     versionShow (state) {
       util.log.capsule(state.name, `v${state.version}`)
-      console.log('Github https://github.com/han-feng/cvicse-admin-start-kit')
       if (process.env.NODE_ENV === 'development') {
         console.log(process.env)
       }

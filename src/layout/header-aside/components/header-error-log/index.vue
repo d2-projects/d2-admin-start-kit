@@ -25,7 +25,7 @@
     </el-tooltip>
     <el-dialog
       :title="tooltipContent"
-      :fullscreen="true"
+      width="80%"
       :visible.sync="dialogVisible"
       :append-to-body="true">
       <div class="d2-mb-10">
