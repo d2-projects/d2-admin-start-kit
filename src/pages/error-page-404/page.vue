@@ -9,7 +9,7 @@
 
 <style lang="scss" scoped>
 .page {
-  background: radial-gradient(at top center, #fff 0%, #abc 50%) #abc;
+  background: transparent;// radial-gradient(at top center, #fff 0%, #abc 50%) #abc;
   background-blend-mode: multiply,multiply;
   height: 100%;
   display: flex;

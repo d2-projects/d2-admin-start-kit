@@ -32,9 +32,12 @@ export default {
             util.cookies.set('uuid', res.uuid)
             util.cookies.set('token', res.token)
             // 设置 vuex 用户信息
-            await dispatch('d2admin/user/set', {
+            await dispatch('session/user/set', {
               name: res.name,
               permissions: res.permissions
+            }, { root: true })
+            await dispatch('d2admin/user/set', {
+              name: res.name
             }, { root: true })
             // 用户登录后从持久化数据加载一系列的设置
             await dispatch('load')
@@ -54,7 +57,7 @@ export default {
      * @param {Object} param vm {Object} vue 实例
      * @param {Object} param confirm {Boolean} 是否需要确认
      */
-    logout ({ commit }, { vm, confirm = false }) {
+    logout ({ dispatch, commit }, { vm, confirm = false }) {
       /**
        * @description 注销
        */
@@ -62,6 +65,8 @@ export default {
         // 删除cookie
         util.cookies.remove('token')
         util.cookies.remove('uuid')
+        // 重置用户信息
+        dispatch('session/user/reset', {}, { root: true })
         // 跳转路由
         vm.$router.push({
           name: 'login'
