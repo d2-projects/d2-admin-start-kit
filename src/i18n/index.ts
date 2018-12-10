@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 
-import cn from './lang/cn'
-import ja from './lang/ja'
-import en from './lang/en'
+import cn from './lang/cn/index'
+import ja from './lang/ja/index'
+import en from './lang/en/index'
 
 Vue.use(VueI18n)
 

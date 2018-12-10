@@ -1,4 +1,5 @@
-import { version } from '../package'
+// @ts-ignore
+import { version } from '../package.json'
 
 export default {
   // 快捷键

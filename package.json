@@ -12,6 +12,8 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@types/js-cookie": "^2.2.0",
+    "@types/nprogress": "^0.0.29",
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
     "better-scroll": "^1.12.1",
@@ -29,17 +31,22 @@
     "screenfull": "^3.3.2",
     "ua-parser-js": "^0.7.18",
     "vue": "^2.5.17",
+    "vue-class-component": "^6.0.0",
     "vue-i18n": "^7.4.2",
+    "vue-property-decorator": "^7.0.0",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-class": "^0.3.1"
   },
   "devDependencies": {
     "@kazupon/vue-i18n-loader": "^0.3.0",
     "@vue/cli-plugin-babel": "^3.0.0",
     "@vue/cli-plugin-eslint": "^3.0.0",
+    "@vue/cli-plugin-typescript": "^3.0.5",
     "@vue/cli-plugin-unit-jest": "^3.0.0",
     "@vue/cli-service": "^3.0.0",
-    "@vue/eslint-config-standard": "^3.0.0",
+    "@vue/eslint-config-prettier": "^3.0.5",
+    "@vue/eslint-config-typescript": "^3.0.5",
     "@vue/test-utils": "^1.0.0-beta.20",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^23.0.1",
@@ -48,6 +55,7 @@
     "sass-loader": "^7.0.1",
     "svg-sprite-loader": "^3.8.0",
     "text-loader": "0.0.1",
+    "typescript": "^3.0.1",
     "vue-template-compiler": "^2.5.17"
   },
   "lint-staged": {

@@ -1,17 +1,17 @@
-import store from '@/store'
+import store from '@/store/index'
 import axios from 'axios'
 import { Message } from 'element-ui'
 import util from '@/libs/util'
 
 // 创建一个错误
-function errorCreat (msg) {
+function errorCreat (msg:string) {
   const err = new Error(msg)
   errorLog(err)
   throw err
 }
 
 // 记录和显示错误
-function errorLog (err) {
+function errorLog (err:any) {
   // 添加到日志
   store.dispatch('d2admin/log/add', {
     type: 'error',
@@ -39,7 +39,7 @@ const service = axios.create({
 
 // 请求拦截器
 service.interceptors.request.use(
-  config => {
+  (config:any) => {
     // 在请求发送之前做一些处理
     if (!(/^https:\/\/|http:\/\//.test(config.url))) {
       const token = util.cookies.get('token')

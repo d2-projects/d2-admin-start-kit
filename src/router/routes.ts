@@ -1,7 +1,7 @@
 import demo from './modules/demo'
+import vue from 'vue'
 
-import layoutHeaderAside from '@/layout/header-aside'
-
+import layoutHeaderAside from '@/layout/header-aside/layout.vue'
 const meta = { requiresAuth: true }
 
 /**
@@ -26,10 +26,10 @@ const frameIn = [
         name: 'refresh',
         hidden: true,
         component: {
-          beforeRouteEnter (to, from, next) {
-            next(vm => vm.$router.replace(from.fullPath))
+          beforeRouteEnter(to: any, from: any, next: any) {
+            next((vm: vue) => vm.$router.replace(from.fullPath))
           },
-          render: h => h()
+          render: (h: any) => h()
         }
       },
       // 页面重定向 必须保留
@@ -38,10 +38,10 @@ const frameIn = [
         name: 'redirect',
         hidden: true,
         component: {
-          beforeRouteEnter (to, from, next) {
-            next(vm => vm.$router.replace(JSON.parse(from.params.route)))
+          beforeRouteEnter(to: any, from: any, next: any) {
+            next((vm: vue) => vm.$router.replace(JSON.parse(from.params.route)))
           },
-          render: h => h()
+          render: (h: any) => h()
         }
       }
     ]
@@ -77,8 +77,4 @@ const errorPage = [
 export const frameInRoutes = frameIn
 
 // 重新组织后导出
-export default [
-  ...frameIn,
-  ...frameOut,
-  ...errorPage
-]
+export default [...frameIn, ...frameOut, ...errorPage]

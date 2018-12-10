@@ -81,7 +81,9 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+  /* eslint-disable prettier/prettier */
+
+  import { mapState, mapGetters, mapActions } from 'vuex'
 import mixinSearch from './mixins/search'
 export default {
   name: 'd2-layout-header-aside',
@@ -117,7 +119,7 @@ export default {
     ...mapGetters('d2admin', {
       themeActiveSetting: 'theme/activeSetting'
     }),
-    /**
+    /**Replace `⏎······'asideCollapseToggle'⏎····` with `'asideCollapseToggl
      * @description 最外层容器的背景图片样式
      */
     styleLayoutMainGroup () {

@@ -1,4 +1,4 @@
-import util from '@/libs/util.js'
+import util from '@/libs/util.ts'
 import { AccountLogin } from '@/api/sys/login'
 
 export default {
@@ -12,20 +12,23 @@ export default {
      * @param {Object} param password {String} 密码
      * @param {Object} param route {Object} 登录成功后定向的路由对象
      */
-    login ({ dispatch }, {
-      vm,
-      username,
-      password,
-      route = {
-        name: 'index'
+    login(
+      { dispatch },
+      {
+        vm,
+        username,
+        password,
+        route = {
+          name: 'index',
+        },
       }
-    }) {
+    ) {
       // 开始请求登录接口
       AccountLogin({
         username,
-        password
+        password,
       })
-        .then(async res => {
+        .then(async (res) => {
           // 设置 cookie 一定要存 uuid 和 token 两个 cookie
           // 整个系统依赖这两个数据进行校验和存储
           // uuid 是用户身份唯一标识 用户注册的时候确定 并且不可改变 不可重复
@@ -34,9 +37,13 @@ export default {
           util.cookies.set('uuid', res.uuid)
           util.cookies.set('token', res.token)
           // 设置 vuex 用户信息
-          await dispatch('d2admin/user/set', {
-            name: res.name
-          }, { root: true })
+          await dispatch(
+            'd2admin/user/set',
+            {
+              name: res.name,
+            },
+            { root: true }
+          )
           // 用户登录后从持久化数据加载一系列的设置
           await dispatch('load')
           // 更新路由 尝试去获取 cookie 里保存的需要重定向的页面完整地址
@@ -46,7 +53,7 @@ export default {
           // 删除 cookie 中保存的重定向页面
           util.cookies.remove('redirect')
         })
-        .catch(err => {
+        .catch((err) => {
           console.log('err: ', err)
         })
     },
@@ -56,26 +63,27 @@ export default {
      * @param {Object} param vm {Object} vue 实例
      * @param {Object} param confirm {Boolean} 是否需要确认
      */
-    logout ({ commit }, { vm, confirm = false }) {
+    logout({ commit }, { vm, confirm = false }) {
       /**
        * @description 注销
        */
-      function logout () {
+      function logout() {
         // 删除cookie
         util.cookies.remove('token')
         util.cookies.remove('uuid')
         // 跳转路由
         vm.$router.push({
-          name: 'login'
+          name: 'login',
         })
       }
+      console.log('准备注销当前账号')
       // 判断是否需要确认
       if (confirm) {
         commit('d2admin/gray/set', true, { root: true })
         vm.$confirm('注销当前账户吗?  打开的标签页和用户设置将会被保存。', '确认操作', {
           confirmButtonText: '确定注销',
           cancelButtonText: '放弃',
-          type: 'warning'
+          type: 'warning',
         })
           .then(() => {
             commit('d2admin/gray/set', false, { root: true })
@@ -93,8 +101,8 @@ export default {
      * @description 用户登录后从持久化数据加载一系列的设置
      * @param {Object} state vuex state
      */
-    load ({ commit, dispatch }) {
-      return new Promise(async resolve => {
+    load({ commit, dispatch }) {
+      return new Promise(async (resolve) => {
         // DB -> store 加载用户名
         await dispatch('d2admin/user/load', null, { root: true })
         // DB -> store 加载主题
@@ -110,6 +118,6 @@ export default {
         // end
         resolve()
       })
-    }
-  }
+    },
+  },
 }

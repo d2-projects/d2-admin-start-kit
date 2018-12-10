@@ -1,6 +1,7 @@
 // Element
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import Vue from "vue"
 // flex 布局库
 import 'flex.css'
 // 组件
@@ -8,12 +9,12 @@ import '@/components'
 // svg 图标
 import '@/assets/svg-icons'
 // 功能插件
-import pluginError from '@/plugin/error'
-import pluginLog from '@/plugin/log'
-import pluginOpen from '@/plugin/open'
+import pluginError from '@/plugin/error/index'
+import pluginLog from '@/plugin/log/index'
+import pluginOpen from '@/plugin/open/index'
 
 export default {
-  async install (Vue, options) {
+  async install (Vue:any, options:any) {
     // 设置为 false 以阻止 vue 在启动时生成生产提示。https://cn.vuejs.org/v2/api/#productionTip
     Vue.config.productionTip = false
     // 当前环境

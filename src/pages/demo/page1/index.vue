@@ -6,8 +6,11 @@
   </d2-container>
 </template>
 
-<script>
-export default {
-  name: 'page1'
-}
+<script lang="ts">
+import { Component, Vue, Watch } from "vue-property-decorator";
+
+@Component({
+  name: "page1"
+})
+export default class page1 extends Vue {}
 </script>

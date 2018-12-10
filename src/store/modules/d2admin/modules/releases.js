@@ -1,5 +1,5 @@
-import util from '@/libs/util.js'
-import setting from '@/setting.js'
+import util from '@/libs/util.ts'
+import setting from '@/setting.ts'
 
 export default {
   namespaced: true,

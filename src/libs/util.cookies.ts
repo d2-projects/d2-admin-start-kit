@@ -1,8 +1,7 @@
 import Cookies from 'js-cookie'
-import setting from '@/setting.js'
+import setting from '@/setting.ts'
 
-const cookies = {}
-
+const cookies:any = {}
 /**
  * @description 存储 cookie 值
  * @param {String} name cookie name

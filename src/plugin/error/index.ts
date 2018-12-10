@@ -1,9 +1,9 @@
-import store from '@/store'
+import store from '@/store/index'
 import util from '@/libs/util'
 
 export default {
-  install (Vue, options) {
-    Vue.config.errorHandler = function (err, vm, info) {
+  install (Vue:any, options:any ) {
+    Vue.config.errorHandler = function (err:any, vm:any, info:any) {
       Vue.nextTick(() => {
         // 添加 log
         store.dispatch('d2admin/log/add', {
