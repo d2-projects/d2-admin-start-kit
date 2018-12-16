@@ -29,21 +29,23 @@ router.beforeEach((to, from, next) => {
   // 关闭搜索面板
   store.commit('d2admin/search/set', false)
   // 验证当前路由所有的匹配中是否需要有登录验证的
-  if (to.matched.some(r => r.meta.requiresAuth)) {
+  if (to.matched.some(r => r.meta.auth)) {
     // 这里暂时将cookie里是否存有token作为验证是否登录的条件
     // 请根据自身业务需要修改
     const token = util.cookies.get('token')
     if (token && token !== 'undefined') {
       next()
     } else {
-      // 将当前预计打开的页面完整地址临时存储 登录后继续跳转
-      // 这个 cookie(redirect) 会在登录后自动删除
-      util.cookies.set('redirect', to.fullPath)
       // 没有登录的时候跳转到登录界面
+      // 携带上登陆成功之后需要跳转的页面完整路径
       next({
-        name: 'login'
+        name: 'login',
+        query: {
+          redirect: to.fullPath
+        }
       })
-      NProgress.done() // next(...)重定向不会触发router.afterEach钩子，需要手动hack一下
+      // https://github.com/d2-projects/d2-admin/issues/138
+      NProgress.done()
     }
   } else {
     // 不需要身份校验 直接通过
@@ -56,9 +58,9 @@ router.afterEach(to => {
   NProgress.done()
   // 需要的信息
   const app = router.app
-  const { name, params, query } = to
+  const { name, params, query, fullPath } = to
   // 多页控制 打开新的页面
-  app.$store.dispatch('d2admin/page/open', { name, params, query })
+  app.$store.dispatch('d2admin/page/open', { name, params, query, fullPath })
   // 更改标题
   util.title(to.meta.title)
 })
