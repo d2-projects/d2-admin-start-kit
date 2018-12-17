@@ -1,17 +1,19 @@
 {
   "name": "d2-admin",
-  "version": "1.5.9",
+  "version": "1.6.9",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "start": "npm run serve",
     "dev": "npm run serve",
     "build": "vue-cli-service build",
+    "build:nomock": "vue-cli-service build --mode nomock",
     "build:travis": "vue-cli-service build --mode travis",
     "lint": "vue-cli-service lint --fix",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@d2-projects/vue-filters-date": "^1.0.2",
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
     "better-scroll": "^1.12.1",
@@ -21,11 +23,11 @@
     "fuse.js": "^3.2.1",
     "hotkeys-js": "^3.3.6",
     "js-cookie": "^2.2.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.10",
     "lowdb": "^1.0.0",
     "mockjs": "^1.0.1-beta3",
     "nprogress": "^0.2.0",
-    "particles.js": "^2.0.0",
+    "qs": "^6.6.0",
     "screenfull": "^3.3.2",
     "ua-parser-js": "^0.7.18",
     "vue": "^2.5.17",
@@ -48,6 +50,7 @@
     "sass-loader": "^7.0.1",
     "svg-sprite-loader": "^3.8.0",
     "text-loader": "0.0.1",
+    "uglifyjs-webpack-plugin": "^2.0.1",
     "vue-template-compiler": "^2.5.17"
   },
   "lint-staged": {
