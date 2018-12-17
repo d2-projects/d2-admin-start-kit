@@ -1,17 +1,16 @@
 <template>
-  <d2-container :filename="filename">
+  <d2-container>
     <template slot="header">Page 1 header</template>
     Hello World
+    <template slot="footer">footer</template>
   </d2-container>
 </template>
 
-<script>
-export default {
-  name: 'page1',
-  data () {
-    return {
-      filename: __filename
-    }
-  }
-}
+<script lang="ts">
+import { Component, Vue, Watch } from "vue-property-decorator";
+
+@Component({
+  name: "page1"
+})
+export default class page1 extends Vue {}
 </script>

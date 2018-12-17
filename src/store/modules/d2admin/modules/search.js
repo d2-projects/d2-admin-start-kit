@@ -1,4 +1,4 @@
-import setting from '@/setting.js'
+import setting from '@/setting.ts'
 
 export default {
   namespaced: true,

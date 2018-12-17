@@ -81,16 +81,9 @@
 </template>
 
 <script>
-import d2MenuSide from './components/menu-side'
-import d2MenuHeader from './components/menu-header'
-import d2Tabs from './components/tabs'
-import d2HeaderFullscreen from './components/header-fullscreen'
-import d2HeaderSearch from './components/header-search'
-import d2HeaderSize from './components/header-size'
-import d2HeaderTheme from './components/header-theme'
-import d2HeaderUser from './components/header-user'
-import d2HeaderErrorLog from './components/header-error-log'
-import { mapState, mapGetters, mapActions } from 'vuex'
+  /* eslint-disable prettier/prettier */
+
+  import { mapState, mapGetters, mapActions } from 'vuex'
 import mixinSearch from './mixins/search'
 export default {
   name: 'd2-layout-header-aside',
@@ -98,15 +91,15 @@ export default {
     mixinSearch
   ],
   components: {
-    d2MenuSide,
-    d2MenuHeader,
-    d2Tabs,
-    d2HeaderFullscreen,
-    d2HeaderSearch,
-    d2HeaderSize,
-    d2HeaderTheme,
-    d2HeaderUser,
-    d2HeaderErrorLog
+    'd2-menu-side': () => import('./components/menu-side'),
+    'd2-menu-header': () => import('./components/menu-header'),
+    'd2-tabs': () => import('./components/tabs'),
+    'd2-header-fullscreen': () => import('./components/header-fullscreen'),
+    'd2-header-search': () => import('./components/header-search'),
+    'd2-header-size': () => import('./components/header-size'),
+    'd2-header-theme': () => import('./components/header-theme'),
+    'd2-header-user': () => import('./components/header-user'),
+    'd2-header-error-log': () => import('./components/header-error-log')
   },
   data () {
     return {
@@ -126,7 +119,7 @@ export default {
     ...mapGetters('d2admin', {
       themeActiveSetting: 'theme/activeSetting'
     }),
-    /**
+    /**Replace `⏎······'asideCollapseToggle'⏎····` with `'asideCollapseToggl
      * @description 最外层容器的背景图片样式
      */
     styleLayoutMainGroup () {

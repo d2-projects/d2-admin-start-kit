@@ -2,11 +2,11 @@
 import 'babel-polyfill'
 // Vue
 import Vue from 'vue'
-import App from './App'
+import App from './App.vue'
 // store
 import store from '@/store/index'
 // 多国语
-import i18n from './i18n'
+import i18n from './i18n/index'
 // 核心插件
 import d2Admin from '@/plugin/d2admin'
 
@@ -27,7 +27,7 @@ new Vue({
   created () {
     // 处理路由 得到每一级的路由设置
     this.$store.commit('d2admin/page/init', frameInRoutes)
-    // 设置顶栏菜单
+    // // 设置顶栏菜单
     this.$store.commit('d2admin/menu/headerSet', menuHeader)
     // 设置侧边栏菜单
     this.$store.commit('d2admin/menu/asideSet', menuAside)

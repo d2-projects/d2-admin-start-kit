@@ -1,3 +1,6 @@
+// @ts-ignore
+import { version } from '../package.json'
+
 export default {
   // 快捷键
   // 支持快捷键 例如 ctrl+shift+s
@@ -16,13 +19,16 @@ export default {
     opened: [
       {
         name: 'index',
-        fullPath: '/index',
         meta: {
           title: '首页',
-          auth: false
+          requiresAuth: false
         }
       }
     ]
+  },
+  // 版本
+  releases: {
+    version
   },
   // 菜单搜索
   search: {

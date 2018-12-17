@@ -1,5 +1,5 @@
-import util from '@/libs/util'
-import { cloneDeep } from 'lodash'
+import db from '@/libs/db.ts'
+import util from '@/libs/util.ts'
 
 /**
  * @description 检查路径是否存在 不存在的话初始化
@@ -19,16 +19,9 @@ function pathInit ({
 }) {
   const uuid = util.cookies.get('uuid') || 'ghost-uuid'
   const currentPath = `${dbName}.${user ? `user.${uuid}` : 'public'}${path ? `.${path}` : ''}`
-  const value = util.db.get(currentPath).value()
-  // console.group('pathInit')
-  // console.log('dbName', dbName)
-  // console.log('path', path)
-  // console.log('user', user)
-  // console.log('defaultValue', defaultValue)
-  // console.log('value', value)
-  // console.groupEnd()
+  const value = db.get(currentPath).value()
   if (!(value !== undefined && validator(value))) {
-    util.db
+    db
       .set(currentPath, defaultValue)
       .write()
   }
@@ -52,7 +45,7 @@ export default {
       value = '',
       user = false
     }) {
-      util.db.set(pathInit({
+      db.set(pathInit({
         dbName,
         path,
         user
@@ -73,12 +66,12 @@ export default {
       user = false
     }) {
       return new Promise(resolve => {
-        resolve(cloneDeep(util.db.get(pathInit({
+        resolve(db.get(pathInit({
           dbName,
           path,
           user,
           defaultValue
-        })).value()))
+        })).value())
       })
     },
     /**
@@ -90,7 +83,7 @@ export default {
       user = false
     } = {}) {
       return new Promise(resolve => {
-        resolve(util.db.get(pathInit({
+        resolve(db.get(pathInit({
           dbName: 'database',
           path: '',
           user,
@@ -107,7 +100,7 @@ export default {
       user = false
     } = {}) {
       return new Promise(resolve => {
-        resolve(util.db.get(pathInit({
+        resolve(db.get(pathInit({
           dbName: 'database',
           path: '',
           user,
@@ -125,11 +118,11 @@ export default {
      */
     databasePage (context, {
       vm,
-      basis = 'fullPath',
+      basis = 'name',
       user = false
     } = {}) {
       return new Promise(resolve => {
-        resolve(util.db.get(pathInit({
+        resolve(db.get(pathInit({
           dbName: 'database',
           path: `$page.${vm.$route[basis]}`,
           user,
@@ -146,11 +139,11 @@ export default {
      */
     databasePageClear (context, {
       vm,
-      basis = 'fullPath',
+      basis = 'name',
       user = false
     } = {}) {
       return new Promise(resolve => {
-        resolve(util.db.get(pathInit({
+        resolve(db.get(pathInit({
           dbName: 'database',
           path: `$page.${vm.$route[basis]}`,
           user,
@@ -168,16 +161,16 @@ export default {
      */
     pageSet (context, {
       vm,
-      basis = 'fullPath',
+      basis = 'name',
       user = false
     }) {
       return new Promise(resolve => {
-        resolve(util.db.get(pathInit({
+        resolve(db.get(pathInit({
           dbName: 'database',
           path: `$page.${vm.$route[basis]}.$data`,
           user,
           validator: () => false,
-          defaultValue: cloneDeep(vm.$data)
+          defaultValue: vm.$data
         })))
       })
     },
@@ -190,16 +183,16 @@ export default {
      */
     pageGet (context, {
       vm,
-      basis = 'fullPath',
+      basis = 'name',
       user = false
     }) {
       return new Promise(resolve => {
-        resolve(cloneDeep(util.db.get(pathInit({
+        resolve(db.get(pathInit({
           dbName: 'database',
           path: `$page.${vm.$route[basis]}.$data`,
           user,
-          defaultValue: cloneDeep(vm.$data)
-        })).value()))
+          defaultValue: vm.$data
+        })).value())
       })
     },
     /**
@@ -211,11 +204,11 @@ export default {
      */
     pageClear (context, {
       vm,
-      basis = 'fullPath',
+      basis = 'name',
       user = false
     }) {
       return new Promise(resolve => {
-        resolve(util.db.get(pathInit({
+        resolve(db.get(pathInit({
           dbName: 'database',
           path: `$page.${vm.$route[basis]}.$data`,
           user,

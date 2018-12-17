@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
+import setting from '@/setting.ts'
 
-const cookies = {}
-
+const cookies:any = {}
 /**
  * @description 存储 cookie 值
  * @param {String} name cookie name
@@ -13,7 +13,7 @@ cookies.set = function (name = 'default', value = '', cookieSetting = {}) {
     expires: 1
   }
   Object.assign(currentCookieSetting, cookieSetting)
-  Cookies.set(`d2admin-${process.env.VUE_APP_VERSION}-${name}`, value, currentCookieSetting)
+  Cookies.set(`d2admin-${setting.releases.version}-${name}`, value, currentCookieSetting)
 }
 
 /**
@@ -21,7 +21,7 @@ cookies.set = function (name = 'default', value = '', cookieSetting = {}) {
  * @param {String} name cookie name
  */
 cookies.get = function (name = 'default') {
-  return Cookies.get(`d2admin-${process.env.VUE_APP_VERSION}-${name}`)
+  return Cookies.get(`d2admin-${setting.releases.version}-${name}`)
 }
 
 /**
@@ -36,7 +36,7 @@ cookies.getAll = function () {
  * @param {String} name cookie name
  */
 cookies.remove = function (name = 'default') {
-  return Cookies.remove(`d2admin-${process.env.VUE_APP_VERSION}-${name}`)
+  return Cookies.remove(`d2admin-${setting.releases.version}-${name}`)
 }
 
 export default cookies

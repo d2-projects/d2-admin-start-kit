@@ -1,12 +1,12 @@
-import store from '@/store'
+import store from '@/store/index'
 import util from '@/libs/util'
 
 export default {
-  install (Vue, options) {
+  install (Vue:any, options:any) { {
     // 快速打印 log
     Vue.prototype.$log = util.log
     // 快速记录日志
-    Vue.prototype.$logAdd = function (info, show = true) {
+    Vue.prototype.$logAdd = function (info:string, show = true) {
       // store 赋值
       store.dispatch('d2admin/log/add', {
         type: 'log',
@@ -18,4 +18,4 @@ export default {
       }
     }
   }
-}
+}}
