@@ -1,6 +1,6 @@
 {
   "name": "d2-admin",
-  "version": "1.6.9",
+  "version": "1.6.10",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
@@ -28,7 +28,7 @@
     "mockjs": "^1.0.1-beta3",
     "nprogress": "^0.2.0",
     "qs": "^6.6.0",
-    "screenfull": "^3.3.2",
+    "screenfull": "^4.0.0",
     "ua-parser-js": "^0.7.18",
     "vue": "^2.5.17",
     "vue-i18n": "^7.4.2",
