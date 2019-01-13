@@ -24,7 +24,7 @@ export default {
       }
     ],
     // 是否开启记录上次访问过的页面
-    isPreviousPage: true
+    isPreviousPage: false
   },
   // 菜单搜索
   search: {
