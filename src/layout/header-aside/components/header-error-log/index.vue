@@ -1,49 +1,53 @@
 <template>
-  <div>
-    <el-tooltip
+  <div v-if="logLength > 0">
+    <Tooltip
       effect="dark"
       :content="tooltipContent"
       placement="bottom">
-      <el-button
+      <Button
         class="d2-ml-0 d2-mr btn-text can-hover"
         type="text"
         @click="handleClick">
-        <el-badge
-          v-if="logLength > 0"
+        <Badge
           :max="99"
           :value="logLengthError"
           :is-dot="logLengthError === 0">
           <d2-icon
             :name="logLengthError === 0 ? 'dot-circle-o' : 'bug'"
             style="font-size: 20px"/>
-        </el-badge>
-        <d2-icon
+        </Badge>
+        <!-- <d2-icon
           v-else
           name="dot-circle-o"
-          style="font-size: 20px"/>
-      </el-button>
-    </el-tooltip>
-    <el-dialog
+          style="font-size: 20px"/> -->
+      </Button>
+    </Tooltip>
+    <Dialog
       :title="tooltipContent"
       width="80%"
       :visible.sync="dialogVisible"
       :append-to-body="true">
       <div class="d2-mb-10">
-        <el-button type="danger" size="mini" @click="handleLogClean">
+        <Button type="danger" size="mini" @click="handleLogClean">
           <d2-icon name="trash-o"/>
           清空
-        </el-button>
+        </Button>
       </div>
       <d2-error-log-list/>
-    </el-dialog>
+    </Dialog>
   </div>
 </template>
 
 <script>
+import { Tooltip, Badge, Button, Dialog } from 'element-ui'
 import { mapGetters, mapMutations } from 'vuex'
 import D2ErrorLogList from './components/list'
 export default {
   components: {
+    Tooltip,
+    Button,
+    Badge,
+    Dialog,
     D2ErrorLogList
   },
   data () {

@@ -8,57 +8,69 @@
       </div>
       <!-- 表单部分 -->
       <div class="form-group">
-        <el-card>
-          <el-form ref="loginForm" label-position="top" :rules="rules" :model="formLogin" size="default">
-            <el-form-item  prop="username">
-              <el-input type="text" v-model="formLogin.username" placeholder="用户名">
+        <Card>
+          <Form ref="loginForm" label-position="top" :rules="rules" :model="formLogin" size="default">
+            <FormItem  prop="username">
+              <Input type="text" v-model="formLogin.username" placeholder="用户名">
                 <i slot="prepend" class="fa fa-user-circle-o"></i>
-              </el-input>
-            </el-form-item>
-            <el-form-item prop="password">
-              <el-input type="password" v-model="formLogin.password" placeholder="密码">
+              </Input>
+            </FormItem>
+            <FormItem prop="password">
+              <Input type="password" v-model="formLogin.password" placeholder="密码">
                 <i slot="prepend" class="fa fa-keyboard-o"></i>
-              </el-input>
-            </el-form-item>
-            <el-form-item prop="code" v-if="requiredInputCode">
-              <el-input type="text" v-model="formLogin.code" placeholder="- - - -">
+              </Input>
+            </FormItem>
+            <FormItem prop="code" v-if="requiredInputCode">
+              <Input type="text" v-model="formLogin.code" placeholder="- - - -">
                 <template slot="prepend">验证码</template>
                 <template slot="append">
                   <img class="login-code" src="./image/login-code.png">
                 </template>
-              </el-input>
-            </el-form-item>
-            <el-button size="default" @click="submit" type="primary" class="button-login">登录</el-button>
-          </el-form>
-        </el-card>
+              </Input>
+            </FormItem>
+            <Button size="default" @click="submit" type="primary" class="button-login">登录</Button>
+          </Form>
+        </Card>
       </div>
       <!-- 快速登录按钮 -->
-      <el-button size="default" type="info" class="button-help" @click="dialogVisible = true">
+      <Button size="default" type="info" class="button-help" @click="dialogVisible = true">
         快速选择用户（测试功能）
-      </el-button>
+      </Button>
     </div>
-    <el-dialog
+    <Dialog
       title="快速选择用户"
       :visible.sync="dialogVisible"
       width="400px">
-      <el-row :gutter="10" style="margin: -20px 0px -10px 0px;">
-        <el-col v-for="(user, index) in users" :key="index" :span="8">
+      <Row :gutter="10" style="margin: -20px 0px -10px 0px;">
+        <Col v-for="(user, index) in users" :key="index" :span="8">
           <div class="user-btn" @click="handleUserBtnClick(user)">
             <d2-icon name="user-circle-o"/>
             <span>{{user.name}}</span>
           </div>
-        </el-col>
-      </el-row>
-    </el-dialog>
+        </Col>
+      </Row>
+    </Dialog>
   </div>
 </template>
 
 <script>
-/* eslint-disable */
-require('particles.js')
+import { Card, Form, FormItem, Input, Button, Dialog, Row, Col } from 'element-ui'
 import config from './config/nasa'
 import { mapActions } from 'vuex'
+
+require('particles.js')
+
 export default {
+  components: {
+    Card,
+    Form,
+    FormItem,
+    Input,
+    Button,
+    Dialog,
+    Row,
+    Col
+  },
   data () {
     return {
       // 快速选择用户
@@ -104,15 +116,18 @@ export default {
   },
   mounted () {
     // 初始化例子插件
-    particlesJS('login', config)
+    window.particlesJS('login', config)
   },
   beforeDestroy () {
     // 销毁 particlesJS
     // thanks https://github.com/d2-projects/d2-admin/issues/65
     // ref https://github.com/VincentGarreau/particles.js/issues/63
-    if (pJSDom && pJSDom.length > 0) {
-      pJSDom[0].pJS.fn.vendors.destroypJS()
-      pJSDom = []
+    if (window['pJSDom'] && window['pJSDom'].length) {
+      let len = window['pJSDom'].length
+      for (let i = 0; i < len; i++) {
+        window['pJSDom'][i].pJS.fn.vendors.destroypJS()
+      }
+      window['pJSDom'] = []
     }
   },
   methods: {
@@ -158,5 +173,96 @@ export default {
 </script>
 
 <style lang="scss">
-@import './style.scss';
+.login-page {
+  background: transparent;
+  height: 100%;
+  position: relative;
+  // 层
+  .layer {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    &.flex-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+  }
+  // 背景
+  .bg {
+    canvas {
+      display: block;
+      margin: 0px;
+      padding: 0px;
+    }
+  }
+  // logo
+  .logo-group {
+    margin-top: -75px - 70px;
+    position: relative;
+    top: 75px;
+    color: $color-primary;
+    img {
+      height: 140px;
+    }
+  }
+  // 登录表单
+  .form-group {
+    width: 300px;
+    // 重新设置卡片阴影
+    .el-card {
+      box-shadow: 0 0 8px 0 rgba(232,237,250,.6), 0 2px 4px 0 rgba(232,237,250,.5);
+      background-color: transparent;
+      .el-card__body {
+        padding-top: 70px;
+        background-color: rgba(#fff,.5);
+      }
+    }
+    // 登录按钮
+    .button-login {
+      width: 100%;
+    }
+    // 输入框左边的图表区域缩窄
+    .el-input-group__prepend {
+      padding: 0px 14px;
+    }
+    .login-code {
+      height: 40px - 2px;
+      display: block;
+      margin: 0px -20px;
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
+  }
+  // 帮助按钮
+  .button-help {
+    width: 300px;
+    margin-top: 20px;
+  }
+  .user-btn {
+    @extend %flex-center-col;
+    @extend %unable-select;
+    padding: 10px 0px;
+    border-radius: 4px;
+    &:hover {
+      background-color: $color-bg;
+      i {
+        color: $color-text-normal;
+      }
+      span {
+        color: $color-text-normal;
+      }
+    }
+    i {
+      font-size: 36px;
+      color: $color-text-sub;
+    }
+    span {
+      font-size: 12px;
+      margin-top: 10px;
+      color: $color-text-sub;
+    }
+  }
+}
 </style>

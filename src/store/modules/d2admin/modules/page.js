@@ -4,7 +4,7 @@ import { get } from 'lodash'
 import setting from '@/setting.js'
 
 // 判定是否需要缓存
-const isKeepAlive = data => get(data, 'meta.cache', false)
+const isKeepAlive = data => get(data, 'meta.cache', true)
 
 export default {
   namespaced: true,
@@ -15,6 +15,8 @@ export default {
     opened: setting.page.opened,
     // 当前页面
     current: '',
+    // 页面最大化显示
+    maximized: false,
     // 需要缓存的页面 name
     keepAlive: []
   },
@@ -125,7 +127,7 @@ export default {
      * @class current
      * @description 打开一个新的页面
      * @param {Object} state vuex state
-     * @param {Object} param { name, params, query, fullPath } 路由信息
+     * @param {Object} param 从路由钩子的 to 对象上获取 { name, params, query, fullPath } 路由信息
      */
     open ({ state, commit, dispatch }, { name, params, query, fullPath }) {
       return new Promise(async resolve => {
@@ -163,6 +165,14 @@ export default {
         // end
         resolve()
       })
+    },
+    /**
+     * @class maximizedToggle
+     * @description 切换最大化状态
+     * @param {Object} state vuex state
+     */
+    maximizedToggle ({ state, commit }) {
+      commit('maximizedSet', !state.maximized)
     },
     /**
      * @class opened
@@ -344,8 +354,11 @@ export default {
     keepAliveRemove (state, name) {
       const list = [ ...state.keepAlive ]
       const index = list.findIndex(item => item === name)
-      list.splice(index, 1)
-      state.keepAlive = list
+
+      if (index >= 0) {
+        list.splice(index, 1)
+        state.keepAlive = list
+      }
     },
     /**
      * @description 增加一个页面的缓存设置
@@ -372,6 +385,15 @@ export default {
      */
     currentSet (state, fullPath) {
       state.current = fullPath
+    },
+    /**
+     * @class current
+     * @description 设置页面是否最大化显示
+     * @param {Object} state vuex state
+     * @param {String} maximized maximized
+     */
+    maximizedSet (state, maximized) {
+      state.maximized = maximized
     },
     /**
      * @class pool

@@ -2,7 +2,7 @@ import demo from './modules/demo'
 
 import layoutHeaderAside from '@/layout/header-aside'
 
-const meta = { requiresAuth: true }
+const meta = { auth: true }
 
 /**
  * 在主框架内显示
@@ -65,11 +65,19 @@ const frameOut = [
  * 错误页面
  */
 const errorPage = [
+  // 403
+  {
+    path: '/403',
+    name: '403',
+    component: () => import('@/pages/error-page'),
+    props: { code: 403 }
+  },
   // 404
   {
     path: '*',
     name: '404',
-    component: () => import('@/pages/error-page-404')
+    component: () => import('@/pages/error-page'),
+    props: { code: 404 }
   }
 ]
 

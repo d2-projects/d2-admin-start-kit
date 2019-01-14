@@ -8,6 +8,7 @@ const userDB = [
     uuid: 'admin-uuid',
     name: '管理员',
     permissions: [
+      '/demo/auth',
       '/demo/page1',
       '/demo/page2',
       '/demo/page3',
@@ -22,6 +23,7 @@ const userDB = [
     uuid: 'editor-uuid',
     name: '编辑',
     permissions: [
+      '/demo/auth',
       '/demo/page1',
       '/demo/page2',
       '/demo/test1',
@@ -34,6 +36,7 @@ const userDB = [
     uuid: 'user1-uuid',
     name: '用户1',
     permissions: [
+      '/demo/auth',
       '/demo/page1',
       '/demo/test1'
     ]
@@ -41,8 +44,9 @@ const userDB = [
 ]
 
 let errorCount = 0
+const baseUrl = `${process.env.VUE_APP_API}`
 
-Mock.mock('/api/login', 'post', ({ url, type, body }) => {
+Mock.mock(baseUrl + 'login', 'post', ({ url, type, body }) => {
   const bodyObj = Qs.parse(body)
   const user = userDB.find(e => e.username === bodyObj.username && e.password === bodyObj.password)
   if (user) {

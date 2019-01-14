@@ -1,3 +1,4 @@
+import logger from 'logger'
 const log = {}
 
 /**
@@ -24,7 +25,7 @@ function typeColor (type = 'default') {
  * @param {String} type style
  */
 log.capsule = function (title, info, type = 'primary') {
-  console.log(
+  logger.log(
     `%c ${title} %c ${info} %c`,
     'background:#35495E; padding: 1px; border-radius: 3px 0 0 3px; color: #fff;',
     `background:${typeColor(type)}; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff;`,
@@ -36,7 +37,7 @@ log.capsule = function (title, info, type = 'primary') {
  * @description 打印彩色文字
  */
 log.colorful = function (textArr) {
-  console.log(
+  logger.log(
     `%c${textArr.map(t => t.text || '').join('%c')}`,
     ...textArr.map(t => `color: ${typeColor(t.type)};`)
   )

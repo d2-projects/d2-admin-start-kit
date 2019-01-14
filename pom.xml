@@ -37,8 +37,8 @@
 						</goals>
 						<phase>generate-resources</phase>
 						<configuration>
-							<nodeVersion>v8.12.0</nodeVersion>
-							<npmVersion>6.4.1</npmVersion>
+							<nodeVersion>v11.6.0</nodeVersion>
+							<npmVersion>6.5.0</npmVersion>
 							<nodeDownloadRoot>http://npm.taobao.org/mirrors/node/</nodeDownloadRoot>
 							<npmDownloadRoot>https://registry.npm.taobao.org/npm/-/</npmDownloadRoot>
 						</configuration>
@@ -61,6 +61,16 @@
 						<phase>generate-resources</phase>
 						<configuration>
 							<arguments>run build</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>npm test:unit</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>test</phase>
+						<configuration>
+							<arguments>run test:unit</arguments>
 						</configuration>
 					</execution>
 				</executions>

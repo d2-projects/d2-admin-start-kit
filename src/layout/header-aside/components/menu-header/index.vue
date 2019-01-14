@@ -2,12 +2,12 @@
   <div class="d2-theme-header-menu" ref="page" :class="{'is-scrollable': isScroll}" flex="cross:center">
     <div class="d2-theme-header-menu__content" ref="content" flex-box="1" flex>
       <div class="d2-theme-header-menu__scroll" ref="scroll" flex-box="0" :style="'transform: translateX(' + currentTranslateX + 'px);'">
-        <el-menu mode="horizontal" :default-active="active" @select="handleMenuSelect">
+        <Menu mode="horizontal" :default-active="active" @select="handleHeaderMenuSelect">
           <template v-for="(menu, menuIndex) in header">
-            <d2-layout-header-aside-menu-item v-if="menu.children === undefined" :menu="menu" :key="menuIndex"/>
-            <d2-layout-header-aside-menu-sub v-else :menu="menu" :key="menuIndex"/>
+            <MenuItem v-if="menu.children === undefined" :menu="menu" :key="menuIndex"/>
+            <HeaderMenuSub v-else :menu="menu" :key="menuIndex"/>
           </template>
-        </el-menu>
+        </Menu>
       </div>
     </div>
     <div v-if="isScroll" class="d2-theme-header-menu__prev" flex-box="0" @click="scroll('left')" flex="main:center cross:center">
@@ -20,19 +20,31 @@
 </template>
 
 <script>
+import { Menu } from 'element-ui'
 import { throttle } from 'lodash'
 import { mapState } from 'vuex'
 import menuMixin from '../mixin/menu'
-import d2LayoutMainMenuItem from '../components/menu-item/index.vue'
-import d2LayoutMainMenuSub from '../components/menu-sub/index.vue'
+import MenuItem from '../components/menu-item'
+import HeaderMenuSub from '../components/header-menu-sub'
+
+const recursive = (menu, path) => {
+  if (menu.path === path) {
+    return true
+  } else if (menu.children) {
+    return menu.children.some(child => recursive(child, path))
+  }
+  return false
+}
+
 export default {
   name: 'd2-layout-header-aside-menu-header',
   mixins: [
     menuMixin
   ],
   components: {
-    'd2-layout-header-aside-menu-item': d2LayoutMainMenuItem,
-    'd2-layout-header-aside-menu-sub': d2LayoutMainMenuSub
+    Menu,
+    MenuItem,
+    HeaderMenuSub
   },
   computed: {
     ...mapState('d2admin/menu', [
@@ -52,12 +64,31 @@ export default {
   watch: {
     '$route': {
       handler ({ fullPath }) {
-        this.active = fullPath
+        let item = this.header.find(i => {
+          return recursive(i, fullPath)
+        })
+        if (!item) {
+          item = this.header[0]
+        }
+        this.active = item.path
+        const subMenu = item.children
+        this.$store.commit('d2admin/menu/asideSet', subMenu, { root: true })
       },
       immediate: true
     }
   },
   methods: {
+    handleHeaderMenuSelect (index, indexPath) {
+      if (/^header-menu-\d+$/.test(index)) {
+        const item = this.header.find(i => i.path === index)
+        if (item) {
+          const subMenu = item.children
+          this.$store.commit('d2admin/menu/asideSet', subMenu, { root: true })
+        }
+      } else {
+        this.handleMenuSelect(index, indexPath)
+      }
+    },
     scroll (direction) {
       if (direction === 'left') {
         // 向右滚动

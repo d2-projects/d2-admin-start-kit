@@ -1,12 +1,12 @@
 <template>
-  <el-table
+  <Table
     :data="logReverse"
     border
     stripe
     style="width: 100%"
     size="mini">
 
-    <el-table-column type="expand">
+    <TableColumn type="expand">
       <div slot-scope="props" class="d2-error-log-list__expand-group">
         <!-- <expand-item
           :type="props.row.type"
@@ -61,9 +61,9 @@
           title="时间"
           :value="props.row.time"/>
       </div>
-    </el-table-column>
+    </TableColumn>
 
-    <el-table-column
+    <TableColumn
       prop="type"
       label="类型"
       width="80px"
@@ -76,35 +76,35 @@
       :filter-method="filterType"
       filter-placement="bottom">
       <template slot-scope="scope">
-        <el-tag
+        <Tag
           v-if="scope.row.type === 'error'"
           size="mini"
           type="danger">
           <d2-icon name="bug"/> Bug
-        </el-tag>
-        <el-tag
+        </Tag>
+        <Tag
           v-else
           size="mini"
           type="info">
           <d2-icon name="dot-circle-o"/> Log
-        </el-tag>
+        </Tag>
       </template>
-    </el-table-column>
+    </TableColumn>
 
-    <el-table-column
+    <TableColumn
       label="地址"
       prop="url"
       width="140px"
       :show-overflow-tooltip="true">
-    </el-table-column>
+    </TableColumn>
 
-    <el-table-column
+    <TableColumn
       label="内容"
       prop="info"
       :show-overflow-tooltip="true">
-    </el-table-column>
+    </TableColumn>
 
-    <el-table-column
+    <TableColumn
       label="错误名称"
       width="140px"
       :show-overflow-tooltip="true">
@@ -112,27 +112,31 @@
         slot-scope="scope">
         {{get(scope.row.err, 'name', '')}}
       </template>
-    </el-table-column>
+    </TableColumn>
 
-    <el-table-column
+    <TableColumn
       label="错误信息"
       width="300px">
       <template
         slot-scope="scope">
         {{get(scope.row.err, 'message', '')}}
       </template>
-    </el-table-column>
+    </TableColumn>
 
-  </el-table>
+  </Table>
 </template>
 
 <script>
+import { Tag, Table, TableColumn } from 'element-ui'
 import { mapState } from 'vuex'
 import { get } from 'lodash'
 import ExpandItem from './components/ExpandItem'
 export default {
   name: 'd2-error-log-list',
   components: {
+    Tag,
+    Table,
+    TableColumn,
     ExpandItem
   },
   computed: {

@@ -1,4 +1,5 @@
-import { name, version } from '../package'
+// 许可类型常量
+import { ANONYMOUS, CHECK } from '@/libs/Auth'
 
 export default {
   // 快捷键
@@ -11,7 +12,8 @@ export default {
   },
   // 侧边栏默认折叠状态
   menu: {
-    asideCollapse: false
+    asideCollapse: false,
+    showNoAuth: false
   },
   // 在读取持久化数据失败时默认页面
   page: {
@@ -21,15 +23,16 @@ export default {
         fullPath: '/index',
         meta: {
           title: '首页',
-          requiresAuth: false
+          auth: true
         }
       }
     ]
   },
   // 版本
   releases: {
-    name,
-    version
+    name: process.env.VUE_APP_NAME,
+    version: process.env.VUE_APP_VERSION,
+    buildTime: process.env.VUE_APP_BUILD_TIME
   },
   // 菜单搜索
   search: {
@@ -60,5 +63,17 @@ export default {
     info: {
       name: 'Guest'
     }
+  },
+  // 许可类型取值有：
+  // 1、ANONYMOUS，允许匿名访问；
+  // 2、LOGGEDIN，登录就可以访问；
+  // 3、CHECK，需要检查当前用户许可
+  // 不在此处配置的许可取值为 loggedIn
+  permissions: {
+    '/login': ANONYMOUS,
+    '/demo/graph': ANONYMOUS,
+    '/demo/page1': CHECK,
+    '/demo/page2': CHECK,
+    '/demo/page3': CHECK
   }
 }

@@ -10,60 +10,54 @@
             :menulist="tagName === '/index' ? contextmenuListIndex : contextmenuList"
             @rowClick="contextmenuClick"/>
         </d2-contextmenu>
-        <el-tabs
+        <Tabs
           class="d2-multiple-page-control"
           :value="current"
           type="card"
           :closable="true"
           @tab-click="handleClick"
+          @dblclick.native="handleDbclickTabs"
           @edit="handleTabsEdit"
           @contextmenu.native="handleContextmenu">
-          <el-tab-pane
+          <TabPane
             v-for="page in opened"
             :key="page.fullPath"
             :label="page.meta.title || '未命名'"
             :name="page.fullPath"/>
-        </el-tabs>
+        </Tabs>
       </div>
     </div>
     <div
       class="d2-multiple-page-control-btn"
       flex-box="0">
-      <el-dropdown
-        size="default"
-        split-button
-        @click="handleControlBtnClick"
-        @command="command => handleControlItemClick(command)">
-        <d2-icon name="times-circle"/>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item command="left">
-            <d2-icon name="arrow-left" class="d2-mr-10"/>
-            关闭左侧
-          </el-dropdown-item>
-          <el-dropdown-item command="right">
-            <d2-icon name="arrow-right" class="d2-mr-10"/>
-            关闭右侧
-          </el-dropdown-item>
-          <el-dropdown-item command="other">
-            <d2-icon name="times" class="d2-mr-10"/>
-            关闭其它
-          </el-dropdown-item>
-          <el-dropdown-item command="all">
-            <d2-icon name="times-circle" class="d2-mr-10"/>
-            全部关闭
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+      <D2HeaderFullscreen v-show="maximized" />
+      <Tooltip
+        effect="dark"
+        :content="maximized ? '退出最大化' : '工作区最大化'"
+        placement="bottom">
+        <Button
+          class="d2-ml-0 d2-mr btn-text can-hover"
+          type="text"
+          @click="handleControlBtnClick">
+          <d2-icon :name="maximized ? 'window-restore' : 'window-maximize'"/>
+        </Button>
+      </Tooltip>
     </div>
   </div>
 </template>
 
 <script>
+import { Tooltip, Button, Tabs, TabPane } from 'element-ui'
 import { mapState, mapActions } from 'vuex'
 export default {
   components: {
+    Tooltip,
+    Button,
+    Tabs,
+    TabPane,
     D2Contextmenu: () => import('../contextmenu'),
-    D2ContextmenuList: () => import('../contextmenu/components/contentmenuList')
+    D2ContextmenuList: () => import('../contextmenu/components/contentmenuList'),
+    D2HeaderFullscreen: () => import('../header-fullscreen')
   },
   data () {
     return {
@@ -85,8 +79,16 @@ export default {
   computed: {
     ...mapState('d2admin/page', [
       'opened',
-      'current'
+      'current',
+      'maximized'
     ])
+  },
+  created () {
+    this.clearSelection = window['getSelection'] ? function () {
+      window.getSelection().removeAllRanges()
+    } : function () {
+      document.selection.empty()
+    }
   },
   methods: {
     ...mapActions('d2admin/page', [
@@ -94,8 +96,13 @@ export default {
       'closeLeft',
       'closeRight',
       'closeOther',
-      'closeAll'
+      'closeAll',
+      'maximizedToggle'
     ]),
+    handleDbclickTabs () {
+      this.maximizedToggle()
+      this.clearSelection()
+    },
     /**
      * @description 右键菜单功能点击
      */
@@ -147,6 +154,9 @@ export default {
         case 'all':
           this.closeAll(this)
           break
+        case 'max':
+          this.maximizedToggle(this)
+          break
         default:
           this.$message.error('无效的操作')
           break
@@ -156,7 +166,7 @@ export default {
      * @description 接收点击关闭控制上按钮的事件
      */
     handleControlBtnClick () {
-      this.closeAll(this)
+      this.maximizedToggle(this)
     },
     /**
      * @description 接收点击 tab 标签的事件
