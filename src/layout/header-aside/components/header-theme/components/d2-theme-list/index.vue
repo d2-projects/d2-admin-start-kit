@@ -1,12 +1,12 @@
 <template>
-  <el-table
+  <Table
     :data="list"
     v-bind="table">
-    <el-table-column
+    <TableColumn
       prop="title"
       align="center"
       width="160"/>
-    <el-table-column
+    <TableColumn
       label="预览"
       width="120">
       <div
@@ -16,33 +16,39 @@
           backgroundImage: `url(${$baseUrl}${scope.row.preview})`
         }">
       </div>
-    </el-table-column>
-    <el-table-column
+    </TableColumn>
+    <TableColumn
       prop="address"
       align="center">
       <template slot-scope="scope">
-        <el-button
+        <Button
           v-if="activeName === scope.row.name"
           type="success"
           icon="el-icon-check"
           round>
           已激活
-        </el-button>
-        <el-button
+        </Button>
+        <Button
           v-else
           round
           @click="handleSelectTheme(scope.row.name)">
           使用
-        </el-button>
+        </Button>
       </template>
-    </el-table-column>
-  </el-table>
+    </TableColumn>
+  </Table>
 </template>
 
 <script>
+import { Table, TableColumn, Button } from 'element-ui'
 import { mapState, mapActions } from 'vuex'
 export default {
   name: 'd2-theme-list',
+  components: {
+    Table,
+    TableColumn,
+    Button
+  },
   data () {
     return {
       table: {

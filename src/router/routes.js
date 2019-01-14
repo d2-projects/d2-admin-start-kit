@@ -2,7 +2,7 @@ import demo from './modules/demo'
 
 import layoutHeaderAside from '@/layout/header-aside'
 
-const meta = { requiresAuth: true }
+const meta = { auth: true }
 
 /**
  * 在主框架内显示
@@ -43,14 +43,6 @@ const frameIn = [
           },
           render: h => h()
         }
-      },
-      // 403 无授权访问提示页
-      {
-        path: '403/:uri',
-        name: '403',
-        props: true,
-        meta: { ...meta, requiresAuth: false, title: '403' },
-        component: () => import('@/pages/error-page-403')
       }
     ]
   },
@@ -73,11 +65,19 @@ const frameOut = [
  * 错误页面
  */
 const errorPage = [
+  // 403
+  {
+    path: '/403',
+    name: '403',
+    component: () => import('@/pages/error-page'),
+    props: { code: 403 }
+  },
   // 404
   {
     path: '*',
     name: '404',
-    component: () => import('@/pages/error-page-404')
+    component: () => import('@/pages/error-page'),
+    props: { code: 404 }
   }
 ]
 

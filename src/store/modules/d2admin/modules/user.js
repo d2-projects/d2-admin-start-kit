@@ -21,7 +21,7 @@ export default {
         await dispatch('d2admin/db/set', {
           dbName: 'sys',
           path: 'user.info',
-          value: { name: info.name },
+          value: info,
           user: true
         }, { root: true })
         // end

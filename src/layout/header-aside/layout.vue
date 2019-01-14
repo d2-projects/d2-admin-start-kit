@@ -10,6 +10,7 @@
       <!-- 顶栏 -->
       <div
         class="d2-theme-header"
+        v-show="!maximized"
         :style="{
           opacity: this.searchActive ? 0.5 : 1
         }"
@@ -27,7 +28,7 @@
         <div class="d2-header-right" flex-box="0">
           <!-- 如果你只想在开发环境显示这个按钮请添加 v-if="$env === 'development'" -->
           <d2-header-search @click="handleSearchClick"/>
-          <d2-header-error-log v-if="$env === 'development'"/>
+          <d2-header-error-log/>
           <d2-header-fullscreen/>
           <d2-header-theme/>
           <d2-header-user/>
@@ -40,6 +41,7 @@
           flex-box="0"
           ref="aside"
           class="d2-theme-container-aside"
+          v-show="!maximized"
           :style="{
             width: asideCollapse ? asideWidthCollapse : asideWidth,
             opacity: this.searchActive ? 0.5 : 1
@@ -58,7 +60,11 @@
           </transition>
           <!-- 内容 -->
           <transition name="fade-scale">
-            <div v-show="!searchActive" class="d2-theme-container-main-layer" flex="dir:top">
+            <div
+              v-show="!searchActive"
+              :style="styleMaximized"
+              class="d2-theme-container-main-layer"
+              flex="dir:top">
               <!-- tab -->
               <div class="d2-theme-container-main-header" flex-box="0">
                 <d2-tabs/>
@@ -80,22 +86,32 @@
 </template>
 
 <script>
+import d2MenuSide from './components/menu-side'
+import d2MenuHeader from './components/menu-header'
+import d2Tabs from './components/tabs'
+import d2HeaderFullscreen from './components/header-fullscreen'
+import d2HeaderSearch from './components/header-search'
+import d2HeaderTheme from './components/header-theme'
+import d2HeaderUser from './components/header-user'
+import d2HeaderErrorLog from './components/header-error-log'
 import { mapState, mapGetters, mapActions } from 'vuex'
+import PageManager from '@/mixins/BasePageManager'
 import mixinSearch from './mixins/search'
 export default {
   name: 'd2-layout-header-aside',
   mixins: [
+    PageManager,
     mixinSearch
   ],
   components: {
-    'd2-menu-side': () => import('./components/menu-side'),
-    'd2-menu-header': () => import('./components/menu-header'),
-    'd2-tabs': () => import('./components/tabs'),
-    'd2-header-fullscreen': () => import('./components/header-fullscreen'),
-    'd2-header-search': () => import('./components/header-search'),
-    'd2-header-theme': () => import('./components/header-theme'),
-    'd2-header-user': () => import('./components/header-user'),
-    'd2-header-error-log': () => import('./components/header-error-log')
+    d2MenuSide,
+    d2MenuHeader,
+    d2Tabs,
+    d2HeaderFullscreen,
+    d2HeaderSearch,
+    d2HeaderTheme,
+    d2HeaderUser,
+    d2HeaderErrorLog
   },
   data () {
     return {
@@ -108,6 +124,7 @@ export default {
   computed: {
     ...mapState('d2admin', {
       keepAlive: state => state.page.keepAlive,
+      maximized: state => state.page.maximized,
       grayActive: state => state.gray.active,
       transitionActive: state => state.transition.active,
       asideCollapse: state => state.menu.asideCollapse
@@ -124,6 +141,11 @@ export default {
           backgroundImage: `url('${this.$baseUrl}${this.themeActiveSetting.backgroundImage}')`
         } : {}
       }
+    },
+    styleMaximized () {
+      return this.maximized ? {
+        right: '-20px'
+      } : {}
     }
   },
   methods: {

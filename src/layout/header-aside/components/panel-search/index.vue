@@ -7,7 +7,7 @@
       flex-box="0"
       flex="dir:top main:center cross:center"
       @click.self="handlePanelClick">
-      <el-autocomplete
+      <Autocomplete
         class="panel-search__input"
         ref="input"
         v-model="searchText"
@@ -21,7 +21,7 @@
         <d2-panel-search-item
           slot-scope="{ item }"
           :item="item"/>
-      </el-autocomplete>
+      </Autocomplete>
       <div class="panel-search__tip">
         您可以使用快捷键
         <span class="panel-search__key">{{hotkey.open}}</span>
@@ -34,7 +34,7 @@
       v-if="resultsList.length > 0"
       class="panel-search__results-group"
       flex-box="1">
-      <el-card>
+      <Card>
         <div class="panel-search__results-group-inner">
           <d2-panel-search-item
             v-for="(item, index) in resultsList"
@@ -43,12 +43,13 @@
             :hover-mode="true"
             @click.native="handleResultsGroupItemClick(item.path)"/>
         </div>
-      </el-card>
+      </Card>
     </div>
   </div>
 </template>
 
 <script>
+import { Autocomplete, Card } from 'element-ui'
 import Fuse from 'fuse.js'
 import { mapState } from 'vuex'
 import mixin from '../mixin/menu'
@@ -57,6 +58,8 @@ export default {
     mixin
   ],
   components: {
+    Autocomplete,
+    Card,
     'd2-panel-search-item': () => import('./components/panel-search-item/index.vue')
   },
   data () {

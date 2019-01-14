@@ -1,18 +1,24 @@
 <template>
-  <el-dropdown size="small" class="d2-mr">
+  <Dropdown size="small" class="d2-mr">
     <span class="btn-text">你好 {{info.name}}</span>
-    <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item @click.native="logOff">
+    <DropdownMenu slot="dropdown">
+      <DropdownItem @click.native="logOff">
         <d2-icon name="power-off" class="d2-mr-5"/>
         注销
-      </el-dropdown-item>
-    </el-dropdown-menu>
-  </el-dropdown>
+      </DropdownItem>
+    </DropdownMenu>
+  </Dropdown>
 </template>
 
 <script>
+import { Dropdown, DropdownMenu, DropdownItem } from 'element-ui'
 import { mapState, mapActions } from 'vuex'
 export default {
+  components: {
+    Dropdown,
+    DropdownMenu,
+    DropdownItem
+  },
   computed: {
     ...mapState('d2admin/user', [
       'info'

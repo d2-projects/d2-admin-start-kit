@@ -8,6 +8,6 @@
 
 <script>
 export default {
-  name: 'page2'
+  name: 'demo-page2'
 }
 </script>

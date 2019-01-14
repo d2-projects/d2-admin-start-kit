@@ -1,17 +1,26 @@
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const TerserPlugin = require('terser-webpack-plugin')
+const PackageConfig = require('./package.json')
 
 // 拼接路径
 const resolve = dir => require('path').join(__dirname, dir)
 
+// 增加环境变量
+process.env.VUE_APP_NAME = PackageConfig.name
+process.env.VUE_APP_VERSION = PackageConfig.version
+process.env.VUE_APP_BUILD_TIME = require('dayjs')().format('YYMMDDHHmmss')
+
 module.exports = {
-  baseUrl: '', // 使用相对路径可以满足大多数情况需求，如遇特殊情况满足不了请调整该值，请参考Vue Cli文档中关于“相对 baseUrl 的限制”：https://cli.vuejs.org/zh/config/#baseurl
+  // publicPath 使用相对路径可以满足大多数情况需求
+  // 如遇特殊情况满足不了请调整该值，请参考Vue Cli文档中关于“相对 publicPath 的限制”：https://cli.vuejs.org/zh/config/#publicpath
+  publicPath: process.env.NODE_ENV === 'production' ? '' : '/',
   outputDir: 'target/dist',
   assetsDir: 'static',
   lintOnSave: true,
   productionSourceMap: false, // 是否为生产环境构建生成 sourceMap
-  devServer: {
-    publicPath: '/'
-  },
+  // devServer: {
+  //   publicPath: '/'
+  // },
   css: {
     loaderOptions: {
       // 设置 scss 公用变量文件
@@ -41,14 +50,16 @@ module.exports = {
             args[0].minify.minifyCSS = true
             return args
           })
+
         config.optimization
           .minimizer([
-            new UglifyJsPlugin({
-              uglifyOptions: {
+            new TerserPlugin({
+              cache: true,
+              parallel: true,
+              terserOptions: {
                 // 移除 console
-                // 其它优化选项 https://segmentfault.com/a/1190000010874406
+                // 参考 https://github.com/webpack-contrib/terser-webpack-plugin
                 compress: {
-                  warnings: false,
                   drop_console: true,
                   drop_debugger: true,
                   pure_funcs: ['console.log']
@@ -100,18 +111,20 @@ module.exports = {
     config.resolve.alias
       .set('@', resolve('src'))
 
-    // babel-polyfill 加入 entry
-    const entry = config.entry('app')
-    entry
-      .add('babel-polyfill')
-      .end()
-
     // 判断环境加入模拟数据
     if (process.env.VUE_APP_BUILD_MODE !== 'nomock') {
-      entry
+      config
+        .entry('app')
         .add('@/mock')
         .end()
     }
+  },
+  configureWebpack: {
+    // plugins: [
+    // new BundleAnalyzerPlugin()
+    // ],
+    externals: {
+      logger: 'console'
+    }
   }
-
 }
