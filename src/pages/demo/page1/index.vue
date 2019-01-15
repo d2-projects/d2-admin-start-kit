@@ -7,7 +7,12 @@
 </template>
 
 <script>
+import test from '../../../../modules/core'
+
 export default {
-  name: 'demo-page1'
+  name: 'demo-page1',
+  mounted () {
+    console.log(test)
+  }
 }
 </script>
