@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="show"
     class="d2-source"
     :class="{ 'd2-source--active': isActive }"
     @click="handleClick">
@@ -21,6 +22,13 @@ export default {
       isActive: false
     }
   },
+  computed: {
+    show () {
+      return process.env.VUE_APP_BUILD_MODE === 'TRAVIS' ||
+        process.env.NODE_ENV === 'development' &&
+        this.filename
+    }
+  },
   mounted () {
     // 一秒后显示按钮
     setTimeout(() => {
@@ -32,8 +40,8 @@ export default {
     handleClick () {
       const file = this.filename.split('?')[0]
       const url = file
-        ? `https://github.com/d2-projects/d2-admin-start-kit/blob/master/${file}`
-        : 'https://github.com/d2-projects/d2-admin-start-kit'
+        ? `https://github.com/d2-projects/d2-admin/blob/master/${file}`
+        : 'https://github.com/d2-projects/d2-admin'
       this.$open(url)
     }
   }
