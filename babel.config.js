@@ -1,5 +1,7 @@
 // 使用 component 插件实现 Element UI 按需加载
 const plugins = [
+  // https://babeljs.io/docs/en/babel-plugin-transform-runtime/
+  '@babel/plugin-transform-runtime',
   [
     'component',
     {

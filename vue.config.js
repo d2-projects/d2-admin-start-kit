@@ -107,10 +107,6 @@ module.exports = {
       .add(resolve('src/assets/svg-icons/icons'))
       .end()
 
-    // 重新设置 alias
-    config.resolve.alias
-      .set('@', resolve('src'))
-
     // 判断环境加入模拟数据
     if (process.env.VUE_APP_BUILD_MODE !== 'nomock') {
       config
