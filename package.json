@@ -38,7 +38,7 @@
     "vue": "^2.5.22",
     "vue-i18n": "^8.7.0",
     "vue-router": "^3.0.2",
-    "vuex": "^3.0.1"
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.2.0",
