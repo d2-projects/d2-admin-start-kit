@@ -11,6 +11,10 @@ export default {
   extensionPoints: {
     'vue.plugin': {
     },
+    'vue.created': {
+    },
+    'vue.mounted': {
+    },
     'vue.route': {
     },
     'vuex.module': {

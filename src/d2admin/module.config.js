@@ -2,7 +2,7 @@
  * 模块描述文件
  */
 import d2AdminVuePlugin from '@/plugin/d2admin'
-import d2AdminVuexModule from '@/store/index/modules/d2admin'
+import d2AdminVuexModule from '@/store/modules/d2admin'
 import d2AdminVueRouter from '@/router'
 
 export default {
