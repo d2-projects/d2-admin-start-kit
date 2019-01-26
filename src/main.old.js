@@ -2,7 +2,7 @@
 import Vue from 'vue'
 import App from './App'
 // store
-import store from '@/store/index'
+import store from '@/store'
 // 多国语
 import i18n from './i18n'
 // 核心插件

@@ -5,6 +5,7 @@ export default class Modular {
     let modules = config.modules || []
     this.application = config.application || {}
     this.strict = config.strict
+
     // 建立 name 查询索引
     const nameMapping = {}
     modules.forEach(module => {
@@ -19,6 +20,7 @@ export default class Modular {
       }
       nameMapping[name] = module
     })
+
     // 解析依赖，模块排序
     const sortModules = []
     sortModules.push(nameMapping['modular-core'])
@@ -58,6 +60,7 @@ export default class Modular {
     })
     this.modules = sortModules
     modules = sortModules
+
     // 组装扩展配置
     const points = {}
     const extens = {}
@@ -88,6 +91,11 @@ export default class Modular {
     this.extensions = extens
   }
   start () {
-    console.log('>>>>>>>>>>>>>>>> load Modules :\n', this)
+    console.log('Start Modules >>>>>>')
+    this.modules.forEach(module => {
+      if (module.activator && module.activator.start) {
+        module.activator.start(this)
+      }
+    })
   }
 }

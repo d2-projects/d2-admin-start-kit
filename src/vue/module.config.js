@@ -1,7 +1,7 @@
 /**
  * 模块描述文件
  */
-import Activator from './Activator'
+import activator from './activator'
 
 export default {
   name: 'vue',
@@ -20,5 +20,5 @@ export default {
     'vuex.module': {
     }
   },
-  Activator: Activator
+  activator: activator
 }
