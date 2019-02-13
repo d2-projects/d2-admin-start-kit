@@ -131,6 +131,12 @@ export default {
         // const hierarchicalLayout = new mx.mxHierarchicalLayout(graph, mx.mxConstants.DIRECTION_WEST)
         const hierarchicalLayout = new mx.mxHierarchicalLayout(graph, mx.mxConstants.DIRECTION_NORTH)
         hierarchicalLayout.interRankCellSpacing = 50
+        // hierarchicalLayout.resizeParent = true
+        // hierarchicalLayout.moveParent = true
+        // hierarchicalLayout.parentBorder = 50
+        // hierarchicalLayout.maintainParentLocation = true
+        // hierarchicalLayout.fineTuning = false
+        // hierarchicalLayout.disableEdgeStyle = false
 
         // const compactTreeLayout = new mx.mxCompactTreeLayout(graph, false) // 紧凑树布局算法，仅适用于单根节点情况
         // compactTreeLayout.useBoundingBox = false
