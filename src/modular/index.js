@@ -29,10 +29,10 @@ export default class Modular {
         return true
       }
       if (item.dependencies && item.dependencies.length) {
-        let ds = item.dependencies
-        let len = ds.length
+        const ds = item.dependencies
+        const len = ds.length
         for (let i = 0; i < len; i++) {
-          let d = ds[i]
+          const d = ds[i]
           if (sortModules.find(m => m.name === d) === undefined) {
             if (nameMapping[d]) {
               if (fillDepens(nameMapping[d])) {

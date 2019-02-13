@@ -5,7 +5,7 @@
 </template>
 
 <script>
-/* eslint-disable new-cap */
+/* eslint-disable new-cap, no-unused-vars, no-new */
 import mxgraph from 'mxgraph'
 
 const mx = mxgraph({
@@ -24,16 +24,26 @@ export default {
       mx.mxEvent.disableContextMenu(this.$refs.container)
 
       // Creates the graph inside the given container
-      // eslint-disable-next-line new-cap
       const graph = new mx.mxGraph(this.$refs.container)
-      // graph.gridSize = 40
+      graph.setCellsResizable(false) // 节点是否可改变大小
+      graph.setCellsEditable(false) // 节点是否可编辑
+      graph.setEdgeLabelsMovable(false) // 连线标签是否可移动
+      graph.setAllowDanglingEdges(false) // 连线是否可以悬空
+      graph.setCellsDisconnectable(false) // 是否允许断开连接
+
+      // graph.setAutoSizeCells(true)
       graph.setPanning(true) // 右键移动坐标轴
-      graph.setCellsResizable(false) // 节点不可改变大小
-      graph.setResizeContainer(false)
+      graph.setResizeContainer(false) // 画布是否随内容调整大小
       graph.setEnabled(true) // false 为只读模式
 
+      // 更改风格的样式
+      const style = graph.getStylesheet().getDefaultVertexStyle()
+      style[mx.mxConstants.STYLE_SHAPE] = mx.mxConstants.SHAPE_ELLIPSE
+      style[mx.mxConstants.STYLE_PERIMETER] = mx.mxPerimeter.EllipsePerimeter
+      style[mx.mxConstants.STYLE_GRADIENTCOLOR] = 'white'
+      style[mx.mxConstants.STYLE_FONTSIZE] = '12'
+
       // Enables rubberband selection
-      // eslint-disable-next-line new-cap, no-new
       // new mx.mxRubberband(graph)
 
       // Gets the default parent for inserting new cells. This
@@ -43,56 +53,57 @@ export default {
       // Adds cells to the model in a single step
       graph.getModel().beginUpdate()
       try {
-        const w = 30
-        const h = 30
-        const v1 = graph.insertVertex(parent, null, 'A', 0, 0, w, h)
-        const v2 = graph.insertVertex(parent, null, 'B', 0, 0, w, h)
-        const v3 = graph.insertVertex(parent, null, 'C', 0, 0, w, h)
-        const v4 = graph.insertVertex(parent, null, 'D', 0, 0, w, h)
-        const v5 = graph.insertVertex(parent, null, 'E', 0, 0, w, h)
-        const v6 = graph.insertVertex(parent, null, 'F', 0, 0, w, h)
-        const v7 = graph.insertVertex(parent, null, 'G', 0, 0, w, h)
-        const v8 = graph.insertVertex(parent, null, 'H', 0, 0, w, h)
-        graph.insertEdge(parent, null, 'ab', v1, v2)
-        graph.insertEdge(parent, null, 'ac', v1, v3)
-        graph.insertEdge(parent, null, 'cd', v3, v4)
-        graph.insertEdge(parent, null, 'be', v2, v5)
-        graph.insertEdge(parent, null, 'cf', v3, v6)
-        graph.insertEdge(parent, null, 'ag', v1, v7)
-        graph.insertEdge(parent, null, 'gh', v7, v8)
-        graph.insertEdge(parent, null, 'gc', v7, v3)
-        graph.insertEdge(parent, null, 'gd', v7, v4)
-        graph.insertEdge(parent, null, 'eh', v5, v8)
+        const w = 120
+        const h = 40
 
-        const circleLayout = new mx.mxCircleLayout(graph)
+        const modules = window.$modular.modules
+        const vertexs = {}
+        modules.forEach(module => {
+          const name = module.name
+          if (name === 'modular-core') return
+          const v = graph.insertVertex(parent, null, name, 0, 0, w, h)
+          vertexs[name] = v
+          if (module.dependencies && module.dependencies.length) {
+            const ds = module.dependencies
+            ds.forEach(d => {
+              if (vertexs[d]) {
+                graph.insertEdge(parent, null, '', v, vertexs[d])
+              } else {
+                console.log(name + ' 依赖的模块 ' + d + '不存在!')
+              }
+            })
+          }
+        })
 
-        const fastOrganicLayout = new mx.mxFastOrganicLayout(graph)
-        fastOrganicLayout.forceConstant = 80
+        // const circleLayout = new mx.mxCircleLayout(graph)
 
-        const hierarchicalLayout = new mx.mxHierarchicalLayout(graph, mx.mxConstants.DIRECTION_WEST)
+        // const fastOrganicLayout = new mx.mxFastOrganicLayout(graph)
+        // fastOrganicLayout.forceConstant = 80
+
+        // const hierarchicalLayout = new mx.mxHierarchicalLayout(graph, mx.mxConstants.DIRECTION_WEST)
 
         const compactTreeLayout = new mx.mxCompactTreeLayout(graph, false)
         compactTreeLayout.useBoundingBox = false
         compactTreeLayout.edgeRouting = false
-        compactTreeLayout.levelDistance = 60
-        compactTreeLayout.nodeDistance = 16
+        compactTreeLayout.levelDistance = 30
+        compactTreeLayout.nodeDistance = 30
 
-        const compositeLayout = new mx.mxCompositeLayout(
-          graph,
-          [
-            circleLayout,
-            hierarchicalLayout,
-            compactTreeLayout,
-            fastOrganicLayout
-          ],
-          hierarchicalLayout)
+        // const edgeLabelLayout = new mx.mxEdgeLabelLayout(graph)
+
+        // const compositeLayout = new mx.mxCompositeLayout(graph, [
+        //   circleLayout,
+        //   hierarchicalLayout,
+        //   compactTreeLayout,
+        //   fastOrganicLayout
+        // ], hierarchicalLayout)
 
         let layout
         // layout = circleLayout
         // layout = fastOrganicLayout
         // layout = hierarchicalLayout
-        // layout = compactTreeLayout
-        layout = compositeLayout
+        layout = compactTreeLayout
+        // layout = edgeLabelLayout
+        // layout = compositeLayout
         layout.execute(parent)
       } finally {
         // Updates the display

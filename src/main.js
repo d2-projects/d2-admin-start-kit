@@ -16,6 +16,7 @@ const modular = new Modular({
   modules,
   application
 })
+window.$modular = modular
 
 // 应用启动
 modular.start()
