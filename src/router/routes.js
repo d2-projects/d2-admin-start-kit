@@ -1,4 +1,5 @@
 import demo from './modules/demo'
+import modular from '@/modular/router'
 
 import layoutHeaderAside from '@/layout/header-aside'
 
@@ -43,7 +44,8 @@ const frameIn = [
           },
           render: h => h()
         }
-      }
+      },
+      modular
     ]
   },
   demo

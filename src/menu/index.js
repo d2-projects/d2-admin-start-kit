@@ -38,9 +38,13 @@ export default [
     title: '设置',
     icon: 'gear',
     children: [
-      { path: '/demo/page1', title: '页面 1' },
-      { path: '/demo/page2', title: '页面 2' },
-      { path: '/demo/page3', title: '页面 3' }
+      {
+        title: '模块',
+        icon: 'object-group',
+        children: [
+          { path: '/modular/graph', title: '依赖关系', icon: 'sitemap' }
+        ]
+      }
     ]
   }
 ]
