@@ -11,9 +11,7 @@ export default {
   extensionPoints: {
     'vue.plugin': {
     },
-    'vue.created': {
-    },
-    'vue.mounted': {
+    'vue.options': {
     },
     'vue.route': {
     },
