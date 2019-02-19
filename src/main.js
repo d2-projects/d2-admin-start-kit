@@ -1,5 +1,5 @@
-// import Modular from 'modular-core'
-import Modular from '@/modular'
+import Modular from 'modular-core'
+// import Modular from '@/modular'
 
 // 遍历目录，获取模块配置
 const files = require.context('./', true, /module\.config\.js$/)
