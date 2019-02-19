@@ -11,19 +11,19 @@ import Auth from '@/libs/Auth'
 export default {
   start (moduleConfig) {
     // 处理 vue.plugin
-    let configs = moduleConfig.extensions['vue.plugin'] || {}
+    let configs = moduleConfig.getExtension('vue.plugin')
     for (let key in configs) {
       Vue.use(configs[key])
     }
     // 处理 vue.options
     const options = []
-    configs = moduleConfig.extensions['vue.options'] || {}
+    configs = moduleConfig.getExtension('vue.options')
     for (let key in configs) {
       options.push(configs[key])
     }
 
     // 处理 vue.route
-    // const routeConfig = moduleConfig.extensions['vue.route'] || {}
+    // const routeConfig = moduleConfig.getExtension('vue.route')
     // let routes
     // let t = false
     // for (let key in routeConfig) {

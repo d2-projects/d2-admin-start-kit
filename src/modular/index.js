@@ -1,19 +1,20 @@
 class ModulesLoader {
   constructor () {
-    this.modules = []
-    this.nameMap = {}
+    this._modules = []
+    this._nameMap = {}
   }
   add (module) {
     if (!this.contains(module)) {
-      this.nameMap[module.name] = module
-      this.modules.push(module)
+      // module = Object.freeze(module) // FIXME
+      this._nameMap[module.name] = module
+      this._modules.push(module)
     }
   }
   getModules () {
-    return this.modules
+    return this._modules
   }
   contains (module) {
-    return !!this.nameMap[module.name]
+    return !!this._nameMap[module.name]
   }
 }
 // 模块化应用实现类
@@ -22,9 +23,9 @@ export default class Modular {
   constructor (config) {
     config = config || {}
     let modules = config.modules || []
-    this.application = config.application || {}
-    this.strict = config.strict
-    this.errors = []
+    this.application = Object.freeze(config.application || {}) // 应用配置
+    this.strict = !!config.strict // 严格模式，暂未使用，保留
+    this.errors = [] // 异常信息
 
     // 建立 name 查询索引
     const nameMapping = {}
@@ -50,6 +51,7 @@ export default class Modular {
         return true
       }
       if (item.dependencies && item.dependencies.length) {
+        item.dependencies = Object.freeze(item.dependencies)
         const ds = item.dependencies
         const len = ds.length
         for (let i = 0; i < len; i++) {
@@ -80,36 +82,46 @@ export default class Modular {
     })
 
     modules = modulesLoader.getModules()
-    this.modules = modules
+    this.modules = Object.freeze(modules)
 
     // 组装扩展配置
     const points = {}
     const extens = {}
     modules.forEach(module => {
       if (module.extensionPoints) {
+        module.extensionPoints = Object.freeze(module.extensionPoints)
         const ps = module.extensionPoints
         for (let key in ps) {
           if (points[key]) {
-            this._log('重复的 extensionPoints 定义 ' + key, points[key], module)
+            this._log('重复的 extensionPoint 定义 ' + key, points[key], module)
           } else {
             points[key] = { module: module.name, config: ps[key] }
           }
         }
       }
       if (module.extensions) {
+        module.extensions = Object.freeze(module.extensions)
         const ext = module.extensions
         for (let key in ext) {
           if (points[key]) {
             extens[key] = extens[key] || {}
             Object.assign(extens[key], ext[key])
           } else {
-            this._log('extensionPoints 定义不存在 ' + key, ext[key], module)
+            this._log('extensionPoint 定义不存在 ' + key, ext[key], module)
           }
         }
       }
     })
-    this.extensionPoints = points
-    this.extensions = extens
+    this._extensionPoints = Object.freeze(points)
+    this._extensions = Object.freeze(extens)
+  }
+  // 获取指定名称的扩展配置
+  getExtension (name) {
+    return this._extensions[name] || {}
+  }
+  // 获取指定名称的扩展点定义
+  getExtensionPoint (name) {
+    return this._extensionPoints[name] || {}
   }
   // 启动模块化应用
   start () {

@@ -105,7 +105,7 @@ export default {
               if (points[key]) {
                 graph.insertEdge(parent, null, '', v, points[key], 'extension')
               } else {
-                console.log('extensionPoints 定义不存在' + key, ext[key], module)
+                console.log('extensionPoint 定义不存在' + key, ext[key], module)
               }
             }
           }
