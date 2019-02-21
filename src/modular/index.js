@@ -5,7 +5,6 @@ class ModulesLoader {
   }
   add (module) {
     if (!this.contains(module)) {
-      // module = Object.freeze(module) // FIXME
       this._nameMap[module.name] = module
       this._modules.push(module)
     }
@@ -23,7 +22,7 @@ export default class Modular {
   constructor (config) {
     config = config || {}
     let modules = config.modules || []
-    this.application = Object.freeze(config.application || {}) // 应用配置
+    this._application = Object.freeze(config.application || {}) // 应用配置
     this.strict = !!config.strict // 严格模式，暂未使用，保留
     this.errors = [] // 异常信息
 
@@ -82,12 +81,13 @@ export default class Modular {
     })
 
     modules = modulesLoader.getModules()
-    this.modules = Object.freeze(modules)
 
     // 组装扩展配置
     const points = {}
     const extens = {}
-    modules.forEach(module => {
+    const len = modules.length
+    for (let i = 0; i < len; i++) {
+      let module = modules[i]
       if (module.extensionPoints) {
         module.extensionPoints = Object.freeze(module.extensionPoints)
         const ps = module.extensionPoints
@@ -111,9 +111,19 @@ export default class Modular {
           }
         }
       }
-    })
+      modules[i] = Object.freeze(module)
+    }
+    this._modules = Object.freeze(modules)
     this._extensionPoints = Object.freeze(points)
     this._extensions = Object.freeze(extens)
+  }
+  // 获取应用配置
+  getApplication () {
+    return this._application
+  }
+  // 获取指定名称的模块配置
+  getModule (name) {
+    return this._modules[name]
   }
   // 获取指定名称的扩展配置
   getExtension (name) {
@@ -125,7 +135,7 @@ export default class Modular {
   }
   // 启动模块化应用
   start () {
-    this.modules.forEach(module => {
+    this._modules.forEach(module => {
       if (module.activator && module.activator.start) {
         module.activator.start(this)
       }
