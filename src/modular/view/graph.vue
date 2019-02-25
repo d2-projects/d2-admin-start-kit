@@ -80,7 +80,8 @@ export default {
         const ew = 90
         const eh = 20
 
-        const modules = window.$modular.modules
+        const modules = window.$modular.getModules()
+        const app = window.$modular.getApplication()
         const vertexs = {}
         const points = {}
         modules.forEach(module => {
@@ -88,6 +89,9 @@ export default {
           let style = null
           if (name === 'modular-core') {
             style = 'fillColor=green'
+          }
+          if (module === app) {
+            style = 'fillColor=red'
           }
           const v = graph.insertVertex(parent, null, name, 20, 20, w, h, style)
           vertexs[name] = v

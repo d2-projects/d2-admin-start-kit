@@ -1,6 +1,8 @@
 /**
  * 模块描述文件
  */
+import plugin from './vue.plugin'
+
 export default {
   name: 'frame',
   dependencies: [
@@ -9,7 +11,7 @@ export default {
   ],
   extensions: {
     'vue.plugin': {
-      frame: {}
+      frame: plugin
     }
   },
   extensionPoints: {

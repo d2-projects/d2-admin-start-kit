@@ -18,7 +18,7 @@ export default {
     'vue.options': {
       d2admin: d2AdminVueOptions
     },
-    'vue.route': {
+    'vue.router': {
       '/': d2AdminVueRouter
     },
     'vuex.module': {

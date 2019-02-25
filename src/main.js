@@ -1,5 +1,7 @@
-import Modular from 'modular-core'
-// import Modular from '@/modular'
+// import Modular from 'modular-core'
+import Modular from '@/modular'
+
+import App from './App'
 
 // 遍历目录，获取模块配置
 const files = require.context('./', true, /module\.config\.js$/)
@@ -12,7 +14,15 @@ files.keys().forEach(key => {
 console.log('>>>>>', modules)
 
 // 应用配置
-const application = {}
+const application = {
+  name: process.env.VUE_APP_NAME,
+  extensions: {
+    'vue.app': {
+      el: '#app',
+      component: App
+    }
+  }
+}
 
 // 模块化组装
 const modular = new Modular({

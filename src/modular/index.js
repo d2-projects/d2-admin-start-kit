@@ -22,7 +22,8 @@ export default class Modular {
   constructor (config) {
     config = config || {}
     let modules = config.modules || []
-    this._application = Object.freeze(config.application || {}) // 应用配置
+    let app = config.application || {}
+    app.name = app.name || 'Application'
     this.strict = !!config.strict // 严格模式，暂未使用，保留
     this.errors = [] // 异常信息
 
@@ -43,7 +44,9 @@ export default class Modular {
 
     // 解析依赖，模块排序
     const modulesLoader = new ModulesLoader()
-    modulesLoader.add(nameMapping['modular-core'])
+
+    // TODO 处理优先加载模块
+    // modulesLoader.add(nameMapping['modular-core'])
 
     function fillDepens (item) {
       if (modulesLoader.contains(item)) {
@@ -79,6 +82,8 @@ export default class Modular {
     modules.forEach(module => {
       fillDepens(module)
     })
+    // 处理应用配置
+    fillDepens(app)
 
     modules = modulesLoader.getModules()
 
@@ -113,6 +118,7 @@ export default class Modular {
       }
       modules[i] = Object.freeze(module)
     }
+    this._application = Object.freeze(app) // 应用配置
     this._modules = Object.freeze(modules)
     this._extensionPoints = Object.freeze(points)
     this._extensions = Object.freeze(extens)
@@ -124,6 +130,10 @@ export default class Modular {
   // 获取指定名称的模块配置
   getModule (name) {
     return this._modules[name]
+  }
+  // 获取全部模块配置
+  getModules () {
+    return this._modules
   }
   // 获取指定名称的扩展配置
   getExtension (name) {
