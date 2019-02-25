@@ -2,6 +2,7 @@
  * 模块描述文件
  */
 import plugin from './vue.plugin'
+import session from '@/store/modules/session'
 
 export default {
   name: 'frame',
@@ -12,6 +13,9 @@ export default {
   extensions: {
     'vue.plugin': {
       frame: plugin
+    },
+    'vuex.module': {
+      session
     }
   },
   extensionPoints: {

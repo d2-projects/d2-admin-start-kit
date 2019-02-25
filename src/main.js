@@ -16,6 +16,7 @@ console.log('>>>>>', modules)
 // 应用配置
 const application = {
   name: process.env.VUE_APP_NAME,
+  version: process.env.VUE_APP_VERSION,
   extensions: {
     'vue.app': {
       el: '#app',

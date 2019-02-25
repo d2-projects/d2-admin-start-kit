@@ -2,16 +2,15 @@
  * modular-vue 模块
  */
 import Vue from 'vue'
+
+import vuexAlong from './vuex-along'
+import router from './router'
+import store from './store'
+
 // FIXME 临时跑通
-import store from '@/store'
 import i18n from '@/i18n'
-import router from '@/router'
 
 const activator = {}
-
-// export const router = {}
-// export const store = {}
-// export const i18n = {}
 
 export default {
   name: 'vue',
@@ -31,8 +30,17 @@ export default {
 }
 
 activator.start = function (moduleConfig) {
+  const application = moduleConfig.getApplication()
+  vuexAlong.setKey(`${application.name}-${application.version}`)
+
+  // 处理 vuex.module
+  let configs = moduleConfig.getExtension('vuex.module')
+  for (let key in configs) {
+    store.registerModule(key, configs[key])
+  }
+
   // 处理 vue.plugin
-  let configs = moduleConfig.getExtension('vue.plugin')
+  configs = moduleConfig.getExtension('vue.plugin')
   for (let key in configs) {
     Vue.use(configs[key])
   }
@@ -44,23 +52,14 @@ activator.start = function (moduleConfig) {
   }
 
   // 处理 vue.router
-  // const routerConfig = moduleConfig.getExtension('vue.router')
-  // let routers
-  // let t = false
-  // for (let key in routerConfig) {
-  //   t = true
-  //   // 根据 key 组装 route
-  //   // FIXME 临时跑通逻辑
-  //   if (key === '/') {
-  //     routers = routerConfig[key]
-  //   }
-  // }
-  // if (t) {
-  //   Vue.use(VueRouter)
-  //   vueConfig.router = new VueRouter({
-  //     routers
-  //   })
-  // }
+  configs = moduleConfig.getExtension('vue.router')
+  for (let key in configs) {
+    // 根据 key 组装 router
+    // FIXME 临时跑通逻辑
+    if (key === '/') {
+      router.addRoutes(configs[key])
+    }
+  }
 
   // 处理 vue.app
   const app = moduleConfig.getExtension('vue.app')
@@ -71,5 +70,6 @@ activator.start = function (moduleConfig) {
     mixins: options,
     render: h => h(app.component)
   }
+
   new Vue(vueOptions).$mount(app.el)
 }

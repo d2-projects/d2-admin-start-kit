@@ -5,20 +5,17 @@ import VueRouter from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
-import store from '@/store'
+import store from './store'
 
 import util from '@/libs/util.js'
 import { checkPermission } from '@/libs/Auth'
 
-// 路由数据
-import routes from './routes'
-
+// 初始化 VueRouter
 Vue.use(VueRouter)
 
-// 导出路由 在 main.js 里使用
-const router = new VueRouter({
-  routes
-})
+const router = new VueRouter()
+
+export default router
 
 /**
  * 路由拦截
@@ -40,8 +37,7 @@ router.beforeEach((to, from, next) => {
       NProgress.done()
     }
   } else if (to.meta.auth) {
-    if (store.getters['session/loggedIn']) {
-    // if (store.getters && store.getters['session/loggedIn']) {
+    if (store.getters && store.getters['session/loggedIn']) {
       // 已登录，则进行许可检查
       if (to.meta.auth !== 'check' || checkPermission(to.fullPath)) {
         next()
@@ -89,5 +85,3 @@ router.onError(err => {
   router.app.$message.error(err.message)
   Vue.config.errorHandler(err, router, err.message)
 })
-
-export default router

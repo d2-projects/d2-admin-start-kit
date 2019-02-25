@@ -19,6 +19,10 @@ function pathInit ({
   defaultValue = ''
 }) {
   const uuid = store.state.session.uuid || 'guest-uuid'
+  // const uuid =
+  //   (store.state && store.state.session && store.state.session.uuid)
+  //     ? store.state.session.uuid
+  //     : 'guest-uuid'
   const currentPath = `${dbName}.${user ? `user.${uuid}` : 'public'}${path ? `.${path}` : ''}`
   const value = util.db.get(currentPath).value()
   // console.group('pathInit')

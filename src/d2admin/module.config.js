@@ -3,7 +3,7 @@
  */
 import d2AdminVuePlugin from '@/plugin/d2admin'
 import d2AdminVuexModule from '@/store/modules/d2admin'
-import d2AdminVueRouter from '@/router'
+import d2AdminVueRouter from '@/router/routes'
 import d2AdminVueOptions from './vue.options'
 
 export default {

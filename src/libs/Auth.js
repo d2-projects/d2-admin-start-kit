@@ -29,6 +29,7 @@ export function checkPermission (...uris) {
       case LOGGEDIN:
       default: // 默认按照 LOGGEDIN 处理
         if (store.getters['session/loggedIn']) {
+        // if (store.getters && store.getters['session/loggedIn']) {
           return true
         }
     }
