@@ -1,7 +1,6 @@
 /**
  * modular-vue 模块
  */
-
 import activator from './activator'
 
 export default {

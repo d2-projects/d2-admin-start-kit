@@ -1,4 +1,4 @@
 import store from '@/vue/store'
-// import store from 'modular-vue/dist/store'
+// import store from 'modular-vue/store'
 
 export default store

@@ -17,13 +17,33 @@ export default {
 
   start (moduleConfig) {
     const application = moduleConfig.getApplication()
-    vuexAlong.setKey(`${application.name}-${application.version}`)
+    vuexAlong.setKey(`vuexAlong:${application.name}-${application.version}`)
 
     // 处理 vuex.module
+    const local = []
+    const session = []
     let configs = moduleConfig.getExtension('vuex.module')
     for (let key in configs) {
-      store.registerModule(key, configs[key])
+      const m = configs[key]
+      store.registerModule(key, m)
+      if (m.storage) {
+        if (m.storage === 'session') {
+          session.push(key)
+        } else if (m.storage === 'local') {
+          local.push(key)
+        }
+      }
     }
+    if (session.length > 0) {
+      vuexAlong.watchSession(session, true)
+    }
+    if (local.length > 0) {
+      vuexAlong.watch(local, true)
+    } else {
+      vuexAlong.onlySession(true)
+    }
+    // vuex.plugin 的安装方法
+    vuexAlong(store)
 
     // 处理 vue.plugin
     configs = moduleConfig.getExtension('vue.plugin')
