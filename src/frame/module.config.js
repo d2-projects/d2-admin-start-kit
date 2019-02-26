@@ -1,7 +1,8 @@
 /**
  * 模块描述文件
  */
-import plugin from './vue.plugin'
+import vuePlugin from './vue.plugin'
+import vueRouterEvent from './vue.router.event'
 import session from '@/store/modules/session'
 
 export default {
@@ -12,7 +13,10 @@ export default {
   ],
   extensions: {
     'vue.plugin': {
-      frame: plugin
+      frame: vuePlugin
+    },
+    'vue.router.event': {
+      frame: vueRouterEvent
     },
     'vuex.module': {
       session

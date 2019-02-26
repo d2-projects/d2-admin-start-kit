@@ -134,7 +134,7 @@ export default {
 
         // const hierarchicalLayout = new mx.mxHierarchicalLayout(graph, mx.mxConstants.DIRECTION_WEST)
         const hierarchicalLayout = new mx.mxHierarchicalLayout(graph, mx.mxConstants.DIRECTION_NORTH)
-        hierarchicalLayout.interRankCellSpacing = 50
+        hierarchicalLayout.interRankCellSpacing = 60
         // hierarchicalLayout.resizeParent = true
         // hierarchicalLayout.moveParent = true
         // hierarchicalLayout.parentBorder = 50
