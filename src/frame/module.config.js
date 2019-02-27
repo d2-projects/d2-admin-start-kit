@@ -5,6 +5,8 @@ import vuePlugin from './vue.plugin'
 import vueRouterEvent from './vue.router.event'
 import session from '@/store/modules/session'
 
+session.storage = 'session'
+
 export default {
   name: 'frame',
   dependencies: [

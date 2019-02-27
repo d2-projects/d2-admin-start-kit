@@ -1,7 +1,6 @@
 import setting from '@/setting.js'
 
 export default {
-  storage: 'session',
   namespaced: true,
   state: {
     uuid: '',
