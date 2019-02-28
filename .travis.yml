@@ -5,6 +5,7 @@ node_js: stable
 addons:
   sonarcloud:
     organization: "han-feng-github"
+    projectKey: "han-feng_modular"
     token:
       secure: $SONAR_CLOUD_TOKEN
 
