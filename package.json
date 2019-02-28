@@ -119,6 +119,9 @@
     "collectCoverageFrom": [
       "<rootDir>/src/**/*.{js,jsx,json,vue}"
     ],
+    "coverageReporters": [
+      "lcov"
+    ],
     "setupFiles": [
       "<rootDir>/tests/setup/requireContextRegister"
     ],
