@@ -18,6 +18,7 @@ branches:
 
 script:
   - npm run build:travis
+  - npm run test:unit
 
 deploy:
   provider: pages
