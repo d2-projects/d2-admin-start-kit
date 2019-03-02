@@ -12,10 +12,6 @@ cache:
   directories:
     - node_modules
 
-branches:
-  only:
-  - master
-
 script:
   - npm run build:travis
   - npm run test:unit
