@@ -21,7 +21,7 @@
     "axios": "^0.18.0",
     "better-scroll": "^1.14.1",
     "dayjs": "^1.8.8",
-    "element-ui": "^2.5.4",
+    "element-ui": "^2.6.1",
     "flex.css": "^1.1.7",
     "fuse.js": "^3.4.2",
     "hotkeys-js": "^3.4.4",
@@ -29,7 +29,7 @@
     "lodash": "^4.17.11",
     "lowdb": "^1.0.0",
     "mockjs": "^1.0.1-beta3",
-    "modular-core": "^0.3.5",
+    "modular-core": "^0.3.7",
     "modular-vue": "^0.2.0",
     "mxgraph": "^3.9.12",
     "nprogress": "^0.2.0",
@@ -57,7 +57,7 @@
     "babel-jest": "^23.6.0",
     "babel-plugin-component": "^1.1.1",
     "babel-plugin-require-context-hook": "^1.0.0",
-    "eslint": "^5.14.1",
+    "eslint": "^5.15.0",
     "eslint-plugin-vue": "^5.2.2",
     "http-server": "^0.11.1",
     "lint-staged": "^8.1.4",
@@ -67,7 +67,7 @@
     "terser-webpack-plugin": "^1.2.3",
     "text-loader": "0.0.1",
     "vue-template-compiler": "^2.6.7",
-    "webpack-bundle-analyzer": "^3.0.4"
+    "webpack-bundle-analyzer": "^3.1.0"
   },
   "eslintConfig": {
     "root": true,

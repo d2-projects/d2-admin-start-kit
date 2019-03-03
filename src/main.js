@@ -1,5 +1,5 @@
-// import Modular from 'modular-core'
-import Modular from '@/modular'
+import Modular from 'modular-core'
+// import Modular from '@/modular'
 
 import App from './App'
 
