@@ -87,7 +87,7 @@ export default {
       render: h => h(app.component)
     }
 
-    new Vue(vueOptions).$mount(app.el)
+    new Vue(vueOptions).$mount('#app')
     // start end
   }
 

@@ -29,7 +29,7 @@
     "lodash": "^4.17.11",
     "lowdb": "^1.0.0",
     "mockjs": "^1.0.1-beta3",
-    "modular-core": "^0.3.7",
+    "modular-core": "^0.3.8-ts-0",
     "modular-vue": "^0.2.0",
     "mxgraph": "^3.9.12",
     "nprogress": "^0.2.0",

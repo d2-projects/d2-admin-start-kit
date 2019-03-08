@@ -60,13 +60,7 @@ const frameOut = [
     path: '/login',
     name: 'login',
     component: () => import('@/pages/login')
-  }
-]
-
-/**
- * 错误页面
- */
-const errorPage = [
+  },
   // 403
   {
     path: '/403',
@@ -87,4 +81,4 @@ const errorPage = [
 export const frameInRoutes = frameIn
 
 // 重新组织后导出
-export default [...frameIn, ...frameOut, ...errorPage]
+export default [...frameIn, ...frameOut]

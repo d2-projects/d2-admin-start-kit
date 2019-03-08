@@ -19,7 +19,6 @@ const application = {
   version: process.env.VUE_APP_VERSION,
   extensions: {
     'vue.app': {
-      el: '#app',
       component: App
     }
   }
