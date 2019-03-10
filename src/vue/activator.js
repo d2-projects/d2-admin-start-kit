@@ -59,13 +59,58 @@ export default {
 
     // 处理 vue.router
     configs = moduleConfig.getExtension('vue.router')
-    for (let key in configs) {
-    // 根据 key 组装 router
-    // FIXME 临时跑通逻辑
-      if (key === '/') {
-        router.addRoutes(configs[key])
+    const routes = []
+    const parentRoutes = {}
+    const unresolved = {}
+    function registerParentRoutes (route) {
+      // 有 children 属性的路由才可以作为父路由注册
+      if (route.children && route.children.length) {
+        const name = route.name
+        if (name === undefined || name === '') {
+          console.log(`Error: 路由名称未定义，${JSON.stringify(route)}`)
+          return
+        }
+        parentRoutes[name] = route.children
+        if (unresolved[name]) {
+          // 加入后将未解决的该名称下子路由拷贝过来
+          unresolved[name].forEach(item => {
+            route.children.push(item)
+          })
+          delete unresolved[name]
+        }
+        route.children.forEach(item => {
+          registerParentRoutes(item)
+        })
       }
     }
+    for (const key in configs) {
+      const config = configs[key]
+      if (config && config.parent && config.routes) {
+        const parentName = config.parent
+        let parent
+        if (parentName === 'root') {
+          parent = routes
+        } else {
+          parent = parentRoutes[parentName]
+          if (!parent) {
+            // 暂存为未解决状态
+            unresolved[parentName] = unresolved[parentName] || []
+            parent = unresolved[parentName]
+          }
+        }
+        config.routes.forEach(item => {
+          // TODO 此处可以加入路由配置规则校验：路由名称未定义、路由缓存开启条件不满足……
+          parent.push(item)
+          registerParentRoutes(item)
+        })
+      }
+    }
+    for (const key in unresolved) {
+      // TODO 完善日志机制
+      console.log(`Error: 父路由“${key}”不存在`)
+    }
+    // 加入路由
+    router.addRoutes(routes)
 
     // 处理 vue.router.event
     configs = moduleConfig.getExtension('vue.router.event')

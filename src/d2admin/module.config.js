@@ -19,7 +19,10 @@ export default {
       d2admin: d2AdminVueOptions
     },
     'vue.router': {
-      '/': d2AdminVueRouter
+      d2admin: {
+        parent: 'root',
+        routes: d2AdminVueRouter
+      }
     },
     'vuex.module': {
       d2admin: d2AdminVuexModule

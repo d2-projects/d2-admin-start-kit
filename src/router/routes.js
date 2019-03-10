@@ -11,6 +11,7 @@ const meta = { auth: true }
 const frameIn = [
   {
     path: '/',
+    name: 'frame',
     redirect: { name: 'index' },
     component: layoutHeaderAside,
     children: [
@@ -45,10 +46,10 @@ const frameIn = [
           render: h => h()
         }
       },
-      modular
+      modular,
+      ...demo
     ]
-  },
-  demo
+  }
 ]
 
 /**
