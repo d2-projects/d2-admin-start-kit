@@ -11,8 +11,10 @@
     "build:travis": "vue-cli-service build --modern --mode travis",
     "lint": "vue-cli-service lint --fix",
     "inspect": "vue-cli-service inspect > target/inspect-dev.log && vue-cli-service inspect --mode production > target/inspect-pro.log",
+    "test": "npm run test:unit",
     "test:unit": "vue-cli-service test:unit",
-    "prestart": "npm run build"
+    "prestart": "npm run build",
+    "pretest:unit": "node scripts/fix-jest-util-bug.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.3.4",
