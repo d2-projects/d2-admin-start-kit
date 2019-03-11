@@ -22,8 +22,8 @@ if (targetFile.match(tag)) {
 const regex = /^\s*newProcess\[Symbol\.toStringTag\]\s*=\s*'process';\s*$/m
 const match = targetFile.match(regex)
 if (!match) {
-  console.log(chalk.red(`${targetFilePath} file doesn't have a [${regex}]. Fix this and run again.`))
-  process.exit(1)
+  console.log(chalk.yellow(`${targetFilePath} file doesn't have a [${regex}].`))
+  return
 }
 
 const oldString = match[0]
