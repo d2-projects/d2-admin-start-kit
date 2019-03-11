@@ -1,23 +1,33 @@
-/* 临时解决 jest-util@23.4.0 在 nodejs v11.11.0 运行报错的问题，相关异常信息：
-      TypeError: Cannot assign to read only property 'Symbol(Symbol.toStringTag)' of object '#<process>'
-        at exports.default (node_modules/jest-util/build/create_process_object.js:15:34)
+#!/usr/bin/env node
+/*
+ * 临时解决 jest-util@23.4.0 在 nodejs v11.11.0 运行报错的问题，相关异常信息：
+ * TypeError: Cannot assign to read only property 'Symbol(Symbol.toStringTag)' of object '#<process>'
+ *     at exports.default (node_modules/jest-util/build/create_process_object.js:15:34)
 */
 const fs = require('fs')
-const src = 'node_modules/jest-util/build/create_process_object.js'
+const chalk = require('chalk')
+const targetFilePath = 'node_modules/jest-util/build/create_process_object.js'
+const tag = 'fix jest-util@23.4.0 bug'
 
-console.log('fix jest-util@23.4.0 bug  ......')
+if (!fs.existsSync(targetFilePath)) {
+  console.log(chalk.yellow(`skipped: ${targetFilePath}`))
+  return
+}
+const targetFile = fs.readFileSync(targetFilePath, 'utf8')
 
-fs.readFile(src, 'utf8', function (err, data) {
-  if (err) {
-    return console.error(err)
-  }
-  const result = data.replace(
-    /^\s*newProcess\[Symbol\.toStringTag\]\s*=\s*'process';\s*$/m,
-    '\n  // newProcess[Symbol.toStringTag] = \'process\'; // fix jest-util@23.4.0 bug\n'
-  )
-  fs.writeFile(src, result, 'utf8', function (err) {
-    if (err) return console.error(err)
-  })
-})
+if (targetFile.match(tag)) {
+  console.log(chalk.green(`skipped: ${targetFilePath}`))
+  return
+}
+const regex = /^\s*newProcess\[Symbol\.toStringTag\]\s*=\s*'process';\s*$/m
+const match = targetFile.match(regex)
+if (!match) {
+  console.log(chalk.red(`${targetFilePath} file doesn't have a [${regex}]. Fix this and run again.`))
+  process.exit(1)
+}
 
-console.log('fix end')
+const oldString = match[0]
+const newString = `\n/* ${tag}\n${oldString}\n*/\n`
+
+fs.writeFileSync(targetFilePath, targetFile.replace(oldString, newString), 'utf8')
+console.log(chalk.green(`replace '${oldString}' -> '${newString}'`))
