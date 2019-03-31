@@ -10,7 +10,8 @@
     "build:nomock": "vue-cli-service build --mode nomock",
     "build:travis": "vue-cli-service build --mode travis",
     "lint": "vue-cli-service lint --fix",
-    "test:unit": "vue-cli-service test:unit"
+    "test:unit": "vue-cli-service test:unit",
+    "analyz": "npm_config_report=true npm run build"
   },
   "dependencies": {
     "@babel/runtime": "^7.2.0",
@@ -33,7 +34,8 @@
     "vue": "^2.5.17",
     "vue-i18n": "^7.4.2",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "webpack-bundle-analyzer": "^3.1.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.2.0",

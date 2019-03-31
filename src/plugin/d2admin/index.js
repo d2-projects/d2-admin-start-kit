@@ -1,8 +1,9 @@
 // Element
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
+// element-ui与flex.css改为CDN动态引入
+// import 'element-ui/lib/theme-chalk/index.css'
 // flex 布局库
-import 'flex.css'
+// import 'flex.css'
 // 组件
 import '@/components'
 // svg 图标
