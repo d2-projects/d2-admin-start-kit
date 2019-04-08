@@ -13,6 +13,8 @@ module.exports = function (api) {
       }
     ])
     plugins.push(
+      // 解决 jest 对动态导入（()=>import()）的支持问题
+      '@babel/plugin-syntax-dynamic-import',
       // 使用 require-context-hook 插件解决 jest 不能解析 require.context 的问题，仅限 test 模式使用
       'require-context-hook'
     )
