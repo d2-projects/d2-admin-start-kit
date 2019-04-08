@@ -1,11 +1,10 @@
 import Modular from 'modular-core'
-// import Modular from '@/modular'
-
+import vueModule from 'modular-vue'
 import App from './App'
 
 // 遍历目录，获取模块配置
 const files = require.context('./', true, /module\.config\.js$/)
-const modules = []
+const modules = [vueModule]
 
 files.keys().forEach(key => {
   modules.push(files(key).default)

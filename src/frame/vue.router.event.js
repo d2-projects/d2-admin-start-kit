@@ -4,18 +4,17 @@ import Vue from 'vue'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
-import store from '@/vue/store'
-import router from '@/vue/router'
+import { router, store } from 'modular-vue'
 
 import util from '@/libs/util.js'
 import { checkPermission } from '@/libs/Auth'
 
 export default {
-  /**
-   * 路由拦截
-   * 权限验证
-   */
-  beforeEach: (to, from, next) => {
+/**
+ * 路由拦截
+ * 权限验证
+ */
+  beforeEach (to, from, next) {
   // 进度条
     NProgress.start()
     // 关闭搜索面板
@@ -32,9 +31,8 @@ export default {
       }
     } else if (to.meta.auth) {
       if (store.getters['session/loggedIn']) {
-        // if (store.getters && store.getters['session/loggedIn']) {
       // 已登录，则进行许可检查
-        if (to.meta.auth !== 'check' || checkPermission(to.fullPath)) {
+        if (checkPermission(to.fullPath)) {
           next()
         } else {
         // 无权访问时显示提示信息
@@ -67,7 +65,7 @@ export default {
     }
   },
 
-  afterEach: to => {
+  afterEach (to) {
   // 进度条
     NProgress.done()
     // 多页控制 打开新的页面
@@ -76,7 +74,7 @@ export default {
     util.title(to.meta.title)
   },
 
-  onError: err => {
+  onError (err) {
     router.app.$message.error(err.message)
     Vue.config.errorHandler(err, router, err.message)
   }

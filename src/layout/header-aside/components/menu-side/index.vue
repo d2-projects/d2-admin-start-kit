@@ -61,7 +61,7 @@ export default {
       handler ({ fullPath }) {
         this.active = fullPath
         this.$nextTick(() => {
-          if (this.aside.length > 0 && this.$refs.menu) {
+          if (this.aside && this.aside.length > 0 && this.$refs.menu) {
             this.$refs.menu.activeIndex = fullPath
           }
         })
@@ -78,7 +78,8 @@ export default {
   methods: {
     scrollInit () {
       this.BS = new BScroll(this.$el, {
-        mouseWheel: true
+        mouseWheel: true,
+        click: true
         // 如果你愿意可以打开显示滚动条
         // scrollbar: {
         //   fade: true,

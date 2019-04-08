@@ -60,19 +60,19 @@ export default {
   // 第一次进入或从其他组件对应路由进入时触发
   beforeRouteEnter (to, from, next) {
     // 获得to对应的路由详细信息对象route
-    console.log('>>>>>>>>>>>> beforeRouteEnter')
+    // console.log('>>>>>>>>>>>> beforeRouteEnter')
     next(vm => {
       PageManager.get(vm).enter(to)
     })
   },
   // 在同一组件对应的多个路由间切换时触发
   beforeRouteUpdate (to, from, next) {
-    console.log('>>>>>>>>>>>> beforeRouteUpdate')
+    // console.log('>>>>>>>>>>>> beforeRouteUpdate')
     next()
   },
   // 导航离开该组件的对应路由时调用
   beforeRouteLeave (to, from, next) {
-    console.log('>>>>>>>>>>>> beforeRouteLeave')
+    // console.log('>>>>>>>>>>>> beforeRouteLeave')
     next()
   }
 }

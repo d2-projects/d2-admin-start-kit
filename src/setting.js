@@ -1,5 +1,5 @@
 // 许可类型常量
-import { ANONYMOUS, CHECK } from '@/libs/Auth'
+import { ANONYMOUS, CHECK } from '@/libs/Auth.Constant'
 
 export default {
   // 快捷键
@@ -57,12 +57,6 @@ export default {
   // 是否默认开启页面切换动画
   transition: {
     active: true
-  },
-  // 在读取持久化数据失败时默认用户信息
-  user: {
-    info: {
-      name: 'Guest'
-    }
   },
   // 许可类型取值有：
   // 1、ANONYMOUS，允许匿名访问；

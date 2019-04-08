@@ -72,10 +72,11 @@
               <!-- 页面 -->
               <div class="d2-theme-container-main-body" flex-box="1">
                 <transition :name="transitionActive ? 'fade-transverse' : ''">
-                  <keep-alive :include="keepAlive">
+                  <keep-alive :include="keepAlive" v-show="!showIframe">
                     <router-view/>
                   </keep-alive>
                 </transition>
+                <iframes v-show="showIframe" />
               </div>
             </div>
           </transition>
@@ -94,6 +95,7 @@ import d2HeaderSearch from './components/header-search'
 import d2HeaderTheme from './components/header-theme'
 import d2HeaderUser from './components/header-user'
 import d2HeaderErrorLog from './components/header-error-log'
+import iframes from './components/iframes'
 import { mapState, mapGetters, mapActions } from 'vuex'
 import PageManager from '@/mixins/BasePageManager'
 import mixinSearch from './mixins/search'
@@ -107,6 +109,7 @@ export default {
     d2MenuSide,
     d2MenuHeader,
     d2Tabs,
+    iframes,
     d2HeaderFullscreen,
     d2HeaderSearch,
     d2HeaderTheme,
@@ -129,6 +132,9 @@ export default {
       transitionActive: state => state.transition.active,
       asideCollapse: state => state.menu.asideCollapse
     }),
+    ...mapState('session', [
+      'showIframe'
+    ]),
     ...mapGetters('d2admin', {
       themeActiveSetting: 'theme/activeSetting'
     }),
