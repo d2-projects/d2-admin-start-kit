@@ -1,68 +1,79 @@
 {
   "name": "cvicse-admin",
-  "version": "1.6.10",
+  "version": "1.6.15",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "start": "http-server target/dist -s -o",
-    "dev": "npm run serve",
     "build": "vue-cli-service build --modern",
     "build:nomock": "vue-cli-service build --modern --mode nomock",
     "build:travis": "vue-cli-service build --modern --mode travis",
     "lint": "vue-cli-service lint --fix",
     "inspect": "vue-cli-service inspect > target/inspect-dev.log && vue-cli-service inspect --mode production > target/inspect-pro.log",
-    "test:unit": "vue-cli-service test:unit"
+    "test": "npm run test:unit",
+    "test:unit": "jest",
+    "sync-version": "node scripts/sync-version.js",
+    "prestart": "npm run build",
+    "pretest:unit": "node scripts/fix-jest-util-bug.js",
+    "postinstall": "node scripts/modifyFormItem.js"
   },
   "dependencies": {
-    "@d2-projects/d2-crud": "^1.3.5",
-    "@d2-projects/vue-filters-date": "^1.0.2",
+    "@babel/runtime": "^7.4.3",
+    "@d2-projects/d2-crud": "^2.0.5",
+    "@d2-projects/vue-filters-date": "^1.0.9",
     "axios": "^0.18.0",
-    "babel-polyfill": "^6.26.0",
-    "better-scroll": "^1.13.4",
-    "dayjs": "^1.7.8",
-    "element-ui": "^2.4.11",
+    "better-scroll": "^1.15.1",
+    "dayjs": "^1.8.12",
+    "element-ui": "^2.7.2",
     "flex.css": "^1.1.7",
-    "fuse.js": "^3.3.0",
-    "hotkeys-js": "^3.4.1",
+    "fuse.js": "^3.4.4",
+    "hotkeys-js": "^3.6.2",
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.11",
     "lowdb": "^1.0.0",
     "mockjs": "^1.0.1-beta3",
+    "modular-core": "^0.6.4",
+    "modular-vue": "^0.6.2",
     "mxgraph": "^3.9.12",
     "nprogress": "^0.2.0",
     "particles.js": "^2.0.0",
-    "qs": "^6.6.0",
-    "screenfull": "^4.0.0",
+    "qs": "^6.7.0",
+    "regenerator-runtime": "^0.13.2",
+    "screenfull": "^4.2.0",
     "ua-parser-js": "^0.7.19",
-    "vue": "^2.5.22",
-    "vue-i18n": "^8.7.0",
+    "vue": "^2.6.10",
+    "vue-i18n": "^8.10.0",
     "vue-router": "^3.0.2",
-    "vuex": "^3.0.1"
+    "vuex": "^3.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.4.3",
     "@kazupon/vue-i18n-loader": "^0.3.0",
-    "@vue/cli-plugin-babel": "^3.3.0",
-    "@vue/cli-plugin-eslint": "^3.3.0",
-    "@vue/cli-plugin-unit-jest": "^3.3.0",
-    "@vue/cli-service": "^3.3.0",
+    "@vue/cli-plugin-babel": "^3.5.5",
+    "@vue/cli-plugin-eslint": "^3.5.1",
+    "@vue/cli-plugin-unit-jest": "^3.5.3",
+    "@vue/cli-service": "^3.5.3",
     "@vue/eslint-config-standard": "^4.0.0",
-    "@vue/test-utils": "^1.0.0-beta.28",
-    "babel-core": "7.0.0-bridge.0",
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
+    "babel-jest": "^24.7.1",
     "babel-plugin-component": "^1.1.1",
     "babel-plugin-require-context-hook": "^1.0.0",
-    "eslint": "^5.12.0",
-    "eslint-plugin-vue": "^5.1.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.2.2",
     "http-server": "^0.11.1",
-    "lint-staged": "^8.1.0",
+    "jest": "^24.7.1",
+    "lint-staged": "^8.1.4",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.0.1",
     "svg-sprite-loader": "^4.1.3",
-    "terser-webpack-plugin": "^1.2.1",
+    "terser-webpack-plugin": "^1.2.3",
     "text-loader": "0.0.1",
-    "vue-template-compiler": "^2.5.22",
-    "webpack-bundle-analyzer": "^3.0.3"
+    "vue-template-compiler": "^2.6.10",
+    "webpack-bundle-analyzer": "^3.2.0"
   },
   "eslintConfig": {
     "root": true,
@@ -107,8 +118,13 @@
       ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
       "^.+\\.jsx?$": "babel-jest"
     },
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!(modular-core|modular-vue|vuex-along))"
+    ],
     "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/src/$1"
+      "^@/(.*)$": "<rootDir>/src/$1",
+      "serverConfig": "<rootDir>/tests/mock/server.config.js",
+      "logger": "<rootDir>/tests/mock/logger.js"
     },
     "snapshotSerializers": [
       "jest-serializer-vue"
@@ -120,7 +136,8 @@
       "<rootDir>/src/**/*.{js,jsx,json,vue}"
     ],
     "coverageReporters": [
-      "lcov"
+      "lcov",
+      "html"
     ],
     "setupFiles": [
       "<rootDir>/tests/setup/requireContextRegister"
@@ -133,11 +150,11 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": [
+    "src/*.js": [
       "vue-cli-service lint",
       "git add"
     ],
-    "*.vue": [
+    "src/*.vue": [
       "vue-cli-service lint",
       "git add"
     ]

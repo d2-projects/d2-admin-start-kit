@@ -1,16 +1,17 @@
-import store from '@/store'
+import { store } from 'modular-vue'
 import setting from '@/setting'
-
-// 许可类型常量
-export const ANONYMOUS = 'anonymous'
-export const LOGGEDIN = 'loggedIn'
-export const CHECK = 'check'
+import { ANONYMOUS, LOGGEDIN, CHECK } from './Auth.Constant'
 
 // Vue Mixin
 export default {
   methods: {
     checkPermission
   }
+}
+
+// 获取许可类型
+export function getPermissionType (uri) {
+  return setting.permissions[uri] || LOGGEDIN
 }
 
 // 当前用户许可检查
@@ -28,9 +29,7 @@ export function checkPermission (...uris) {
         break
       case LOGGEDIN:
       default: // 默认按照 LOGGEDIN 处理
-        if (store.getters['session/loggedIn']) {
-          return true
-        }
+        return !!store.getters['session/loggedIn']
     }
   }
   return forEachMatch(checks, store.state.session.user.permissions)
@@ -52,6 +51,7 @@ export function forEachMatch (facts, rules) {
 }
 
 // 树状查找匹配算法
+// TODO 性能优化的匹配算法，待实现
 export function treeMatch (facts, rules) {
   return true
 }

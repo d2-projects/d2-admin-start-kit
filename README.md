@@ -1,11 +1,18 @@
 # CVICSE Admin
 
-![GitHub package version](https://img.shields.io/github/package-json/v/han-feng/cvicse-admin-start-kit.svg)
 [![Build Status](https://travis-ci.org/han-feng/cvicse-admin-start-kit.svg?branch=master)](https://travis-ci.org/han-feng/cvicse-admin-start-kit)
-[![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=cvicse-admin-start-kit&metric=alert_status)](https://sonarcloud.io/dashboard?id=cvicse-admin-start-kit)
+![GitHub package version](https://img.shields.io/github/package-json/v/han-feng/cvicse-admin-start-kit.svg)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=cvicse-admin-start-kit&metric=ncloc)](https://sonarcloud.io/dashboard?id=cvicse-admin-start-kit)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/han-feng/cvicse-admin-start-kit.svg)
 ![GitHub language count](https://img.shields.io/github/languages/count/han-feng/cvicse-admin-start-kit.svg)
 ![GitHub top language](https://img.shields.io/github/languages/top/han-feng/cvicse-admin-start-kit.svg)
+
+[![SonarCloud](https://sonarcloud.io/api/project_badges/measure?project=cvicse-admin-start-kit&metric=alert_status)](https://sonarcloud.io/dashboard?id=cvicse-admin-start-kit)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=cvicse-admin-start-kit&metric=bugs)](https://sonarcloud.io/dashboard?id=cvicse-admin-start-kit)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=cvicse-admin-start-kit&metric=code_smells)](https://sonarcloud.io/dashboard?id=cvicse-admin-start-kit)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=cvicse-admin-start-kit&metric=coverage)](https://sonarcloud.io/dashboard?id=cvicse-admin-start-kit)
+[![codecov](https://codecov.io/gh/han-feng/cvicse-admin-start-kit/branch/master/graph/badge.svg)](https://codecov.io/gh/han-feng/cvicse-admin-start-kit)
+
 
 基于 [D2Admin](https://github.com/d2-projects/d2-admin) 简化版定制的企业级应用前端模板。
 

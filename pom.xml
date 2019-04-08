@@ -1,24 +1,16 @@
-<?xml version="1.0"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-
+<?xml version="1.0" ?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>com.cvicse</groupId>
 	<artifactId>cvicse-admin-start-kit</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
-
 	<name>cvicse-admin-start-kit</name>
 	<url>https://github.com/han-feng/cvicse-admin-start-kit</url>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
-
 	<build>
 		<defaultGoal>install</defaultGoal>
 		<plugins>
@@ -37,8 +29,8 @@
 						</goals>
 						<phase>generate-resources</phase>
 						<configuration>
-							<nodeVersion>v11.6.0</nodeVersion>
-							<npmVersion>6.5.0</npmVersion>
+							<nodeVersion>v11.11.0</nodeVersion>
+							<npmVersion>6.9.0</npmVersion>
 							<nodeDownloadRoot>http://npm.taobao.org/mirrors/node/</nodeDownloadRoot>
 							<npmDownloadRoot>https://registry.npm.taobao.org/npm/-/</npmDownloadRoot>
 						</configuration>
@@ -51,6 +43,16 @@
 						<phase>generate-resources</phase>
 						<configuration>
 							<arguments>install</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>sync version</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<arguments>run sync-version -- ${revision}</arguments>
 						</configuration>
 					</execution>
 					<execution>
@@ -98,5 +100,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

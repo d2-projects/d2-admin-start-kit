@@ -1,10 +1,11 @@
 // 菜单数据
 export default [
+  { path: '/index', title: '首页', icon: 'home' },
   {
     title: '演示',
     icon: 'flask',
     children: [
-      // { path: '/index', title: '首页', icon: 'home' },
+      { path: '/demo/validator', title: '输入校验', icon: 'edit' },
       {
         title: '权限演示',
         icon: 'universal-access',

@@ -1,14 +1,13 @@
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const TerserPlugin = require('terser-webpack-plugin')
-const PackageConfig = require('./package.json')
 
 // 拼接路径
 const resolve = dir => require('path').join(__dirname, dir)
 
 // 增加环境变量
-process.env.VUE_APP_NAME = PackageConfig.name
-process.env.VUE_APP_VERSION = PackageConfig.version
-process.env.VUE_APP_BUILD_TIME = require('dayjs')().format('YYMMDDHHmmss')
+process.env.VUE_APP_NAME = process.env.npm_package_name
+process.env.VUE_APP_VERSION = process.env.npm_package_version
+process.env.VUE_APP_BUILD_TIME = require('dayjs')().format('YYYY-M-D HH:mm:ss')
 
 module.exports = {
   // publicPath 使用相对路径可以满足大多数情况需求
@@ -108,8 +107,8 @@ module.exports = {
       .end()
 
     // 重新设置 alias
-    config.resolve.alias
-      .set('@', resolve('src'))
+    // config.resolve.alias
+    //   .set('modular-vue', resolve('src/vue'))
 
     // 判断环境加入模拟数据
     if (process.env.VUE_APP_BUILD_MODE !== 'nomock') {
@@ -120,11 +119,12 @@ module.exports = {
     }
   },
   configureWebpack: {
-    // plugins: [
-    // new BundleAnalyzerPlugin()
-    // ],
+    plugins: [
+      // new BundleAnalyzerPlugin()
+    ],
     externals: {
-      logger: 'console'
+      logger: 'console',
+      serverConfig: 'serverConfig'
     }
   }
 }

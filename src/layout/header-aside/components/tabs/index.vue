@@ -138,8 +138,7 @@ export default {
         this.contextmenuFlag = false
       }
       const params = {
-        pageSelect: tagName,
-        vm: this
+        pageSelect: tagName
       }
       switch (command) {
         case 'left':
@@ -152,7 +151,7 @@ export default {
           this.closeOther(params)
           break
         case 'all':
-          this.closeAll(this)
+          this.closeAll()
           break
         case 'max':
           this.maximizedToggle(this)
@@ -185,8 +184,7 @@ export default {
     handleTabsEdit (tagName, action) {
       if (action === 'remove') {
         this.close({
-          tagName,
-          vm: this
+          tagName
         })
       }
     }

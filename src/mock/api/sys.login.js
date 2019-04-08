@@ -1,5 +1,6 @@
 import Qs from 'qs'
 import Mock from 'mockjs'
+import Service from '@/libs/Service'
 
 const userDB = [
   {
@@ -44,9 +45,8 @@ const userDB = [
 ]
 
 let errorCount = 0
-const baseUrl = `${process.env.VUE_APP_API}`
 
-Mock.mock(baseUrl + 'login', 'post', ({ url, type, body }) => {
+Mock.mock(Service.getUrl('login'), 'post', ({ url, type, body }) => {
   const bodyObj = Qs.parse(body)
   const user = userDB.find(e => e.username === bodyObj.username && e.password === bodyObj.password)
   if (user) {

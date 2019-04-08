@@ -4,17 +4,13 @@ node_js: stable
 
 addons:
   sonarcloud:
-    organization: "han-feng-github"
+    organization: han-feng-github
     token:
       secure: $SONAR_CLOUD_TOKEN
 
 cache:
   directories:
-    - "node_modules"
-
-branches:
-  only:
-  - master
+    - node_modules
 
 script:
   - npm run build:travis
@@ -30,4 +26,5 @@ deploy:
     branch: master
 
 after_success:
+  - npx codecov --token=$CODECOV_TOKEN
   - sonar-scanner
