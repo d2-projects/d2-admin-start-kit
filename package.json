@@ -145,5 +145,18 @@
     "browser": true,
     "collectCoverage": true,
     "testURL": "http://localhost/"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/*.js": [
+      "vue-cli-service lint",
+      "git add"
+    ],
+    "src/*.vue": [
+      "vue-cli-service lint",
+      "git add"
+    ]
   }
 }
