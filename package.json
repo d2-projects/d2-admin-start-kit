@@ -43,7 +43,7 @@
     "ua-parser-js": "^0.7.19",
     "vue": "^2.6.10",
     "vue-i18n": "^8.10.0",
-    "vue-router": "^3.0.2",
+    "vue-router": "^3.0.3",
     "vuex": "^3.1.0"
   },
   "devDependencies": {
