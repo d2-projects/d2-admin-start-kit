@@ -8,13 +8,9 @@ addons:
     token:
       secure: $SONAR_CLOUD_TOKEN
 
-cache:
-  directories:
-    - node_modules
-
 script:
   - npm run build:travis
-  - npm run test:unit
+  - npm test
 
 deploy:
   provider: pages

@@ -66,13 +66,13 @@
 						</configuration>
 					</execution>
 					<execution>
-						<id>npm test:unit</id>
+						<id>npm test</id>
 						<goals>
 							<goal>npm</goal>
 						</goals>
 						<phase>test</phase>
 						<configuration>
-							<arguments>run test:unit</arguments>
+							<arguments>test</arguments>
 						</configuration>
 					</execution>
 				</executions>

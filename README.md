@@ -13,7 +13,6 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=cvicse-admin-start-kit&metric=coverage)](https://sonarcloud.io/dashboard?id=cvicse-admin-start-kit)
 [![codecov](https://codecov.io/gh/han-feng/cvicse-admin-start-kit/branch/master/graph/badge.svg)](https://codecov.io/gh/han-feng/cvicse-admin-start-kit)
 
-
 基于 [D2Admin](https://github.com/d2-projects/d2-admin) 简化版定制的企业级应用前端模板。
 
 [预览](https://han-feng.github.io/cvicse-admin-start-kit) | [Github](https://github.com/han-feng/cvicse-admin-start-kit) | [码云镜像](https://gitee.com/han_feng/cvicse-admin-start-kit)
@@ -23,21 +22,25 @@
 ## 使用 nodejs 开发
 
 安装依赖
+
 ```
 npm install
 ```
 
 开发调试运行，支持热更新
+
 ```
 npm run serve
 ```
 
 编译打包生产版本，包含 Mock 测试数据
+
 ```
 npm run build
 ```
 
 运行 build 命令产生的版本，
+
 ```
 npm run start
 ```
@@ -45,10 +48,12 @@ npm run start
 ## 使用 Maven 构建打包
 
 在项目根目录下，执行下面命令即可进行构建：
+
 ```
 mvn install
 ```
-自动下载安装 nodejs、npm 等相关工具，编译、打包形成可以在 java web 项目中直接使用的 jar 包，该版本不包含 Mock 测试数据。
+
+自动下载安装 nodejs、npm 等相关工具，编译、打包形成可以在 java web 项目中直接使用的 jar 包。
 
 ---
 
