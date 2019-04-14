@@ -16,10 +16,13 @@ module.exports = {
   outputDir: 'target/dist',
   assetsDir: 'static',
   lintOnSave: true,
-  productionSourceMap: false, // 是否为生产环境构建生成 sourceMap
-  // devServer: {
-  //   publicPath: '/'
-  // },
+  productionSourceMap: false,
+  // 默认情况下 babel-loader 会忽略所有 node_modules 中的文件。如果你想要通过 Babel 显式转译一个依赖，可以在这个选项中列出来
+  transpileDependencies: [
+    'modular-core',
+    'modular-vue',
+    'vuex-along'
+  ],
   css: {
     loaderOptions: {
       // 设置 scss 公用变量文件

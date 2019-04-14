@@ -1,6 +1,6 @@
 {
   "name": "cvicse-admin",
-  "version": "1.6.15",
+  "version": "1.6.5-beta",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --open",
@@ -11,7 +11,7 @@
     "lint": "vue-cli-service lint --fix",
     "inspect": "vue-cli-service inspect > target/inspect-dev.log && vue-cli-service inspect --mode production > target/inspect-pro.log",
     "test": "npm run test:unit",
-    "test:unit": "jest",
+    "test:unit": "vue-cli-service test:unit",
     "sync-version": "node scripts/sync-version.js",
     "prestart": "npm run build",
     "pretest:unit": "node scripts/fix-jest-util-bug.js",
