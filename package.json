@@ -22,7 +22,7 @@
     "@d2-projects/d2-crud": "^2.0.5",
     "@d2-projects/vue-filters-date": "^1.0.9",
     "axios": "^0.18.0",
-    "better-scroll": "^1.15.1",
+    "better-scroll": "^1.15.2",
     "dayjs": "^1.8.12",
     "element-ui": "^2.7.2",
     "flex.css": "^1.1.7",
@@ -43,7 +43,7 @@
     "ua-parser-js": "^0.7.19",
     "vue": "^2.6.10",
     "vue-i18n": "^8.10.0",
-    "vue-router": "^3.0.4",
+    "vue-router": "^3.0.5",
     "vuex": "^3.1.0"
   },
   "devDependencies": {
@@ -71,77 +71,6 @@
     "text-loader": "0.0.1",
     "vue-template-compiler": "^2.6.10",
     "webpack-bundle-analyzer": "^3.3.2"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "@vue/standard"
-    ],
-    "rules": {
-      "vue/no-parsing-error": [
-        2,
-        {
-          "x-invalid-end-tag": false
-        }
-      ]
-    },
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "json",
-      "vue"
-    ],
-    "transform": {
-      "^.+\\.vue$": "vue-jest",
-      ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
-      "^.+\\.jsx?$": "babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "<rootDir>/node_modules/(?!(modular-core|modular-vue|vuex-along))"
-    ],
-    "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/src/$1",
-      "serverConfig": "<rootDir>/tests/mock/server.config.js",
-      "logger": "<rootDir>/tests/mock/logger.js"
-    },
-    "snapshotSerializers": [
-      "jest-serializer-vue"
-    ],
-    "testMatch": [
-      "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
-    ],
-    "collectCoverageFrom": [
-      "<rootDir>/src/**/*.{js,jsx,json,vue}"
-    ],
-    "coverageReporters": [
-      "lcov",
-      "html"
-    ],
-    "setupFiles": [
-      "<rootDir>/tests/setup/requireContextRegister"
-    ],
-    "browser": true,
-    "collectCoverage": true,
-    "testURL": "http://localhost/"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
