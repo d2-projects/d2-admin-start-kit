@@ -30,6 +30,7 @@ export default [
         icon: 'sitemap',
         children: [
           { path: '/demo/graph', title: 'Hello, World!', icon: 'braille' },
+          { path: '/demo/graph/modular', title: 'Modular 视图', icon: 'sitemap' },
           { path: '/demo/graph/editor', title: 'Graph 编辑器', icon: 'object-group' }
         ]
       }

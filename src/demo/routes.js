@@ -20,6 +20,12 @@ export default [
     meta: { title: 'Graph 编辑器' }
   },
   {
+    path: 'demo/graph/modular',
+    name: 'demo-graph-modular',
+    component: () => import('./view/mxgraph/modular'),
+    meta: { title: 'Modular 视图' }
+  },
+  {
     path: 'demo/params/:id',
     name: 'demo-params',
     props: true,
