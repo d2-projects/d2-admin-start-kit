@@ -1,7 +1,1 @@
-export default {
-  pub: {
-    pageHeader: {
-      demo: '示例'
-    }
-  }
-}
+export default {}
