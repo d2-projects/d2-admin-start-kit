@@ -41,11 +41,6 @@ export default {
     D2HelpBtn,
     D2Badge,
     D2PageCover
-  },
-  data () {
-    return {
-      filename: __filename
-    }
   }
 }
 </script>

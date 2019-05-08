@@ -1,5 +1,5 @@
 <template>
-  <d2-container :filename="filename">
+  <d2-container>
     <template slot="header">Page 1 header</template>
     Hello World
   </d2-container>
@@ -7,11 +7,6 @@
 
 <script>
 export default {
-  name: 'page1',
-  data () {
-    return {
-      filename: __filename
-    }
-  }
+  name: 'page1'
 }
 </script>
