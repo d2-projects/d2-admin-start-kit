@@ -15,40 +15,17 @@
 import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
   name: 'd2-header-size',
-  data () {
-    return {
-      options: [
-        { label: '默认', value: 'default' },
-        { label: '中', value: 'medium' },
-        { label: '小', value: 'small' },
-        { label: '最小', value: 'mini' }
-      ]
-    }
-  },
   computed: {
     ...mapState('d2admin/size', [
       'value'
-    ])
-  },
-  watch: {
-    // 注意 这里是关键
-    // 因为需要访问 this.$ELEMENT 所以只能在这里使用这种方式
-    value: {
-      handler (val, oldVal) {
-        // https://github.com/d2-projects/d2-admin/pull/129
-        if (oldVal) {
-          // 这个情况在已经加载完页面 用户改变了尺寸时触发
-          this.$ELEMENT.size = val
-          // 由于已经加载过设置 需要清空缓存设置
-          this.pageKeepAliveClean()
-          // 由于已经加载过设置 需要刷新此页面
-          this.$router.replace('/refresh')
-        } else {
-          // 这个情况在刷新页面时触发
-          this.$ELEMENT.size = val
-        }
-      },
-      immediate: true
+    ]),
+    options () {
+      return [
+        { label: this.$t('layout.header-aside.header-size.options.default'), value: 'default' },
+        { label: this.$t('layout.header-aside.header-size.options.medium'), value: 'medium' },
+        { label: this.$t('layout.header-aside.header-size.options.small'), value: 'small' },
+        { label: this.$t('layout.header-aside.header-size.options.mini'), value: 'mini' }
+      ]
     }
   },
   methods: {
@@ -61,9 +38,9 @@ export default {
     handleChange (value) {
       this.sizeSet(value)
       this.$notify({
-        title: '提示',
+        title: this.$t('public.notify.special.component-size.changed.title'),
         dangerouslyUseHTMLString: true,
-        message: '已更新页面内 <b>组件</b> 的 <b>默认尺寸</b><br/>例如按钮大小，<b>非字号</b>',
+        message: this.$t('public.notify.special.component-size.changed.message'),
         type: 'success'
       })
     },
