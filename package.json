@@ -1,6 +1,6 @@
 {
   "name": "d2-admin",
-  "version": "1.7.0",
+  "version": "1.7.2",
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "start": "npm run serve",
@@ -16,7 +16,7 @@
     "better-scroll": "^1.15.2",
     "core-js": "^2.6.5",
     "dayjs": "^1.8.12",
-    "element-ui": "^2.7.2",
+    "element-ui": "^2.11.1",
     "flex.css": "^1.1.7",
     "fuse.js": "^3.4.4",
     "hotkeys-js": "^3.6.2",
