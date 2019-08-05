@@ -1,38 +1,49 @@
-<template>
-  <div class="d2-theme-header-menu" ref="page" :class="{'is-scrollable': isScroll}" flex="cross:center">
-    <div class="d2-theme-header-menu__content" ref="content" flex-box="1" flex>
-      <div class="d2-theme-header-menu__scroll" ref="scroll" flex-box="0" :style="'transform: translateX(' + currentTranslateX + 'px);'">
-        <el-menu mode="horizontal" :default-active="active" @select="handleMenuSelect">
-          <template v-for="(menu, menuIndex) in header">
-            <d2-layout-header-aside-menu-item v-if="menu.children === undefined" :menu="menu" :key="menuIndex"/>
-            <d2-layout-header-aside-menu-sub v-else :menu="menu" :key="menuIndex"/>
-          </template>
-        </el-menu>
-      </div>
-    </div>
-    <div v-if="isScroll" class="d2-theme-header-menu__prev" flex-box="0" @click="scroll('left')" flex="main:center cross:center">
-      <i class="el-icon-arrow-left"></i>
-    </div>
-    <div v-if="isScroll" class="d2-theme-header-menu__next" flex-box="0" @click="scroll('right')" flex="cross:center">
-      <i class="el-icon-arrow-right"></i>
-    </div>
-  </div>
-</template>
-
-<script>
 import { throttle } from 'lodash'
 import { mapState } from 'vuex'
 import menuMixin from '../mixin/menu'
-import d2LayoutMainMenuItem from '../components/menu-item/index.vue'
-import d2LayoutMainMenuSub from '../components/menu-sub/index.vue'
+import { elMenuItem, elSubmenu } from '../libs/util.menu'
+
 export default {
   name: 'd2-layout-header-aside-menu-header',
   mixins: [
     menuMixin
   ],
-  components: {
-    'd2-layout-header-aside-menu-item': d2LayoutMainMenuItem,
-    'd2-layout-header-aside-menu-sub': d2LayoutMainMenuSub
+  render (createElement) {
+    return createElement('div', {
+      attrs: { flex: 'cross:center' },
+      class: { 'd2-theme-header-menu': true, 'is-scrollable': this.isScroll },
+      ref: 'page'
+    }, [
+      createElement('div', {
+        attrs: { class: 'd2-theme-header-menu__content', flex: '', 'flex-box': '1' },
+        ref: 'content'
+      }, [
+        createElement('div', {
+          attrs: { class: 'd2-theme-header-menu__scroll', 'flex-box': '0' },
+          style: { transform: `translateX(${this.currentTranslateX}px)` },
+          ref: 'scroll'
+        }, [
+          createElement('el-menu', {
+            props: { mode: 'horizontal', defaultActive: this.active },
+            on: { select: this.handleMenuSelect }
+          }, this.header.map(menu => (menu.children === undefined ? elMenuItem : elSubmenu).call(this, createElement, menu)))
+        ])
+      ]),
+      ...this.isScroll ? [
+        createElement('div', {
+          attrs: { class: 'd2-theme-header-menu__prev', flex: 'main:center cross:center', 'flex-box': '0' },
+          on: { click: () => this.scroll('left') }
+        }, [
+          createElement('i', { attrs: { class: 'el-icon-arrow-left' } })
+        ]),
+        createElement('div', {
+          attrs: { class: 'd2-theme-header-menu__next', flex: 'main:center cross:center', 'flex-box': '0' },
+          on: { click: () => this.scroll('right') }
+        }, [
+          createElement('i', { attrs: { class: 'el-icon-arrow-right' } })
+        ])
+      ] : []
+    ])
   },
   computed: {
     ...mapState('d2admin/menu', [
@@ -120,4 +131,3 @@ export default {
     window.removeEventListener('load', this.checkScroll)
   }
 }
-</script>
