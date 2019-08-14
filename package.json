@@ -49,7 +49,6 @@
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
     "svg-sprite-loader": "^4.1.3",
-    "uglifyjs-webpack-plugin": "^2.1.2",
     "vue-template-compiler": "^2.5.21"
   }
 }
