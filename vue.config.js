@@ -50,13 +50,6 @@ module.exports = {
           propName: process.env.VUE_APP_SOURCE_VIEWER_PROP_NAME
         })
       )
-    // i18n
-    config.module
-      .rule('i18n')
-      .resourceQuery(/blockType=i18n/)
-      .use('i18n')
-      .loader('@kazupon/vue-i18n-loader')
-      .end()
     // svg
     const svgRule = config.module.rule('svg')
     svgRule.uses.clear()
@@ -86,6 +79,15 @@ module.exports = {
       entry
         .add('@/mock')
         .end()
+    }
+  },
+  // i18n
+  pluginOptions: {
+    i18n: {
+      locale: 'zh-chs',
+      fallbackLocale: 'en',
+      localeDir: 'locales',
+      enableInSFC: true
     }
   }
 }

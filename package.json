@@ -29,12 +29,12 @@
     "screenfull": "^4.2.0",
     "ua-parser-js": "^0.7.19",
     "vue": "^2.6.10",
-    "vue-i18n": "^8.10.0",
+    "vue-i18n": "^8.14.0",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@kazupon/vue-i18n-loader": "^0.3.0",
+    "@kazupon/vue-i18n-loader": "^0.4.1",
     "@vue/cli-plugin-babel": "^3.6.0",
     "@vue/cli-plugin-eslint": "^3.6.0",
     "@vue/cli-plugin-unit-jest": "^3.6.0",
