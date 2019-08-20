@@ -8,10 +8,10 @@ export default {
   actions: {
     /**
      * @description 登录
-     * @param {Object} param context
-     * @param {Object} param username {String} 用户账号
-     * @param {Object} param password {String} 密码
-     * @param {Object} param route {Object} 登录成功后定向的路由对象 任何 vue-router 支持的格式
+     * @param {Object} context
+     * @param {Object} payload username {String} 用户账号
+     * @param {Object} payload password {String} 密码
+     * @param {Object} payload route {Object} 登录成功后定向的路由对象 任何 vue-router 支持的格式
      */
     login ({ dispatch }, {
       username = '',
@@ -48,8 +48,8 @@ export default {
     },
     /**
      * @description 注销用户并返回登录页面
-     * @param {Object} param context
-     * @param {Object} param confirm {Boolean} 是否需要确认
+     * @param {Object} context
+     * @param {Object} payload confirm {Boolean} 是否需要确认
      */
     logout ({ commit, dispatch }, { confirm = false } = {}) {
       /**
@@ -69,9 +69,9 @@ export default {
       // 判断是否需要确认
       if (confirm) {
         commit('d2admin/gray/set', true, { root: true })
-        MessageBox.confirm('注销当前账户吗?  打开的标签页和用户设置将会被保存。', '确认操作', {
-          confirmButtonText: '确定注销',
-          cancelButtonText: '放弃',
+        MessageBox.confirm('确定要注销当前用户吗', '注销用户', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
           type: 'warning'
         })
           .then(() => {
@@ -81,7 +81,7 @@ export default {
           .catch(() => {
             commit('d2admin/gray/set', false, { root: true })
             Message({
-              message: '放弃注销用户'
+              message: '取消注销操作'
             })
           })
       } else {
@@ -90,7 +90,7 @@ export default {
     },
     /**
      * @description 用户登录后从持久化数据加载一系列的设置
-     * @param {Object} state vuex state
+     * @param {Object} context
      */
     load ({ dispatch }) {
       return new Promise(async resolve => {
