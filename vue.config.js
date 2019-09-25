@@ -1,4 +1,4 @@
-const VueFilenameInjector = require('./tools/vue-filename-injector')
+const VueFilenameInjector = require('@d2-projects/vue-filename-injector')
 
 // 拼接路径
 const resolve = dir => require('path').join(__dirname, dir)
