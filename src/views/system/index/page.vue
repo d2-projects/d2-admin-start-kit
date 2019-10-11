@@ -7,7 +7,6 @@
           <span class="btn-group__btn" @click="$open('https://github.com/d2-projects')">开源组织</span> |
           <span class="btn-group__btn" @click="$open('https://fairyever.com/d2-admin/doc/zh/')">文档</span> |
           <span class="btn-group__btn" @click="$open('https://github.com/d2-projects/d2-admin-start-kit')">简化版</span> |
-          <span class="btn-group__btn" @click="$open('https://alibaba.github.io/ice/scaffold?type=vue')">飞冰</span> |
           <span class="btn-group__btn" @click="$open('https://juejin.im/user/57a48b632e958a006691b946/posts')">掘金</span> |
           <span class="btn-group__btn" @click="$open('https://daily.fairyever.com')">日报</span> |
           <el-popover :width="172" trigger="hover">
