@@ -1,6 +1,6 @@
 import UaParser from 'ua-parser-js'
 
-export default {
+export default context => ({
   namespaced: true,
   state: {
     // 用户 UA
@@ -15,4 +15,4 @@ export default {
       state.data = new UaParser().getResult()
     }
   }
-}
+})

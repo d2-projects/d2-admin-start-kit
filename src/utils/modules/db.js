@@ -1,19 +1,16 @@
 import low from 'lowdb'
 import LocalStorage from 'lowdb/adapters/LocalStorage'
-import util from '@/libs/util'
-import { cloneDeep } from 'lodash'
+import * as cookies from './cookies'
+import {
+  cloneDeep
+} from 'lodash'
 
-const adapter = new LocalStorage(`d2admin-${process.env.VUE_APP_VERSION}`)
+const adapter = new LocalStorage(`tao-${process.env.VUE_APP_VERSION}`)
 const db = low(adapter)
-
-db
-  .defaults({
-    sys: {},
-    database: {}
-  })
-  .write()
-
-export default db
+db.defaults({
+  sys: {},
+  database: {}
+}).write()
 
 /**
  * @description 检查路径是否存在 不存在的话初始化
@@ -24,14 +21,14 @@ export default db
  * @param {Object} payload defaultValue {*} 初始化默认值
  * @returns {String} 可以直接使用的路径
  */
-export function pathInit ({
+function pathInit ({
   dbName = 'database',
   path = '',
   user = true,
   validator = () => true,
   defaultValue = ''
 }) {
-  const uuid = util.cookies.get('uuid') || 'ghost-uuid'
+  const uuid = cookies.get('uuid') || 'ghost-uuid'
   const currentPath = `${dbName}.${user ? `user.${uuid}` : 'public'}${path ? `.${path}` : ''}`
   const value = db.get(currentPath).value()
   if (!(value !== undefined && validator(value))) {
@@ -77,14 +74,12 @@ export function dbGet ({
   defaultValue = '',
   user = false
 }) {
-  return new Promise(resolve => {
-    resolve(cloneDeep(db.get(pathInit({
-      dbName,
-      path,
-      user,
-      defaultValue
-    })).value()))
-  })
+  return cloneDeep(db.get(pathInit({
+    dbName,
+    path,
+    user,
+    defaultValue
+  })).value())
 }
 
 /**
@@ -98,9 +93,11 @@ export function database ({
   validator = () => true,
   defaultValue = ''
 } = {}) {
-  return new Promise(resolve => {
-    resolve(db.get(pathInit({
-      dbName, path, user, validator, defaultValue
-    })))
-  })
+  return db.get(pathInit({
+    dbName,
+    path,
+    user,
+    validator,
+    defaultValue
+  }))
 }

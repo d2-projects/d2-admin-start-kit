@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
-import util from '@/libs/util'
+import util from '@/utils'
 export default {
   name: 'app',
   watch: {
@@ -24,5 +24,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~@/assets/style/public-class.scss';
+@import "~@/assets/style/public-class.scss";
 </style>

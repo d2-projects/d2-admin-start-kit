@@ -1,6 +1,6 @@
 import screenfull from 'screenfull'
 
-export default {
+export default context => ({
   namespaced: true,
   state: {
     // 全屏激活
@@ -9,38 +9,33 @@ export default {
   actions: {
     /**
      * @description 初始化监听
-     * @param {Object} context
+     * @param {Object} vuex context
      */
-    listen ({ commit }) {
-      return new Promise(resolve => {
-        if (screenfull.enabled) {
-          screenfull.on('change', () => {
-            console.log('1')
-            if (!screenfull.isFullscreen) {
-              commit('set', false)
-            }
-          })
-        }
-        // end
-        resolve()
-      })
+    listen ({
+      commit
+    }) {
+      if (screenfull.enabled) {
+        screenfull.on('change', () => {
+          if (!screenfull.isFullscreen) {
+            commit('set', false)
+          }
+        })
+      }
     },
     /**
      * @description 切换全屏
-     * @param {Object} context
+     * @param {Object} vuex context
      */
-    toggle ({ commit }) {
-      return new Promise(resolve => {
-        if (screenfull.isFullscreen) {
-          screenfull.exit()
-          commit('set', false)
-        } else {
-          screenfull.request()
-          commit('set', true)
-        }
-        // end
-        resolve()
-      })
+    toggle ({
+      commit
+    }) {
+      if (screenfull.isFullscreen) {
+        screenfull.exit()
+        commit('set', false)
+      } else {
+        screenfull.request()
+        commit('set', true)
+      }
     }
   },
   mutations: {
@@ -53,4 +48,4 @@ export default {
       state.active = active
     }
   }
-}
+})

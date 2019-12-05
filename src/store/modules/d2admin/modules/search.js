@@ -1,6 +1,6 @@
 import setting from '@/setting.js'
 
-export default {
+export default context => ({
   namespaced: true,
   state: {
     // 搜索面板激活状态
@@ -39,11 +39,11 @@ export default {
       const push = function (menu, titlePrefix = []) {
         menu.forEach(m => {
           if (m.children) {
-            push(m.children, [ ...titlePrefix, m.title ])
+            push(m.children, [...titlePrefix, m.title])
           } else {
             pool.push({
               ...m,
-              fullTitle: [ ...titlePrefix, m.title ].join(' / ')
+              fullTitle: [...titlePrefix, m.title].join(' / ')
             })
           }
         })
@@ -52,4 +52,4 @@ export default {
       state.pool = pool
     }
   }
-}
+})

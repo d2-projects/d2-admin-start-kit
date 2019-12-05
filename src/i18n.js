@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import util from '@/libs/util'
+import util from '@/utils'
 
 Vue.use(VueI18n)
 

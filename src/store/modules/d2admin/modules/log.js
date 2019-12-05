@@ -1,8 +1,10 @@
 import dayjs from 'dayjs'
-import { get } from 'lodash'
-import util from '@/libs/util.js'
+import {
+  get
+} from 'lodash'
+import util from '@/utils'
 
-export default {
+export default context => ({
   namespaced: true,
   state: {
     // 错误日志
@@ -32,12 +34,19 @@ export default {
   actions: {
     /**
      * @description 添加一个日志
-     * @param {Object} context
+     * @param {Object} vuex context
      * @param {String} param message {String} 信息
      * @param {String} param type {String} 类型
      * @param {Object} payload meta {Object} 附带的信息
      */
-    push ({ rootState, commit }, { message, type = 'info', meta }) {
+    push ({
+      rootState,
+      commit
+    }, {
+      message,
+      type = 'info',
+      meta
+    }) {
       commit('push', {
         message,
         type,
@@ -75,4 +84,4 @@ export default {
       state.log = []
     }
   }
-}
+})

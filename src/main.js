@@ -5,13 +5,14 @@ import App from './App'
 // 核心插件
 import d2Admin from '@/plugin/d2admin'
 // store
-import store from '@/store/index'
-
+import store from '@/store'
 // 菜单和路由设置
 import router from './router'
 import menuHeader from '@/menu/header'
 import menuAside from '@/menu/aside'
-import { frameInRoutes } from '@/router/routes'
+import {
+  frameInRoutes
+} from '@/router/routes'
 
 // 核心插件
 Vue.use(d2Admin)

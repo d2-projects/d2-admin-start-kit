@@ -1,4 +1,6 @@
-import { uniqueId } from 'lodash'
+import {
+  uniqueId
+} from 'lodash'
 // 设置文件
 import setting from '@/setting.js'
 
@@ -17,7 +19,7 @@ function supplementMenuPath (menu) {
   }))
 }
 
-export default {
+export default context => ({
   namespaced: true,
   state: {
     // 顶栏菜单
@@ -30,58 +32,61 @@ export default {
   actions: {
     /**
      * 设置侧边栏展开或者收缩
-     * @param {Object} context
+     * @param {Object} vuex context
      * @param {Boolean} collapse is collapse
      */
-    asideCollapseSet ({ state, dispatch }, collapse) {
-      return new Promise(async resolve => {
-        // store 赋值
-        state.asideCollapse = collapse
-        // 持久化
-        await dispatch('d2admin/db/set', {
-          dbName: 'sys',
-          path: 'menu.asideCollapse',
-          value: state.asideCollapse,
-          user: true
-        }, { root: true })
-        // end
-        resolve()
+    async asideCollapseSet ({
+      state,
+      dispatch
+    }, collapse) {
+      // store 赋值
+      state.asideCollapse = collapse
+      // 持久化
+      await dispatch('d2admin/db/set', {
+        dbName: 'sys',
+        path: 'menu.asideCollapse',
+        value: state.asideCollapse,
+        user: true
+      }, {
+        root: true
       })
     },
     /**
      * 切换侧边栏展开和收缩
-     * @param {Object} context
+     * @param {Object} vuex context
      */
-    asideCollapseToggle ({ state, dispatch }) {
-      return new Promise(async resolve => {
-        // store 赋值
-        state.asideCollapse = !state.asideCollapse
-        // 持久化
-        await dispatch('d2admin/db/set', {
-          dbName: 'sys',
-          path: 'menu.asideCollapse',
-          value: state.asideCollapse,
-          user: true
-        }, { root: true })
-        // end
-        resolve()
+    async asideCollapseToggle ({
+      state,
+      dispatch
+    }) {
+      // store 赋值
+      state.asideCollapse = !state.asideCollapse
+      // 持久化
+      await dispatch('d2admin/db/set', {
+        dbName: 'sys',
+        path: 'menu.asideCollapse',
+        value: state.asideCollapse,
+        user: true
+      }, {
+        root: true
       })
     },
     /**
      * 从持久化数据读取侧边栏展开或者收缩
-     * @param {Object} context
+     * @param {Object} vuex context
      */
-    asideCollapseLoad ({ state, dispatch }) {
-      return new Promise(async resolve => {
-        // store 赋值
-        state.asideCollapse = await dispatch('d2admin/db/get', {
-          dbName: 'sys',
-          path: 'menu.asideCollapse',
-          defaultValue: setting.menu.asideCollapse,
-          user: true
-        }, { root: true })
-        // end
-        resolve()
+    async asideCollapseLoad ({
+      state,
+      dispatch
+    }) {
+      // store 赋值
+      state.asideCollapse = await dispatch('d2admin/db/get', {
+        dbName: 'sys',
+        path: 'menu.asideCollapse',
+        defaultValue: setting.menu.asideCollapse,
+        user: true
+      }, {
+        root: true
       })
     }
   },
@@ -105,4 +110,4 @@ export default {
       state.aside = supplementMenuPath(menu)
     }
   }
-}
+})

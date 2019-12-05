@@ -6,7 +6,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 import store from '@/store/index'
-import util from '@/libs/util.js'
+import util from '@/utils'
 
 // 路由数据
 import routes from './routes'

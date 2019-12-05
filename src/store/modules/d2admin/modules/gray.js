@@ -1,4 +1,4 @@
-export default {
+export default context => ({
   namespaced: true,
   state: {
     // 灰度
@@ -21,4 +21,4 @@ export default {
       state.active = active
     }
   }
-}
+})
