@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import generatorD2Admin from './modules/d2admin'
 import api from '@/api'
+console.log('api', api)
 
 Vue.use(Vuex)
 export default new Vuex.Store({

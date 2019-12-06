@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'cascader',
+  name: 'cascaderPage',
   props: {
     item: {
       type: Object,

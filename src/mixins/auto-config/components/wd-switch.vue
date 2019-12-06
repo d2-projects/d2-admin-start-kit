@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'switch',
+  name: 'switchPage',
   props: {
     item: {
       type: Object,

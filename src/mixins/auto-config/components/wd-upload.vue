@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'upload',
+  name: 'uploadPage',
   props: {
     item: {
       type: Object,

@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: 'checkbox',
+  name: 'checkboxPage',
   props: {
     item: {
       type: Object,

@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'button',
+  name: 'buttonPage',
   props: {
     item: {
       type: Object,

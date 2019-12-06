@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: 'select',
+  name: 'selectPage',
   props: {
     item: {
       type: Object,

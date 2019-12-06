@@ -14,6 +14,7 @@ export default {
     autocompletePage: () => import('./components/wd-autocomplete.vue'),
     switchPage: () => import('./components/wd-switch'),
     uploadPage: () => import('./components/wd-upload.vue'),
+    ueditPage: () => import('./components/wg-uedit'),
     buttonPage: () => import('./components/wd-button')
   }
 }

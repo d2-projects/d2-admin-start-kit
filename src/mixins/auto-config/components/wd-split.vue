@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'split',
+  name: 'splitPage',
   props: {
     item: {
       type: Object,

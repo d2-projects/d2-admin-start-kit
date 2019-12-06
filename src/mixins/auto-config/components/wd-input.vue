@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'input',
+  name: 'inputPage',
   props: {
     item: {
       type: Object,

@@ -19,7 +19,7 @@
  * querySearchAsync(string,cb)  autocomplete 函数
  */
 export default {
-  name: 'autocomplete',
+  name: 'autocompletePage',
   props: {
     item: {
       type: Object,

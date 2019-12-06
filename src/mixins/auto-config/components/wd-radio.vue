@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: 'radio',
+  name: 'radioPage',
   props: {
     item: {
       type: Object,
