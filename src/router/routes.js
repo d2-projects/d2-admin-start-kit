@@ -72,7 +72,13 @@ const frameIn = [{
       component: util.import('system/function/redirect')
     }
   ]
-}]
+},
+{
+  path: '/home',
+  name: 'home',
+  component: util.import('system/home')
+}
+]
 
 /**
  * 在主框架之外显示
