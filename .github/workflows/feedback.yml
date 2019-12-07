@@ -14,6 +14,6 @@ jobs:
       with:
         username: ${{ secrets.FEEDBACK_USERNAME }}
         sign: ${{ secrets.FEEDBACK_SIGN }}
-        repo: ${{ github.repository }}
+        template: d2-projects/d2-admin
         actor: ${{ github.actor }}
         token: ${{ secrets.GITHUB_TOKEN }}
