@@ -25,7 +25,7 @@ export default {
      * @param {Object} context
      */
     isLoaded ({ state }) {
-      if (state.value) return Promise.resolve()
+      if (state.openedLoaded) return Promise.resolve()
       return new Promise(resolve => {
         const timer = setInterval(() => {
           if (state.openedLoaded) {
