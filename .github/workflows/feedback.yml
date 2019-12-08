@@ -1,12 +1,8 @@
 name: feedback
-
 on: [fork, watch, issues]
-
 jobs:
   feedback:
-
     runs-on: ubuntu-latest
-
     steps:
     - name: feedback
       id: feedback
@@ -15,5 +11,6 @@ jobs:
         username: ${{ secrets.FEEDBACK_USERNAME }}
         sign: ${{ secrets.FEEDBACK_SIGN }}
         template: d2-projects/d2-admin
+        repo: ${{ github.repository }}
         actor: ${{ github.actor }}
         token: ${{ secrets.GITHUB_TOKEN }}
