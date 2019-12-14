@@ -4,6 +4,7 @@
       <slot name="header"/>
     </div>
     <div class="d2-container-ghost-bs__body" ref="wrapper">
+      <!-- https://github.com/d2-projects/d2-admin/issues/181 -->
       <div>
         <slot/>
       </div>

@@ -8,9 +8,8 @@
           <span class="btn-group__btn" @click="$open('https://fairyever.com/d2-admin/doc/zh/')">文档</span> |
           <span class="btn-group__btn" @click="$open('https://github.com/d2-projects/d2-admin-start-kit')">简化版</span> |
           <span class="btn-group__btn" @click="$open('https://juejin.im/user/57a48b632e958a006691b946/posts')">掘金</span> |
-          <span class="btn-group__btn" @click="$open('https://daily.fairyever.com')">日报</span> |
           <el-popover :width="172" trigger="hover">
-            <p class="d2-mt-0 d2-mb-10">D2Projects</p>
+            <p class="d2-mt-0 d2-mb-10">今日前端</p>
             <img src="./image/qr@2x.png" style="width: 172px;">
             <span slot="reference" class="btn-group__btn btn-group__btn--link">
               <d2-icon name="weixin"/>
@@ -22,20 +21,20 @@
           </el-popover>
         </div>
         <d2-badge/>
-        <d2-help-btn/>
+        <d2-help/>
       </template>
     </d2-page-cover>
   </d2-container>
 </template>
 
 <script>
-import D2HelpBtn from './components/d2-help-btn'
 import D2Badge from './components/d2-badge'
+import D2Help from './components/d2-help'
 import D2PageCover from './components/d2-page-cover'
 export default {
   components: {
-    D2HelpBtn,
     D2Badge,
+    D2Help,
     D2PageCover
   },
   data () {
@@ -54,6 +53,7 @@ export default {
   .btn-group {
     color: $color-text-placehoder;
     font-size: 12px;
+    line-height: 12px;
     margin-top: 0px;
     margin-bottom: 20px;
     .btn-group__btn {
