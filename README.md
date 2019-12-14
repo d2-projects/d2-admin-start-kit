@@ -10,3 +10,10 @@
 | cdn.d2.pub | [cdn.d2.pub/d2-admin-start-kit/preview](https://cdn.d2.pub/d2-admin-start-kit/preview) | qiniu CDN | [![](https://github.com/d2-projects/d2-admin-start-kit/workflows/Deploy%20cdn/badge.svg)](https://github.com/d2-projects/d2-admin-start-kit/actions?query=workflow%3A%22Deploy+cdn%22) |
 | github | [d2-projects.github.io/d2-admin-start-kit](https://d2-projects.github.io/d2-admin-start-kit) | GitHub pages | [![](https://github.com/d2-projects/d2-admin-start-kit/workflows/Deploy%20Github/badge.svg)](https://github.com/d2-projects/d2-admin-start-kit/actions?query=workflow%3A%22Deploy+Github%22) |
 | netlify | [d2-admin-start-kit.netlify.com](https://d2-admin-start-kit.netlify.com) | Netlify CDN | [![](https://api.netlify.com/api/v1/badges/08ff8c93-f0a8-497a-a081-440b31fb3aa4/deploy-status)](https://app.netlify.com/sites/d2-admin-start-kit/deploys) |
+
+## Other synchronous repositories
+
+| type | link |
+| --- | --- |
+| gitee | [https://gitee.com/fairyever/d2-admin](https://gitee.com/fairyever/d2-admin) |
+| coding | [https://d2-projects.coding.net/p/d2-projects/d/d2-admin/git](https://d2-projects.coding.net/p/d2-projects/d/d2-admin/git) |
