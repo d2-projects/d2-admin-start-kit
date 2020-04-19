@@ -1,6 +1,6 @@
 {
-  "name": "d2-admin",
-  "version": "1.8.0",
+  "name": "d2-admin-start-kit",
+  "version": "1.8.4",
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "start": "npm run serve",
@@ -8,12 +8,11 @@
     "build": "vue-cli-service build",
     "build:nomock": "vue-cli-service build --mode nomock",
     "build:preview": "NODE_OPTIONS=--max_old_space_size=4096 vue-cli-service build --mode preview",
-    "build:github": "NODE_OPTIONS=--max_old_space_size=4096 vue-cli-service build --mode github",
-    "build:netlify": "NODE_OPTIONS=--max_old_space_size=4096 vue-cli-service build --mode netlify",
     "lint": "vue-cli-service lint --fix",
     "test:unit": "vue-cli-service test:unit",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/locales/**/*.json'",
-    "analyz": "npm_config_report=true npm run build"
+    "analyz": "npm_config_report=true npm run build",
+    "commit": "git-cz"
   },
   "dependencies": {
     "axios": "^0.19.0",
@@ -30,7 +29,7 @@
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
     "qs": "^6.9.1",
-    "screenfull": "^5.0.0",
+    "screenfull": "^5.0.2",
     "sortablejs": "^1.10.1",
     "ua-parser-js": "^0.7.20",
     "vue": "^2.6.11",

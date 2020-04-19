@@ -3,6 +3,7 @@ const VueFilenameInjector = require('@d2-projects/vue-filename-injector')
 const ThemeColorReplacer = require('webpack-theme-color-replacer')
 const forElementUI = require('webpack-theme-color-replacer/forElementUI')
 const cdnDependencies = require('./dependencies-cdn')
+const { chain, set, each, keys } = require('lodash')
 
 // 拼接路径
 const resolve = dir => require('path').join(__dirname, dir)
@@ -16,7 +17,7 @@ let publicPath = process.env.VUE_APP_PUBLIC_PATH || '/'
 
 // 设置不参与构建的库
 let externals = {}
-cdnDependencies.forEach(package => { externals[package.name] = package.library })
+cdnDependencies.forEach(pkg => { externals[pkg.name] = pkg.library })
 
 // 引入文件的 cdn 链接
 const cdn = {
@@ -24,12 +25,20 @@ const cdn = {
   js: cdnDependencies.map(e => e.js).filter(e => e)
 }
 
+// 多页配置，默认未开启，如需要请参考 https://cli.vuejs.org/zh/config/#pages
+const pages = undefined
+// const pages = {
+//   index: './src/main.js',
+//   subpage: './src/subpage.js'
+// }
+
 module.exports = {
   // 根据你的实际情况更改这里
   publicPath,
   lintOnSave: true,
   devServer: {
-    publicPath // 和 publicPath 保持一致
+    publicPath, // 和 publicPath 保持一致
+    disableHostCheck: process.env.NODE_ENV === 'development' // 关闭 host check，方便使用 ngrok 之类的内网转发工具
   },
   css: {
     loaderOptions: {
@@ -39,6 +48,7 @@ module.exports = {
       }
     }
   },
+  pages,
   configureWebpack: config => {
     const configNew = {}
     if (process.env.NODE_ENV === 'production') {
@@ -54,27 +64,23 @@ module.exports = {
         })
       ]
     }
-    if (process.env.NODE_ENV === 'development') {
-      // 关闭 host check，方便使用 ngrok 之类的内网转发工具
-      configNew.devServer = {
-        disableHostCheck: true
-      }
-    }
     return configNew
   },
   // 默认设置: https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-service/lib/config/base.js
   chainWebpack: config => {
     /**
      * 添加 CDN 参数到 htmlWebpackPlugin 配置中
+     * 已适配多页
      */
-    config.plugin('html').tap(args => {
-      if (process.env.NODE_ENV === 'production') {
-        args[0].cdn = cdn
-      } else {
-        args[0].cdn = []
-      }
-      return args
+    const htmlPluginNames = chain(pages).keys().map(page => 'html-' + page).value()
+    const targetHtmlPluginNames = htmlPluginNames.length ? htmlPluginNames : ['html']
+    each(targetHtmlPluginNames, name => {
+      config.plugin(name).tap(options => {
+        set(options, '[0].cdn', process.env.NODE_ENV === 'production' ? cdn : [])
+        return options
+      })
     })
+
     /**
      * 删除懒加载模块的 prefetch preload，降低带宽压力
      * https://cli.vuejs.org/zh/guide/html-and-static-assets.html#prefetch
@@ -140,11 +146,13 @@ module.exports = {
     config.resolve.alias
       .set('@api', resolve('src/api'))
     // 判断环境加入模拟数据
-    const entry = config.entry('app')
+    // 已适配多页
     if (process.env.VUE_APP_BUILD_MODE !== 'NOMOCK') {
-      entry
-        .add('@/mock')
-        .end()
+      const multiEntry = keys(pages || {})
+      const entrys = multiEntry.length ? multiEntry : ['app']
+      each(entrys, entry => {
+        config.entry(entry).add('@/mock').end()
+      })
     }
     // 分析工具
     if (process.env.npm_config_report) {
