@@ -7,6 +7,8 @@
 ![Deploy preview](https://github.com/d2-projects/d2-admin-start-kit/workflows/Deploy%20preview/badge.svg)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/08ff8c93-f0a8-497a-a081-440b31fb3aa4/deploy-status)](https://app.netlify.com/sites/d2-admin-start-kit/deploys)
 
+The following access addresses are built and deployed by the latest master branch code at the same time. The access effect is completely consistent. Please select the appropriate access link according to your own network situation.
+
 | server | link | server |
 | --- | --- | --- |
 | d2.pub | [d2.pub/d2-admin-start-kit/preview](https://d2.pub/d2-admin-start-kit/preview) | China server |
