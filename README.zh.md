@@ -20,7 +20,7 @@
 
 | 位置 | 链接 |
 | --- | --- |
-| 码云 | [https://gitee.com/fairyever/d2-admin-start-kit](https://gitee.com/fairyever/d2-admin-start-kit) |
+| 码云 | [https://gitee.com/d2-projects/d2-admin-start-kit](https://gitee.com/d2-projects/d2-admin-start-kit) |
 | coding | [https://d2-projects.coding.net/p/d2-projects/d/d2-admin-start-kit/git](https://d2-projects.coding.net/p/d2-projects/d/d2-admin-start-kit/git) |
 
 > 如果您在 github 仓库下载很慢，可以尝试使用我们的码云仓库克隆代码
