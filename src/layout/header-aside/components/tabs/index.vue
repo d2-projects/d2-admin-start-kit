@@ -74,6 +74,7 @@ export default {
         { icon: 'times-circle', title: '关闭全部', value: 'all' }
       ],
       contextmenuList: [
+        { icon: 'refresh', title: '刷新', value: 'refresh' },
         { icon: 'arrow-left', title: '关闭左侧', value: 'left' },
         { icon: 'arrow-right', title: '关闭右侧', value: 'right' },
         { icon: 'times', title: '关闭其它', value: 'other' },
@@ -142,6 +143,7 @@ export default {
       if (tagName) this.contextmenuFlag = false
       const params = { pageSelect: tagName }
       switch (command) {
+        case 'refresh': this.$router.push({ name: 'refresh' }); break
         case 'left': this.closeLeft(params); break
         case 'right': this.closeRight(params); break
         case 'other': this.closeOther(params); break
